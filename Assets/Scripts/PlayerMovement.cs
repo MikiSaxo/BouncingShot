@@ -7,7 +7,26 @@ public class PlayerMovement : MonoBehaviour
 {
     public float Speed;
     public Rigidbody2D rb;
+    public SpriteRenderer MainSprite;
+
     Vector2 movementInput = Vector2.zero;
+
+    private void Start()
+    {
+        print(Manager.instance.NbOfPlayer);
+        if (Manager.instance.NbOfPlayer == 1)
+        {
+            MainSprite.color = Color.red;
+            transform.position = Manager.instance.SpawnPoints[0].position;
+            Manager.instance.NbOfPlayer++;
+        }
+        else
+        {
+            MainSprite.color = Color.blue;
+            transform.position = Manager.instance.SpawnPoints[1].position;
+
+        }
+    }
 
     void Update()
     {
@@ -18,7 +37,6 @@ public class PlayerMovement : MonoBehaviour
     {
         movementInput = context.ReadValue<Vector2>();
     }
-   
 
     void Movement()
     {
