@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c93fc3b4d3599874c903a98d00efbaa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRate: 0.1
+  attackRate: 0.3
   Bullet: {fileID: 9034547383929328815, guid: 50526f866de9adb488ca45d9c435cac5, type: 3}
 --- !u!1 &5709792288666449926
 GameObject:
@@ -172,7 +172,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a44601a547d74b4ab33afd15f738122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 8
+  Speed: 90
+  rb: {fileID: 5709792288666449925}
 --- !u!212 &5709792288666449927
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -237,14 +238,14 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 400
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &8496036693764573225
 CircleCollider2D:
   m_ObjectHideFlags: 0
