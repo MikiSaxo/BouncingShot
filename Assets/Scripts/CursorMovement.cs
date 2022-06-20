@@ -15,8 +15,7 @@ public class CursorMovement : MonoBehaviour
 
     void Update()
     {
-        if (movementInputRotate != Vector2.zero)
-            Rotate();
+        Rotate();
 
         if (isCooldown == false && shoot)
         {

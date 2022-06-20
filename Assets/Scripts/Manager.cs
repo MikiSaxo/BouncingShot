@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Manager : MonoBehaviour
 {
+    public List<GameObject> Players = new List<GameObject>(2);
+    public GameObject Ball;
     public Transform[] SpawnPoints;
-
+    public TextMeshProUGUI[] TextScores;
+    public int[] NbScores;
+    [HideInInspector]
     public int NbOfPlayer;
 
     public static Manager instance;
@@ -17,17 +22,43 @@ public class Manager : MonoBehaviour
             return;
         }
         instance = this;
-        /*if (Abilities.instance.nbPlayer == 1)
+    }
+
+    public void WhichBallTouches(int whichPlayer)
+    {
+        NbScores[whichPlayer]++;
+        TextScores[whichPlayer].text = NbScores[whichPlayer].ToString();
+
+        Ball.transform.position = SpawnPoints[whichPlayer+2].position;
+        Ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+
+        TextScores[2].gameObject.SetActive(true);
+        if (whichPlayer == 0)
         {
-            rend.color = Color.red;
-            gameObject.tag = "player1";
-            colorRing.tag = "player1";
+            TextScores[2].text = "Red Scores";
+            TextScores[2].color = Color.red;
         }
-        if (Abilities.instance.nbPlayer == 2)
+        else
         {
-            rend.color = new Color(0, 0.5f, 1, 1);
-            gameObject.tag = "player2";
-            colorRing.tag = "player2";
-        }*/
+            TextScores[2].text = "Blue Scores";
+            TextScores[2].color = Color.cyan;
+        }
+
+        StartCoroutine(Replace());
+    }
+
+    IEnumerator Replace()
+    {
+        Players[0].transform.position = SpawnPoints[0].position;
+        Players[1].transform.position = SpawnPoints[1].position;
+        
+
+        Players[0].GetComponent<PlayerMovement>().CanMove = false;
+        Players[1].GetComponent<PlayerMovement>().CanMove = false;
+        yield return new WaitForSeconds(1f);
+        TextScores[2].gameObject.SetActive(false);
+        Players[0].GetComponent<PlayerMovement>().CanMove = true;
+        Players[1].GetComponent<PlayerMovement>().CanMove = true;
     }
 }

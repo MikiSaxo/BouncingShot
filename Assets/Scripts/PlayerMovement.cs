@@ -8,20 +8,26 @@ public class PlayerMovement : MonoBehaviour
     public float Speed;
     public Rigidbody2D rb;
     public SpriteRenderer MainSprite;
+    [HideInInspector]
+    public bool CanMove;
 
     Vector2 movementInput = Vector2.zero;
 
     private void Start()
     {
-        print(Manager.instance.NbOfPlayer);
+        CanMove = true;
+        print("P" + Manager.instance.NbOfPlayer);
+        Manager.instance.Players.Add(gameObject);
         if (Manager.instance.NbOfPlayer == 1)
         {
-            MainSprite.color = Color.blue;
+            gameObject.tag = "P1";
+            MainSprite.color = Color.cyan;
             transform.position = Manager.instance.SpawnPoints[0].position;
             Manager.instance.NbOfPlayer++;
         }
         else
         {
+            gameObject.tag = "P2";
             MainSprite.color = Color.red;
             transform.position = Manager.instance.SpawnPoints[1].position;
 
@@ -40,8 +46,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Movement()
     {
-        Vector2 m = new Vector2(movementInput.x, movementInput.y) * Speed * Time.deltaTime;
+        //Vector2 m = new Vector2(movementInput.x, movementInput.y) * Speed * Time.deltaTime;
         Vector2 m2 = new Vector2(movementInput.x, movementInput.y) * Speed;
+        if (!CanMove)
+            m2 = Vector2.zero;
         //transform.Translate(m, Space.World);
         rb.velocity = m2;
     }

@@ -14,5 +14,12 @@ public class Ball : MonoBehaviour
             //Rigidbody2D otherRb = collision.rigidbody;
             rb.AddForce(-collision.contacts[0].normal * bumperPower, ForceMode2D.Impulse);
         }
+
+        if (collision.transform.CompareTag("P1"))
+        {
+            Manager.instance.WhichBallTouches(0);
+        }
+        else if (collision.transform.CompareTag("P2"))
+            Manager.instance.WhichBallTouches(1);
     }
 }

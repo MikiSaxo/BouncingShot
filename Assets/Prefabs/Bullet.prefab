@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3379961108525010167}
-  Speed: 25
+  Speed: 35
 --- !u!50 &3379961108525010167
 Rigidbody2D:
   serializedVersion: 4
@@ -119,7 +119,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!70 &5289827200745463134
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
