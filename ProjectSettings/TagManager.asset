@@ -9,6 +9,8 @@ TagManager:
   - Bumper
   - P1
   - P2
+  - BulletP1
+  - BulletP2
   layers:
   - Default
   - TransparentFX

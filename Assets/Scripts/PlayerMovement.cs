@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
         CanMove = true;
         print("P" + Manager.instance.NbOfPlayer);
         Manager.instance.Players.Add(gameObject);
+        gameObject.GetComponentInChildren<CursorMovement>().WhichPlayer = Manager.instance.NbOfPlayer;
         if (Manager.instance.NbOfPlayer == 1)
         {
             gameObject.tag = "P1";

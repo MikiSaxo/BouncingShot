@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("Outside") || collision.transform.CompareTag("Ball") || collision.transform.CompareTag("Bumper") || collision.transform.CompareTag("P1") || collision.transform.CompareTag("P2") || collision.transform.CompareTag("Bullet"))
+        if (collision.transform.CompareTag("Outside") || collision.transform.CompareTag("Bumper") || collision.transform.CompareTag("P1") || collision.transform.CompareTag("P2"))
         {
             Destroy(gameObject);
         }

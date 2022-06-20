@@ -11,6 +11,7 @@ public class CursorMovement : MonoBehaviour
     float nextAttack = 1f;
 
     public float attackRate = 1f;
+    public int WhichPlayer;
     public GameObject Bullet;
 
     void Update()
@@ -55,6 +56,16 @@ public class CursorMovement : MonoBehaviour
     void Shoot()
     {
         print("shoot");
-        Instantiate(Bullet, transferPosition, transform.rotation);
+        GameObject b = Instantiate(Bullet, transferPosition, transform.rotation);
+        if (WhichPlayer == 1)
+        {
+            b.tag = "BulletP1";
+            b.GetComponent<SpriteRenderer>().color = Color.cyan;
+        }
+        else if (WhichPlayer == 2)
+        {
+            b.tag = "BulletP2"; 
+            b.GetComponent<SpriteRenderer>().color = Color.red;
+        }
     }
 }
