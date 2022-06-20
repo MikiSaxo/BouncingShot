@@ -13,9 +13,18 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("Outside") || collision.transform.CompareTag("Ball"))
+        if (collision.transform.CompareTag("Outside") || collision.transform.CompareTag("Ball") || collision.transform.CompareTag("Bumper"))
         {
             Destroy(gameObject);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.transform.CompareTag("Outside"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
 }

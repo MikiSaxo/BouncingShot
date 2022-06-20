@@ -16,13 +16,13 @@ public class PlayerMovement : MonoBehaviour
         print(Manager.instance.NbOfPlayer);
         if (Manager.instance.NbOfPlayer == 1)
         {
-            MainSprite.color = Color.red;
+            MainSprite.color = Color.blue;
             transform.position = Manager.instance.SpawnPoints[0].position;
             Manager.instance.NbOfPlayer++;
         }
         else
         {
-            MainSprite.color = Color.blue;
+            MainSprite.color = Color.red;
             transform.position = Manager.instance.SpawnPoints[1].position;
 
         }

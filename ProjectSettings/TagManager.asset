@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Outside
   - Ball
+  - Bumper
   layers:
   - Default
   - TransparentFX
