@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &834979115231302476
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 790458659883460412}
+  m_Layer: 0
+  m_Name: SpawnBullet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &790458659883460412
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 834979115231302476}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.584, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5698265879038090210}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1492677946433015787
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,6 +139,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 790458659883460412}
   - {fileID: 7423161835187729947}
   m_Father: {fileID: 5709792288666449924}
   m_RootOrder: 0
@@ -224,6 +255,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f4b2ba7d-22fe-4739-ab53-4ca1dfc284b9
     m_ActionName: Gameplay/Shoot[/XInputControllerWindows/rightTrigger,/XInputControllerWindows/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4709864462000678249}
+        m_TargetAssemblyTypeName: CursorMovement, Assembly-CSharp
+        m_MethodName: OnLock
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0007c3a8-a931-4fe5-a268-349a039b1ea4
+    m_ActionName: Gameplay/Lock[/XInputControllerWindows/leftTrigger,/XInputControllerWindows/leftTrigger,/XInputControllerWindows/leftTrigger,/XInputControllerWindows/leftTrigger,/XInputControllerWindows/leftTrigger,/XInputControllerWindows/leftTrigger]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Controller1
   m_DefaultActionMap: Gameplay
@@ -261,7 +308,7 @@ MonoBehaviour:
   WhichPlayer: 0
   Bullet: {fileID: 9034547383929328815, guid: 50526f866de9adb488ca45d9c435cac5, type: 3}
   Cursor: {fileID: 2510709762314060668}
-  SpawnBullet: {fileID: 7841088972208506997}
+  SpawnBullet: {fileID: 834979115231302476}
   timer: 0
 --- !u!212 &5709792288666449927
 SpriteRenderer:
@@ -380,7 +427,7 @@ Transform:
   m_LocalScale: {x: 0.403, y: 0.403, z: 0.403}
   m_Children: []
   m_Father: {fileID: 5698265879038090210}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!212 &7893162856935187240
 SpriteRenderer:

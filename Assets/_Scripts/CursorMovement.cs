@@ -7,15 +7,15 @@ public class CursorMovement : MonoBehaviour
 {
     Vector2 movementInputRotate = Vector2.zero;
     Vector3 transferPosition;
-    bool shoot, isCooldown;
+    bool shoot, isLock, isCooldown;
     float nextAttack = 1f;
 
     public float attackRate = 1f;
     public int WhichPlayer;
     [SerializeField] GameObject Bullet, Cursor, SpawnBullet;
-
-    //[SerializeField] GameObject b;
     [SerializeField] float timer;
+
+    const float minimumTime = 0.05f;
 
     private void Start()
     {
@@ -24,9 +24,16 @@ public class CursorMovement : MonoBehaviour
 
     void Update()
     {
-        if (movementInputRotate != Vector2.zero)
-            Rotate();
         Timer();
+        if (isLock)
+        {
+            RotateLock();
+        }
+        else
+        {
+            if (movementInputRotate != Vector2.zero)
+                Rotate();
+        }
 
         //if (isCooldown == false && !shoot && timer > 0)
         //{
@@ -56,6 +63,13 @@ public class CursorMovement : MonoBehaviour
         shoot = context.ReadValue<bool>();
     }
 
+    public void OnLock(InputAction.CallbackContext context)
+    {
+        isLock = context.action.triggered;
+        isLock = context.ReadValue<bool>();
+        print("lockkkkkk");
+    }
+
     void Timer()
     {
         if (shoot == true)
@@ -64,17 +78,29 @@ public class CursorMovement : MonoBehaviour
         }
         else
         {
-            if (gameObject.GetComponent<PlayerMovement>().CanMove && timer > 0.05f)
+            if (gameObject.GetComponent<PlayerMovement>().CanMove && timer > minimumTime)
                 Shoot();
         }
     }
 
     void Rotate()
     {
-        float angle = Mathf.Atan2(movementInputRotate.y, movementInputRotate.x) * Mathf.Rad2Deg;
-        Cursor.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-
+        if (!isLock)
+        {
+            float angle = Mathf.Atan2(movementInputRotate.y, movementInputRotate.x) * Mathf.Rad2Deg;
+            Cursor.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        }
     }
+
+    void RotateLock()
+    {
+        print("rotalocks");
+        Vector2 direction = Manager.instance.Ball.transform.position - Cursor.transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        Cursor.transform.rotation = Quaternion.Slerp(Cursor.transform.rotation, rotation, 50 * Time.deltaTime);
+    }
+
     void Shoot()
     {
         if (timer > 1)
@@ -83,6 +109,8 @@ public class CursorMovement : MonoBehaviour
         print("shoot");
         transferPosition = new Vector3(SpawnBullet.transform.position.x, SpawnBullet.transform.position.y, 0);
         GameObject b = Instantiate(Bullet, transferPosition, Cursor.transform.rotation);
+        if (timer < 0.2f)
+            timer = minimumTime*2;
         b.transform.localScale = new Vector3(1 * timer, 1 * timer, 1);
         b.GetComponent<Bullet>().timer = timer;
         timer = 0;
