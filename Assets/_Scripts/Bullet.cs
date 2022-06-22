@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     public Rigidbody2D rb;
     public float Speed;
+    public float timer;
     void Start()
     {
         rb.velocity = transform.right * Speed;
@@ -13,7 +14,7 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("Outside") || collision.transform.CompareTag("Bumper") || collision.transform.CompareTag("P1") || collision.transform.CompareTag("P2"))
+        if (collision.transform.CompareTag("Outside") || collision.transform.CompareTag("Bumper"))// || collision.transform.CompareTag("P1") || collision.transform.CompareTag("P2"))
         {
             Destroy(gameObject);
         }

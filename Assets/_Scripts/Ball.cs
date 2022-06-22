@@ -7,7 +7,7 @@ public class Ball : MonoBehaviour
     public Rigidbody2D rb;
     public SpriteRenderer spr;
     [SerializeField]
-    int bumperPower, color;
+    int bumperPower, bulletPower, color;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -19,27 +19,31 @@ public class Ball : MonoBehaviour
         }
 
 
-
-        if (collision.transform.CompareTag("P1") && color != 1)
+        /*if (collision.transform.CompareTag("P1") && color != 1)
         {
             Manager.instance.WhichBallTouches(0);
         }
         else if (collision.transform.CompareTag("P2") && color != 2)
-            Manager.instance.WhichBallTouches(1);
+            Manager.instance.WhichBallTouches(1);*/
 
 
 
         if (collision.transform.CompareTag("BulletP1"))
         {
             ChangeColor(1);
+            //rb.velocity = Vector2.zero;
+            rb.AddForce(collision.contacts[0].normal * bulletPower * collision.gameObject.GetComponent<Bullet>().timer, ForceMode2D.Impulse);
             Destroy(collision.gameObject);
         }
         if (collision.transform.CompareTag("BulletP2"))
         {
             ChangeColor(2);
+            //rb.velocity = Vector2.zero;
+            rb.AddForce(collision.contacts[0].normal * bulletPower * collision.gameObject.GetComponent<Bullet>().timer, ForceMode2D.Impulse);
             Destroy(collision.gameObject);
         }
     }
+
 
     void ChangeColor(int which)
     {

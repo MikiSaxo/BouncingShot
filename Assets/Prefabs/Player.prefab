@@ -257,9 +257,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c93fc3b4d3599874c903a98d00efbaa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRate: 0.8
+  attackRate: 0.5
   WhichPlayer: 0
   Bullet: {fileID: 9034547383929328815, guid: 50526f866de9adb488ca45d9c435cac5, type: 3}
+  BBullet: {fileID: 9034547383929328815, guid: 373959995bd691446a3c157a92e590ce, type: 3}
   Cursor: {fileID: 2510709762314060668}
 --- !u!212 &5709792288666449927
 SpriteRenderer:

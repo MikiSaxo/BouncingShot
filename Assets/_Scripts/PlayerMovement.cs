@@ -5,11 +5,12 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float Speed;
-    public Rigidbody2D rb;
-    public SpriteRenderer MainSprite;
-    [HideInInspector]
-    public bool CanMove;
+
+    [SerializeField] float Speed;
+    [SerializeField] Rigidbody2D rb;
+    [SerializeField] SpriteRenderer MainSprite;
+
+    [HideInInspector] public bool CanMove;
 
     Vector2 movementInput = Vector2.zero;
 
