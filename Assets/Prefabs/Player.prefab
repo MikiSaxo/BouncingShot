@@ -260,8 +260,9 @@ MonoBehaviour:
   attackRate: 0.5
   WhichPlayer: 0
   Bullet: {fileID: 9034547383929328815, guid: 50526f866de9adb488ca45d9c435cac5, type: 3}
-  BBullet: {fileID: 9034547383929328815, guid: 373959995bd691446a3c157a92e590ce, type: 3}
   Cursor: {fileID: 2510709762314060668}
+  SpawnBullet: {fileID: 7841088972208506997}
+  timer: 0
 --- !u!212 &5709792288666449927
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -333,7 +334,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &8496036693764573225
 CircleCollider2D:
   m_ObjectHideFlags: 0

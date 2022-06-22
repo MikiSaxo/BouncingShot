@@ -13,6 +13,8 @@ public class Manager : MonoBehaviour
     [HideInInspector]
     public int NbOfPlayer;
 
+    const int anounceText = 0;
+
     public static Manager instance;
     private void Awake()
     {
@@ -24,25 +26,26 @@ public class Manager : MonoBehaviour
         instance = this;
     }
 
-    public void WhichBallTouches(int whichPlayer)
+    public void WhichBallTouches(int wasTouch, int whoTouch)
     {
-        NbScores[whichPlayer]++;
-        TextScores[whichPlayer].text = NbScores[whichPlayer].ToString();
+        NbScores[whoTouch]++;
+        TextScores[whoTouch].text = NbScores[whoTouch].ToString();
 
-        Ball.transform.position = SpawnPoints[whichPlayer+2].position;
+        Ball.transform.position = SpawnPoints[wasTouch + 1].position;
         Ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        Ball.GetComponent<Ball>().ChangeColor(wasTouch);
 
 
-        TextScores[2].gameObject.SetActive(true);
-        if (whichPlayer == 0)
+        TextScores[anounceText].gameObject.SetActive(true);
+        if (whoTouch == 2)
         {
-            TextScores[2].text = "Red Scores";
-            TextScores[2].color = Color.red;
+            TextScores[anounceText].text = "Red Scores";
+            TextScores[anounceText].color = Color.red;
         }
         else
         {
-            TextScores[2].text = "Blue Scores";
-            TextScores[2].color = Color.cyan;
+            TextScores[anounceText].text = "Blue Scores";
+            TextScores[anounceText].color = Color.cyan;
         }
 
         StartCoroutine(Replace());
@@ -57,7 +60,7 @@ public class Manager : MonoBehaviour
         Players[0].GetComponent<PlayerMovement>().CanMove = false;
         Players[1].GetComponent<PlayerMovement>().CanMove = false;
         yield return new WaitForSeconds(1f);
-        TextScores[2].gameObject.SetActive(false);
+        TextScores[anounceText].gameObject.SetActive(false);
         Players[0].GetComponent<PlayerMovement>().CanMove = true;
         Players[1].GetComponent<PlayerMovement>().CanMove = true;
     }

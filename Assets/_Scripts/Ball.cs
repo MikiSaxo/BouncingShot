@@ -19,12 +19,10 @@ public class Ball : MonoBehaviour
         }
 
 
-        /*if (collision.transform.CompareTag("P1") && color != 1)
-        {
-            Manager.instance.WhichBallTouches(0);
-        }
+        if (collision.transform.CompareTag("P1") && color != 1)
+            Manager.instance.WhichBallTouches(1, 2);
         else if (collision.transform.CompareTag("P2") && color != 2)
-            Manager.instance.WhichBallTouches(1);*/
+            Manager.instance.WhichBallTouches(2, 1);
 
 
 
@@ -45,7 +43,7 @@ public class Ball : MonoBehaviour
     }
 
 
-    void ChangeColor(int which)
+    public void ChangeColor(int which)
     {
         color = which;
         if (color == 0)

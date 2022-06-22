@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
     public float timer;
     void Start()
     {
-        rb.velocity = transform.right * Speed;
+        rb.velocity = transform.right * Speed * (timer * Speed / 2);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
