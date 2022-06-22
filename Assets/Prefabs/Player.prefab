@@ -91,11 +91,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5698265879038090210}
-  - component: {fileID: 1860553664726385370}
   m_Layer: 0
   m_Name: Cursor
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -114,20 +113,6 @@ Transform:
   m_Father: {fileID: 5709792288666449924}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1860553664726385370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2510709762314060668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c93fc3b4d3599874c903a98d00efbaa3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackRate: 1
-  Bullet: {fileID: 9034547383929328815, guid: 50526f866de9adb488ca45d9c435cac5, type: 3}
 --- !u!1 &5709792288666449926
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,6 +124,7 @@ GameObject:
   - component: {fileID: 5709792288666449924}
   - component: {fileID: 5709792288666449931}
   - component: {fileID: 5709792288666449930}
+  - component: {fileID: 4709864462000678249}
   - component: {fileID: 5709792288666449927}
   - component: {fileID: 5709792288666449925}
   - component: {fileID: 8496036693764573225}
@@ -208,7 +194,7 @@ MonoBehaviour:
     m_ActionName: Gameplay/Move[/XInputControllerWindows/leftStick,/XInputControllerWindows/leftStick]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1860553664726385370}
+      - m_Target: {fileID: 4709864462000678249}
         m_TargetAssemblyTypeName: CursorMovement, Assembly-CSharp
         m_MethodName: OnRotate
         m_Mode: 0
@@ -224,7 +210,7 @@ MonoBehaviour:
     m_ActionName: Gameplay/Rotate[/XInputControllerWindows/rightStick,/XInputControllerWindows/rightStick]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1860553664726385370}
+      - m_Target: {fileID: 4709864462000678249}
         m_TargetAssemblyTypeName: CursorMovement, Assembly-CSharp
         m_MethodName: OnShoot
         m_Mode: 0
@@ -259,6 +245,22 @@ MonoBehaviour:
   rb: {fileID: 5709792288666449925}
   MainSprite: {fileID: 5709792288666449927}
   CanMove: 0
+--- !u!114 &4709864462000678249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5709792288666449926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c93fc3b4d3599874c903a98d00efbaa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRate: 0.8
+  WhichPlayer: 0
+  Bullet: {fileID: 9034547383929328815, guid: 50526f866de9adb488ca45d9c435cac5, type: 3}
+  Cursor: {fileID: 2510709762314060668}
 --- !u!212 &5709792288666449927
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -330,7 +332,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!58 &8496036693764573225
 CircleCollider2D:
   m_ObjectHideFlags: 0

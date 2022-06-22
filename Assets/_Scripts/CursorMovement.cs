@@ -13,6 +13,7 @@ public class CursorMovement : MonoBehaviour
     public float attackRate = 1f;
     public int WhichPlayer;
     public GameObject Bullet;
+    public GameObject Cursor;
 
     void Update()
     {
@@ -49,14 +50,14 @@ public class CursorMovement : MonoBehaviour
     void Rotate()
     {
         float angle = Mathf.Atan2(movementInputRotate.y, movementInputRotate.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-
-        transferPosition = new Vector3(movementInputRotate.x + transform.position.x, movementInputRotate.y + transform.position.y, 0);
+        Cursor.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        
+        transferPosition = new Vector3(movementInputRotate.x + Cursor.transform.position.x, movementInputRotate.y + Cursor.transform.position.y, 0);
     }
     void Shoot()
     {
         print("shoot");
-        GameObject b = Instantiate(Bullet, transferPosition, transform.rotation);
+        GameObject b = Instantiate(Bullet, transferPosition, Cursor.transform.rotation);
         if (WhichPlayer == 1)
         {
             b.tag = "BulletP1";

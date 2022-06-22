@@ -31,7 +31,6 @@ public class PlayerMovement : MonoBehaviour
             gameObject.tag = "P2";
             MainSprite.color = Color.red;
             transform.position = Manager.instance.SpawnPoints[1].position;
-
         }
     }
 
