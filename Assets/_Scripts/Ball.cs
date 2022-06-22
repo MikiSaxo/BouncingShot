@@ -19,17 +19,11 @@ public class Ball : MonoBehaviour
             ChangeColor(0);
         }
 
-
-        if (collision.transform.CompareTag("P1") && color != 1)
-            Manager.instance.WhichBallTouches(1, 2);
-        else if (collision.transform.CompareTag("P2") && color != 2)
-            Manager.instance.WhichBallTouches(2, 1);
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
         if (collision.transform.CompareTag("BulletP1"))
         {
+            //var coord = Vector2.Distance(transform.position, collision.transform.position);
+            //print(coord);
+            print("ball contre bullet");
             ChangeColor(1);
             rb.AddForce(collision.contacts[0].normal * bulletPower * collision.gameObject.GetComponent<Bullet>().timer, ForceMode2D.Impulse);
             Destroy(collision.gameObject);
@@ -42,6 +36,16 @@ public class Ball : MonoBehaviour
             Destroy(collision.gameObject);
             //rb.velocity = Vector2.zero;
         }
+
+        if (collision.transform.CompareTag("P1") && color != 1)
+            Manager.instance.WhichBallTouches(1, 2);
+        else if (collision.transform.CompareTag("P2") && color != 2)
+            Manager.instance.WhichBallTouches(2, 1);
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        
     }
 
     public void ChangeColor(int which)

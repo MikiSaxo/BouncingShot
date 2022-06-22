@@ -8,7 +8,8 @@ public class Bullet : MonoBehaviour
     public float Speed;
     public float timer;
     public GameObject Child;
-   
+    public int bulletPower;
+
     void Start()
     {
         rb.velocity = transform.right * Speed * (timer * Speed / 2);
@@ -17,13 +18,19 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("Outside") || collision.transform.CompareTag("Bumper"))// || collision.transform.CompareTag("P1") || collision.transform.CompareTag("P2"))
+        if (collision.transform.CompareTag("Outside") || collision.transform.CompareTag("Bumper") || collision.transform.CompareTag("P1") || collision.transform.CompareTag("P2"))
         {
             Destroy(gameObject);
         }
-
-        
+        if (collision.transform.CompareTag("BulletP1") || collision.transform.CompareTag("BulletP2"))// || collision.transform.CompareTag("Ball"))
+        {
+            Destroy(gameObject);
+            //GetComponent<CapsuleCollider2D>().isTrigger = true;
+            //print("collision bullets");
+        }
     }
+
+ 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -32,19 +39,20 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (collision.transform.CompareTag("Ball"))
-        {
-            GetComponent<CapsuleCollider2D>().isTrigger = false;
+        //if (collision.transform.CompareTag("Ball"))
+        //{
+            //GetComponent<CapsuleCollider2D>().isTrigger = false;
+            //var test = transform.rotation.z;
+            //print("test = " + test);
+            //collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, test) * bulletPower, ForceMode2D.Impulse);
             //Destroy(gameObject);
-        }
-
-        
+        //}
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        print("ça touche manouch");
-        if (collision.transform.CompareTag("BulletP1") && tag == "BulletP2")
+        //print("ça touche manouch");
+        /*if (collision.transform.CompareTag("BulletP1") && tag == "BulletP2")
         {
             print("P2 rencontre P1");
             if (collision.gameObject.GetComponent<Bullet>().timer > timer)
@@ -72,6 +80,6 @@ public class Bullet : MonoBehaviour
                 Destroy(collision.gameObject);
                 Destroy(gameObject);
             }
-        }
+        }*/
     }
 }
