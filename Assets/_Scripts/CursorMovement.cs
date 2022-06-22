@@ -58,7 +58,7 @@ public class CursorMovement : MonoBehaviour
 
     void Timer()
     {
-        if (shoot == true && timer <= 1)
+        if (shoot == true)
         {
             timer += Time.deltaTime;
         }
@@ -77,6 +77,9 @@ public class CursorMovement : MonoBehaviour
     }
     void Shoot()
     {
+        if (timer > 1)
+            timer = 1;
+
         print("shoot");
         transferPosition = new Vector3(SpawnBullet.transform.position.x, SpawnBullet.transform.position.y, 0);
         GameObject b = Instantiate(Bullet, transferPosition, Cursor.transform.rotation);
