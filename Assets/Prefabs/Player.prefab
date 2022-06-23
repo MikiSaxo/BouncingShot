@@ -310,6 +310,7 @@ MonoBehaviour:
   Bullet: {fileID: 9034547383929328815, guid: 50526f866de9adb488ca45d9c435cac5, type: 3}
   Cursor: {fileID: 2510709762314060668}
   SpawnBullet: {fileID: 834979115231302476}
+  IndicatorCanShoot: {fileID: 1492677946433015787}
   timer: 0
 --- !u!212 &5709792288666449927
 SpriteRenderer:

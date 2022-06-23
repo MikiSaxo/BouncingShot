@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
-        rb.velocity = transform.right * Speed * (timer * Speed / 2);
+        rb.velocity = transform.right * Speed;// * (timer * Speed / 2);
         Child.tag = tag;
     }
 

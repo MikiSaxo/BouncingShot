@@ -25,14 +25,15 @@ public class Ball : MonoBehaviour
             //print(coord);
             print("ball contre bullet");
             ChangeColor(1);
-            rb.AddForce(collision.contacts[0].normal * bulletPower * collision.gameObject.GetComponent<Bullet>().timer, ForceMode2D.Impulse);
+            //rb.AddForce(collision.contacts[0].normal * bulletPower * collision.gameObject.GetComponent<Bullet>().timer, ForceMode2D.Impulse);
+            rb.AddForce(collision.contacts[0].normal * bulletPower, ForceMode2D.Impulse);
             Destroy(collision.gameObject);
             //rb.velocity = Vector2.zero;
         }
         if (collision.transform.CompareTag("BulletP2"))
         {
             ChangeColor(2);
-            rb.AddForce(collision.contacts[0].normal * bulletPower * collision.gameObject.GetComponent<Bullet>().timer, ForceMode2D.Impulse);
+            rb.AddForce(collision.contacts[0].normal * bulletPower, ForceMode2D.Impulse);
             Destroy(collision.gameObject);
             //rb.velocity = Vector2.zero;
         }

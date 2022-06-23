@@ -130,10 +130,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3379961108525010167}
-  Speed: 10
+  Speed: 20
   timer: 0
   Child: {fileID: 405621909292024935}
-  bulletPower: 100
+  bulletPower: 0
 --- !u!50 &3379961108525010167
 Rigidbody2D:
   serializedVersion: 4

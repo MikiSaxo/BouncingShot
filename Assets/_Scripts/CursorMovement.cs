@@ -12,19 +12,19 @@ public class CursorMovement : MonoBehaviour
 
     public float attackRate = 1f;
     public int WhichPlayer;
-    [SerializeField] GameObject Bullet, Cursor, SpawnBullet;
+    [SerializeField] GameObject Bullet, Cursor, SpawnBullet, IndicatorCanShoot;
     [SerializeField] float timer;
 
     const float minimumTime = 0.05f;
 
     private void Start()
     {
-        timer = 0;
+        //timer = 0;
     }
 
     void Update()
     {
-        Timer();
+        //Timer();
         if (isLock)
         {
             RotateLock();
@@ -35,21 +35,23 @@ public class CursorMovement : MonoBehaviour
                 Rotate();
         }
 
-        //if (isCooldown == false && !shoot && timer > 0)
-        //{
-        //    isCooldown = true;
-        //    nextAttack = attackRate;
-        //    //Shoot();
-        //}
+        if (isCooldown == false && shoot && gameObject.GetComponent<PlayerMovement>().CanMove)
+        {
+            IndicatorCanShoot.SetActive(false);
+            isCooldown = true;
+            nextAttack = attackRate;
+            Shoot();
+        }
 
-        //if (isCooldown)
-        //{
-        //    nextAttack -= Time.deltaTime;
-        //    if (nextAttack <= 0)
-        //    {
-        //        isCooldown = false;
-        //    }
-        //}
+        if (isCooldown)
+        {
+            nextAttack -= Time.deltaTime;
+            if (nextAttack <= 0)
+            {
+                isCooldown = false;
+                IndicatorCanShoot.SetActive(true);
+            }
+        }
     }
 
     public void OnRotate(InputAction.CallbackContext context)
@@ -70,18 +72,18 @@ public class CursorMovement : MonoBehaviour
         print("lockkkkkk");
     }
 
-    void Timer()
-    {
-        if (shoot == true)
-        {
-            timer += Time.deltaTime;
-        }
-        else
-        {
-            if (gameObject.GetComponent<PlayerMovement>().CanMove && timer > minimumTime)
-                Shoot();
-        }
-    }
+    //void Timer()
+    //{
+    //    if (shoot == true)
+    //    {
+    //        timer += Time.deltaTime;
+    //    }
+    //    else
+    //    {
+    //        if (gameObject.GetComponent<PlayerMovement>().CanMove && timer > minimumTime)
+    //            Shoot();
+    //    }
+    //}
 
     void Rotate()
     {
@@ -103,17 +105,17 @@ public class CursorMovement : MonoBehaviour
 
     void Shoot()
     {
-        if (timer > 1)
-            timer = 1;
+        //if (timer > 1)
+        //    timer = 1;
 
         print("shoot");
         transferPosition = new Vector3(SpawnBullet.transform.position.x, SpawnBullet.transform.position.y, 0);
         GameObject b = Instantiate(Bullet, transferPosition, Cursor.transform.rotation);
-        if (timer < 0.2f)
-            timer = minimumTime*2;
-        b.transform.localScale = new Vector3(1 * timer, 1 * timer, 1);
-        b.GetComponent<Bullet>().timer = timer;
-        timer = 0;
+        //if (timer < 0.2f)
+        //    timer = minimumTime*2;
+        //b.transform.localScale = new Vector3(1 * timer, 1 * timer, 1);
+        //b.GetComponent<Bullet>().timer = timer;
+        //timer = 0;
         if (WhichPlayer == 1)
         {
             b.tag = "BulletP1";

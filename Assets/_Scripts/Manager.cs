@@ -12,7 +12,7 @@ public class Manager : MonoBehaviour
     public int[] NbScores;
     [SerializeField] string[] Phrases;
     [HideInInspector] public int NbOfPlayer;
-    [SerializeField] float timeForDecompte;
+    [SerializeField] float timeForDecompteInSec;
     [SerializeField] int nbDecompte;
 
     const int anounceText = 0;
@@ -86,7 +86,7 @@ public class Manager : MonoBehaviour
         for (int i = nbDecompte; i > 0; i--)
         {
             TextScores[3].text = i.ToString();
-            yield return new WaitForSeconds(timeForDecompte);
+            yield return new WaitForSeconds(timeForDecompteInSec);
         }
         TextScores[3].gameObject.SetActive(false);
         Players[0].GetComponent<PlayerMovement>().CanMove = true;
