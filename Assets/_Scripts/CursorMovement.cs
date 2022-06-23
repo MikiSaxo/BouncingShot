@@ -90,24 +90,24 @@ public class CursorMovement : MonoBehaviour
         if (!isLock)
         {
             float angle = Mathf.Atan2(movementInputRotate.y, movementInputRotate.x) * Mathf.Rad2Deg;
-            Cursor.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
     }
 
     void RotateLock()
     {
         //print("rotalocks");
-        Vector2 direction = Manager.instance.Ball.transform.position - Cursor.transform.position;
+        Vector2 direction = Manager.instance.Ball.transform.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        Cursor.transform.rotation = Quaternion.Slerp(Cursor.transform.rotation, rotation, 50 * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 50 * Time.deltaTime);
     }
 
     void Shoot()
     {
         //if (timer > 1)
         //    timer = 1;
-
+        //RipplePostProcessor.instance.RippleEffect(transform.position);
         print("shoot");
         transferPosition = new Vector3(SpawnBullet.transform.position.x, SpawnBullet.transform.position.y, 0);
         GameObject b = Instantiate(Bullet, transferPosition, Cursor.transform.rotation);

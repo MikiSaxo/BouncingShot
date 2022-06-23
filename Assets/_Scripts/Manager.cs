@@ -39,18 +39,17 @@ public class Manager : MonoBehaviour
     {
         StartCoroutine(Decompte());
     }
-
     public void WhichBallTouches(int wasTouch, int whoTouch)
     {
         NbScores[whoTouch]++;
         TextScores[whoTouch].text = NbScores[whoTouch].ToString();
 
-        Ball.transform.position = SpawnPoints[wasTouch + 1].position;
+        Ball.transform.position = SpawnPoints[4].position;
         Ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        Ball.GetComponent<Ball>().ChangeColor(wasTouch);
+        Ball.GetComponent<Ball>().ChangeColor(0);
 
 
-        TextScores[anounceText].gameObject.SetActive(true);
+        /*TextScores[anounceText].gameObject.SetActive(true);
         if (whoTouch == 2)
         {
             TextScores[anounceText].text = Phrases[1];
@@ -60,10 +59,33 @@ public class Manager : MonoBehaviour
         {
             TextScores[anounceText].text = Phrases[2];
             TextScores[anounceText].color = Color.cyan;
-        }
+        }*/
 
-        StartCoroutine(Replace());
     }
+    //public void WhichBallTouches(int wasTouch, int whoTouch)
+    //{
+    //    NbScores[whoTouch]++;
+    //    TextScores[whoTouch].text = NbScores[whoTouch].ToString();
+
+    //    Ball.transform.position = SpawnPoints[wasTouch + 1].position;
+    //    Ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+    //    Ball.GetComponent<Ball>().ChangeColor(wasTouch);
+
+
+    //    TextScores[anounceText].gameObject.SetActive(true);
+    //    if (whoTouch == 2)
+    //    {
+    //        TextScores[anounceText].text = Phrases[1];
+    //        TextScores[anounceText].color = Color.red;
+    //    }
+    //    else
+    //    {
+    //        TextScores[anounceText].text = Phrases[2];
+    //        TextScores[anounceText].color = Color.cyan;
+    //    }
+
+    //    StartCoroutine(Replace());
+    //}
 
     IEnumerator Replace()
     {

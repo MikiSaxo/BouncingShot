@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 1656307625301104429}
   - component: {fileID: 6057572811945631881}
   - component: {fileID: 3379961108525010167}
-  - component: {fileID: 7599464762197665741}
+  - component: {fileID: 1898442114763607448}
   - component: {fileID: 7811242687621445699}
   m_Layer: 0
   m_Name: Bullet
@@ -155,8 +155,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!70 &7599464762197665741
-CapsuleCollider2D:
+--- !u!61 &1898442114763607448
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -168,9 +168,19 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0009352864, y: -0.00000002991382}
-  m_Size: {x: 0.63926625, y: 0.27720726}
-  m_Direction: 1
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.51160944, y: 0.2555703}
+  m_EdgeRadius: 0
 --- !u!96 &7811242687621445699
 TrailRenderer:
   serializedVersion: 2

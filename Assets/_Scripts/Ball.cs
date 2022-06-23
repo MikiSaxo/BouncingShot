@@ -6,7 +6,7 @@ public class Ball : MonoBehaviour
 {
     public Rigidbody2D rb;
     public SpriteRenderer spr;
-    
+    public ShakeCamera shakeCamera;
 
     [SerializeField] int bumperPower, bulletPower, color;
 
@@ -39,9 +39,17 @@ public class Ball : MonoBehaviour
         }
 
         if (collision.transform.CompareTag("P1") && color != 1)
+        {
             Manager.instance.WhichBallTouches(1, 2);
+            RipplePostProcessor.instance.RippleEffect(transform.position);
+            shakeCamera.CamShake();
+        }
         else if (collision.transform.CompareTag("P2") && color != 2)
+        {
             Manager.instance.WhichBallTouches(2, 1);
+            RipplePostProcessor.instance.RippleEffect(transform.position);
+            shakeCamera.CamShake();
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
