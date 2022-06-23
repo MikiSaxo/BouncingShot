@@ -10,8 +10,10 @@ public class Manager : MonoBehaviour
     public Transform[] SpawnPoints;
     public TextMeshProUGUI[] TextScores;
     public int[] NbScores;
-    [HideInInspector]
-    public int NbOfPlayer;
+    [SerializeField] string[] Phrases;
+    [HideInInspector] public int NbOfPlayer;
+    [SerializeField] float timeForDecompte;
+    [SerializeField] int nbDecompte;
 
     const int anounceText = 0;
 
@@ -24,6 +26,18 @@ public class Manager : MonoBehaviour
             return;
         }
         instance = this;
+    }
+
+    private void Start()
+    {
+        TextScores[0].gameObject.SetActive(true);
+        TextScores[0].text = Phrases[0];
+        TextScores[anounceText].color = Color.yellow;
+    }
+
+    public void LaunchGame()
+    {
+        StartCoroutine(Decompte());
     }
 
     public void WhichBallTouches(int wasTouch, int whoTouch)
@@ -39,12 +53,12 @@ public class Manager : MonoBehaviour
         TextScores[anounceText].gameObject.SetActive(true);
         if (whoTouch == 2)
         {
-            TextScores[anounceText].text = "Red Scores";
+            TextScores[anounceText].text = Phrases[1];
             TextScores[anounceText].color = Color.red;
         }
         else
         {
-            TextScores[anounceText].text = "Blue Scores";
+            TextScores[anounceText].text = Phrases[2];
             TextScores[anounceText].color = Color.cyan;
         }
 
@@ -61,6 +75,20 @@ public class Manager : MonoBehaviour
         Players[1].GetComponent<PlayerMovement>().CanMove = false;
         yield return new WaitForSeconds(1f);
         TextScores[anounceText].gameObject.SetActive(false);
+        
+        StartCoroutine(Decompte());
+    }
+
+    IEnumerator Decompte()
+    {
+        TextScores[0].gameObject.SetActive(false);
+        TextScores[3].gameObject.SetActive(true);
+        for (int i = nbDecompte; i > 0; i--)
+        {
+            TextScores[3].text = i.ToString();
+            yield return new WaitForSeconds(timeForDecompte);
+        }
+        TextScores[3].gameObject.SetActive(false);
         Players[0].GetComponent<PlayerMovement>().CanMove = true;
         Players[1].GetComponent<PlayerMovement>().CanMove = true;
     }

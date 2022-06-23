@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        CanMove = true;
+        //CanMove = true;
         print("P" + Manager.instance.NbOfPlayer);
         Manager.instance.Players.Add(gameObject);
         gameObject.GetComponentInChildren<CursorMovement>().WhichPlayer = Manager.instance.NbOfPlayer;
@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
             gameObject.tag = "P2";
             MainSprite.color = Color.red;
             transform.position = Manager.instance.SpawnPoints[1].position;
+            Manager.instance.LaunchGame();
         }
     }
 
