@@ -16,7 +16,7 @@ public class Ball : MonoBehaviour
         {
             //Rigidbody2D otherRb = collision.rigidbody;
             rb.AddForce(-collision.contacts[0].normal * bumperPower, ForceMode2D.Impulse);
-            ChangeColor(0);
+            //ChangeColor(0);
         }
 
         if (collision.transform.CompareTag("BulletP1"))
