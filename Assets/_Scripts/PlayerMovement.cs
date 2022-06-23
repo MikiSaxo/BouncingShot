@@ -40,6 +40,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (movementInput != Vector2.zero)
             Movement();
+
+        if (!CanMove)
+        {
+            Destroy(GameObject.Find("Bullet(Clone)"));
+        }
     }
     public void OnMove(InputAction.CallbackContext context)
     {
