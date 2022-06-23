@@ -60,13 +60,13 @@ public class CursorMovement : MonoBehaviour
     public void OnShoot(InputAction.CallbackContext context)
     {
         shoot = context.action.triggered;
-        shoot = context.ReadValue<bool>();
+        //shoot = context.ReadValue<bool>();
     }
 
     public void OnLock(InputAction.CallbackContext context)
     {
         isLock = context.action.triggered;
-        isLock = context.ReadValue<bool>();
+        //isLock = context.ReadValue<bool>();
         print("lockkkkkk");
     }
 
@@ -94,7 +94,7 @@ public class CursorMovement : MonoBehaviour
 
     void RotateLock()
     {
-        print("rotalocks");
+        //print("rotalocks");
         Vector2 direction = Manager.instance.Ball.transform.position - Cursor.transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
