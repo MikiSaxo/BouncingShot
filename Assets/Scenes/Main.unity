@@ -1970,24 +1970,17 @@ Transform:
   m_Father: {fileID: 1335222405}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1885141293 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 256931305622729957, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
+--- !u!114 &1885141297 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1885141297, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
   m_PrefabInstance: {fileID: 256931306379260792}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1885141297
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1885141293}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd7594716aaf2c2478dad169714392da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CamAnim: {fileID: 519420033}
 --- !u!4 &1886760769 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3924549647216285653, guid: 230b7b39f6c7f384684e867eb6e6b6a7, type: 3}
@@ -2438,58 +2431,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1885141297, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
+      propertyPath: CamAnim
+      value: 
+      objectReference: {fileID: 519420033}
     - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
       propertyPath: Ball
       value: 
       objectReference: {fileID: 1148225155}
-    - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
-      propertyPath: NbOfPlayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
-      propertyPath: nbDecompte
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
-      propertyPath: timeForDecompte
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
-      propertyPath: Phrases.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
-      propertyPath: NbScores.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
-      propertyPath: timeForDecompteInSec
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
-      propertyPath: Phrases.Array.data[0]
-      value: Waiting For Players
-      objectReference: {fileID: 0}
-    - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
-      propertyPath: Phrases.Array.data[1]
-      value: Red Scores
-      objectReference: {fileID: 0}
-    - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
-      propertyPath: Phrases.Array.data[2]
-      value: Blue Scores
-      objectReference: {fileID: 0}
-    - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
-      propertyPath: TextScores.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
-      propertyPath: NbScores.Array.data[1]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
-      propertyPath: SpawnPoints.Array.size
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
       propertyPath: TextScores.Array.data[0]
       value: 

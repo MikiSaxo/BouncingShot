@@ -138,8 +138,8 @@ MonoBehaviour:
   durationMin: 0.05
   durationMax: 0.2
   durationEnd: 0.2
-  minScale: 0.8
-  maxScale: 1.1
+  minScale: {x: 0.8, y: 0.8, z: 1}
+  maxScale: {x: 1.1, y: 1.1, z: 1}
 --- !u!114 &3785488840029501904
 MonoBehaviour:
   m_ObjectHideFlags: 0
