@@ -12,10 +12,18 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.transform.CompareTag("Outside"))
+        {
+            gameObject.GetComponent<ReboundAnimation>().StartBounce();
+        }
+
         if (collision.transform.CompareTag("Bumper"))
         {
             //Rigidbody2D otherRb = collision.rigidbody;
+            rb.velocity = Vector2.zero;
             rb.AddForce(-collision.contacts[0].normal * bumperPower, ForceMode2D.Impulse);
+            collision.gameObject.GetComponent<ReboundAnimation>().StartBounce();
+            gameObject.GetComponent<ReboundAnimation>().StartBounce();
             //ChangeColor(0);
         }
 
@@ -27,6 +35,7 @@ public class Ball : MonoBehaviour
             ChangeColor(1);
             //rb.AddForce(collision.contacts[0].normal * bulletPower * collision.gameObject.GetComponent<Bullet>().timer, ForceMode2D.Impulse);
             rb.AddForce(collision.contacts[0].normal * bulletPower, ForceMode2D.Impulse);
+            gameObject.GetComponent<ReboundAnimation>().StartBounce();
             Destroy(collision.gameObject);
             //rb.velocity = Vector2.zero;
         }
@@ -34,6 +43,7 @@ public class Ball : MonoBehaviour
         {
             ChangeColor(2);
             rb.AddForce(collision.contacts[0].normal * bulletPower, ForceMode2D.Impulse);
+            gameObject.GetComponent<ReboundAnimation>().StartBounce();
             Destroy(collision.gameObject);
             //rb.velocity = Vector2.zero;
         }
@@ -50,11 +60,6 @@ public class Ball : MonoBehaviour
             RipplePostProcessor.instance.RippleEffect(transform.position);
             shakeCamera.CamShake();
         }
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        
     }
 
     public void ChangeColor(int which)
