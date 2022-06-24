@@ -1183,6 +1183,7 @@ GameObject:
   - component: {fileID: 1148225157}
   - component: {fileID: 1148225156}
   - component: {fileID: 1148225162}
+  - component: {fileID: 1148225163}
   - component: {fileID: 1148225161}
   m_Layer: 0
   m_Name: Ball
@@ -1433,8 +1434,21 @@ MonoBehaviour:
   durationMin: 0.05
   durationMax: 0.2
   durationEnd: 0.1
-  minScale: 0.8
+  minScale: 0.9
   maxScale: 1.1
+--- !u!114 &1148225163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148225155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f7080372d397e34387dcb3469db569a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChoisiBieng: 4
 --- !u!1001 &1183678486
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2629,10 +2643,6 @@ PrefabInstance:
     - target: {fileID: 1011663371020820203, guid: dc800c4e6985cb64b8b413d727424853, type: 3}
       propertyPath: m_Name
       value: OutsideCollider
-      objectReference: {fileID: 0}
-    - target: {fileID: 5993795472391024305, guid: dc800c4e6985cb64b8b413d727424853, type: 3}
-      propertyPath: m_Size.x
-      value: 18.999166
       objectReference: {fileID: 0}
     - target: {fileID: 7441012975609641767, guid: dc800c4e6985cb64b8b413d727424853, type: 3}
       propertyPath: m_RootOrder

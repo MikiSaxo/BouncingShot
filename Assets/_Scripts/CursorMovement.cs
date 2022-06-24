@@ -115,6 +115,10 @@ public class CursorMovement : MonoBehaviour
         print("shoot");
         transferPosition = new Vector3(SpawnBullet.transform.position.x, SpawnBullet.transform.position.y, 0);
         GameObject b = Instantiate(Bullet, transferPosition, Cursor.transform.rotation);
+        
+        if (GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2)
+            b.gameObject.GetComponent<WhoAreYou>().ChoisiBieng = WhoAreYou.ChooseYourChampion.BulletP2;
+        
         //if (timer < 0.2f)
         //    timer = minimumTime*2;
         //b.transform.localScale = new Vector3(1 * timer, 1 * timer, 1);
@@ -122,12 +126,12 @@ public class CursorMovement : MonoBehaviour
         //timer = 0;
         if (WhichPlayer == 1)
         {
-            b.tag = "BulletP1";
+            //b.tag = "BulletP1";
             b.GetComponentInChildren<SpriteRenderer>().color = Color.cyan;
         }
         else if (WhichPlayer == 2)
         {
-            b.tag = "BulletP2";
+            //b.tag = "BulletP2";
             b.GetComponentInChildren<SpriteRenderer>().color = Color.red;
         }
     }

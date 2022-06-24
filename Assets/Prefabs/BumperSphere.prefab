@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8209011401614387365}
   - component: {fileID: 8209011401614387364}
   - component: {fileID: 355064131}
+  - component: {fileID: 3785488840029501904}
   m_Layer: 0
   m_Name: BumperSphere
   m_TagString: Bumper
@@ -139,3 +140,16 @@ MonoBehaviour:
   durationEnd: 0.2
   minScale: 0.8
   maxScale: 1.1
+--- !u!114 &3785488840029501904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8209011401614387367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f7080372d397e34387dcb3469db569a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChoisiBieng: 5

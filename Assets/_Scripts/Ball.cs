@@ -12,12 +12,12 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("Outside"))
+        if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.Outside)
         {
             gameObject.GetComponent<ReboundAnimation>().StartBounce();
         }
 
-        if (collision.transform.CompareTag("Bumper"))
+        if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.Bumper)
         {
             //Rigidbody2D otherRb = collision.rigidbody;
             rb.velocity = Vector2.zero;
@@ -27,7 +27,7 @@ public class Ball : MonoBehaviour
             //ChangeColor(0);
         }
 
-        if (collision.transform.CompareTag("BulletP1"))
+        if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP1)
         {
             //var coord = Vector2.Distance(transform.position, collision.transform.position);
             //print(coord);
@@ -39,7 +39,7 @@ public class Ball : MonoBehaviour
             Destroy(collision.gameObject);
             //rb.velocity = Vector2.zero;
         }
-        if (collision.transform.CompareTag("BulletP2"))
+        if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP2)
         {
             ChangeColor(2);
             rb.AddForce(collision.contacts[0].normal * bulletPower, ForceMode2D.Impulse);
@@ -48,13 +48,13 @@ public class Ball : MonoBehaviour
             //rb.velocity = Vector2.zero;
         }
 
-        if (collision.transform.CompareTag("P1") && color != 1)
+        if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1 && color != 1)
         {
             Manager.instance.WhichBallTouches(1, 2);
             RipplePostProcessor.instance.RippleEffect(transform.position);
             shakeCamera.CamShake();
         }
-        else if (collision.transform.CompareTag("P2") && color != 2)
+        else if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2 && color != 2)
         {
             Manager.instance.WhichBallTouches(2, 1);
             RipplePostProcessor.instance.RippleEffect(transform.position);

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7871497295835212832}
   - component: {fileID: 7541983493391853688}
   - component: {fileID: 3867183364867002878}
+  - component: {fileID: 8114902617848294762}
   m_Layer: 0
   m_Name: BumperSquare
   m_TagString: Bumper
@@ -131,3 +132,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.28, y: 1.28}
   m_EdgeRadius: 0
+--- !u!114 &8114902617848294762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7696027579430211602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f7080372d397e34387dcb3469db569a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChoisiBieng: 5

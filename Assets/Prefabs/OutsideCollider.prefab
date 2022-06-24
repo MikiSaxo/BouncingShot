@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7441012975609641767}
   - component: {fileID: 5993795472391024305}
+  - component: {fileID: 3962944083458358335}
   m_Layer: 0
   m_Name: OutsideCollider
   m_TagString: Outside
@@ -57,3 +58,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 18.999166, y: 3}
   m_EdgeRadius: 0
+--- !u!114 &3962944083458358335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011663371020820203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f7080372d397e34387dcb3469db569a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChoisiBieng: 6

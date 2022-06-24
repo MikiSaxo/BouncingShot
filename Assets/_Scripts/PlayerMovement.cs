@@ -22,14 +22,16 @@ public class PlayerMovement : MonoBehaviour
         gameObject.GetComponentInChildren<CursorMovement>().WhichPlayer = Manager.instance.NbOfPlayer;
         if (Manager.instance.NbOfPlayer == 1)
         {
-            gameObject.tag = "P1";
+            //gameObject.tag = "P1";
+            //gameObject.GetComponent<WhoAreYou>().ChoisiBieng = WhoAreYou.ChooseYourChampion.P1;
             MainSprite.color = Color.cyan;
             transform.position = Manager.instance.SpawnPoints[0].position;
             Manager.instance.NbOfPlayer++;
         }
         else
         {
-            gameObject.tag = "P2";
+            //gameObject.tag = "P2";
+            gameObject.GetComponent<WhoAreYou>().ChoisiBieng = WhoAreYou.ChooseYourChampion.P2;
             MainSprite.color = Color.red;
             transform.position = Manager.instance.SpawnPoints[1].position;
             Manager.instance.LaunchGame();

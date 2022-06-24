@@ -13,16 +13,20 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         rb.velocity = transform.right * Speed;// * (timer * Speed / 2);
-        Child.tag = tag;
+        //Child.tag = tag;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("Outside") || collision.transform.CompareTag("Bumper") || collision.transform.CompareTag("P1") || collision.transform.CompareTag("P2"))
+        if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.Outside
+            || collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.Bumper 
+            || collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1
+            || collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2)
         {
             Destroy(gameObject);
         }
-        if (collision.transform.CompareTag("BulletP1") || collision.transform.CompareTag("BulletP2"))// || collision.transform.CompareTag("Ball"))
+        if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP1
+            || collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP2)// || collision.transform.CompareTag("Ball"))
         {
             Destroy(gameObject);
             //GetComponent<CapsuleCollider2D>().isTrigger = true;
@@ -34,7 +38,10 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.CompareTag("Outside") || collision.transform.CompareTag("Bumper") || collision.transform.CompareTag("P1") || collision.transform.CompareTag("P2"))
+        if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.Outside
+            || collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.Bumper
+            || collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1
+            || collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2)
         {
             Destroy(gameObject);
         }
