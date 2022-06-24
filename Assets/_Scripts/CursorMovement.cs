@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using DG.Tweening;
 
 public class CursorMovement : MonoBehaviour
 {
@@ -13,7 +14,9 @@ public class CursorMovement : MonoBehaviour
     public float attackRate = 1f;
     public int WhichPlayer;
     [SerializeField] GameObject Bullet, Cursor, SpawnBullet, IndicatorCanShoot;
-    [SerializeField] float timer;
+    [SerializeField] float timer, durationMin, durationMax, durationEnd;
+
+    [SerializeField] Vector3 minScale, maxScale;
 
     const float minimumTime = 0.05f;
 
@@ -108,6 +111,7 @@ public class CursorMovement : MonoBehaviour
         //if (timer > 1)
         //    timer = 1;
         //RipplePostProcessor.instance.RippleEffect(transform.position);
+        StartAnimShoot();
         print("shoot");
         transferPosition = new Vector3(SpawnBullet.transform.position.x, SpawnBullet.transform.position.y, 0);
         GameObject b = Instantiate(Bullet, transferPosition, Cursor.transform.rotation);
@@ -126,5 +130,19 @@ public class CursorMovement : MonoBehaviour
             b.tag = "BulletP2";
             b.GetComponentInChildren<SpriteRenderer>().color = Color.red;
         }
+    }
+
+    void StartAnimShoot()
+    {
+        transform.DOScale(minScale, durationMin).OnComplete(MaxBounce);
+    }
+    void MaxBounce()
+    {
+        transform.DOScale(maxScale, durationMax).OnComplete(IdleBounce);
+    }
+
+    void IdleBounce()
+    {
+        transform.DOScale(new Vector3(1, 1, 1), durationEnd);
     }
 }
