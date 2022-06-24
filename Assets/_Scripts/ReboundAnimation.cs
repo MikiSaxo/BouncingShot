@@ -5,7 +5,8 @@ using DG.Tweening;
 
 public class ReboundAnimation : MonoBehaviour
 {
-    [SerializeField] float durationMin, durationMax, durationEnd, minScale, maxScale;
+    [SerializeField] float durationMin, durationMax, durationEnd;
+    [SerializeField] Vector3 minScale, maxScale;
     void Start()
     {
         //StartBounce();
@@ -13,12 +14,12 @@ public class ReboundAnimation : MonoBehaviour
 
     public void StartBounce()
     {
-        transform.DOScale(new Vector3(minScale, minScale, minScale), durationMin).OnComplete(MaxBounce);
+        transform.DOScale(minScale, durationMin).OnComplete(MaxBounce);
     }
 
     void MaxBounce()
     {
-        transform.DOScale(new Vector3(maxScale, maxScale, maxScale), durationMax).OnComplete(IdleBounce);
+        transform.DOScale(maxScale, durationMax).OnComplete(IdleBounce);
     }
 
     void IdleBounce()
