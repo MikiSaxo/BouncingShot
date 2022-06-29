@@ -44,22 +44,33 @@ public class Manager : MonoBehaviour
         NbScores[whoTouch]++;
         TextScores[whoTouch].text = NbScores[whoTouch].ToString();
 
-        Ball.transform.position = SpawnPoints[4].position;
-        Ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        Ball.GetComponent<Ball>().ChangeColor(0);
-
-
-        /*TextScores[anounceText].gameObject.SetActive(true);
-        if (whoTouch == 2)
+        if (GameParameters.instance.Mode == GameParameters.WhichMode.Normal)
         {
-            TextScores[anounceText].text = Phrases[1];
-            TextScores[anounceText].color = Color.red;
+            Ball.transform.position = SpawnPoints[wasTouch + 1].position;
+            Ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            Ball.GetComponent<Ball>().ChangeColor(wasTouch);
+
+            TextScores[anounceText].gameObject.SetActive(true);
+            if (whoTouch == 2)
+            {
+                TextScores[anounceText].text = Phrases[1];
+                TextScores[anounceText].color = Color.red;
+            }
+            else
+            {
+                TextScores[anounceText].text = Phrases[2];
+                TextScores[anounceText].color = Color.cyan;
+            }
+            StartCoroutine(Replace());
         }
-        else
+
+        if (GameParameters.instance.Mode == GameParameters.WhichMode.Blitz)
         {
-            TextScores[anounceText].text = Phrases[2];
-            TextScores[anounceText].color = Color.cyan;
-        }*/
+            Ball.transform.position = SpawnPoints[4].position;
+            Ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            Ball.GetComponent<Ball>().ChangeColor(0);
+        }
+
 
     }
     //public void WhichBallTouches(int wasTouch, int whoTouch)
@@ -91,13 +102,13 @@ public class Manager : MonoBehaviour
     {
         Players[0].transform.position = SpawnPoints[0].position;
         Players[1].transform.position = SpawnPoints[1].position;
-        
+
 
         Players[0].GetComponent<PlayerMovement>().CanMove = false;
         Players[1].GetComponent<PlayerMovement>().CanMove = false;
         yield return new WaitForSeconds(1f);
         TextScores[anounceText].gameObject.SetActive(false);
-        
+
         StartCoroutine(Decompte());
     }
 
