@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
             MainSprite.color = Color.cyan;
             transform.position = Manager.instance.SpawnPoints[0].position;
             Manager.instance.NbOfPlayer++;
+            Manager.instance.playerScoreVisu[0].GetComponent<FollowObject>().target = gameObject.transform;
         }
         else
         {
@@ -32,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
             MainSprite.color = Color.red;
             transform.position = Manager.instance.SpawnPoints[1].position;
             Manager.instance.LaunchGame();
+            Manager.instance.playerScoreVisu[1].GetComponent<FollowObject>().target = gameObject.transform;
         }
     }
 

@@ -15,6 +15,7 @@ public class Manager : MonoBehaviour
     [HideInInspector] public int NbOfPlayer;
     [SerializeField] float timeForDecompteInSec;
     [SerializeField] int nbDecompte;
+    public GameObject[] playerScoreVisu;
 
     const int anounceText = 0;
 
