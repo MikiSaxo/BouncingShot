@@ -135,6 +135,7 @@ MonoBehaviour:
   timer: 0
   Child: {fileID: 405621909292024935}
   bulletPower: 0
+  bouncePlayerPower: 7500
 --- !u!50 &3379961108525010167
 Rigidbody2D:
   serializedVersion: 4

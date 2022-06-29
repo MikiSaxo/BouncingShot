@@ -13,6 +13,8 @@ public class WhoAreYou : MonoBehaviour
         Ball,
         Bumper,
         Outside,
+        CampP1,
+        CampP2,
     }
     public ChooseYourChampion ChoisiBieng;
 }

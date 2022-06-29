@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     public float Speed;
     public float timer;
     public GameObject Child;
-    public int bulletPower;
+    public int bulletPower, bouncePlayerPower;
 
     void Start()
     {
@@ -18,23 +18,44 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.Outside
-            || collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.Bumper 
-            || collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1
-            || collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2)
+        if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.Outside //Outside & Bumper
+            || collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.Bumper)
         {
             Destroy(gameObject);
         }
-        if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP1
+
+        if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP1 // Bullets
             || collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP2)// || collision.transform.CompareTag("Ball"))
         {
             Destroy(gameObject);
-            //GetComponent<CapsuleCollider2D>().isTrigger = true;
-            //print("collision bullets");
         }
+
+        if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1 // P1 & P2
+            || collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2)
+        {
+            if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession)
+            {
+                collision.gameObject.GetComponent<PlayerMovement>().LaunchBounceBullet();
+                //StartCoroutine(TakeAShot(collision));
+                //collision.gameObject.GetComponent<PlayerMovement>().LaunchBounceBullet(gameObject.GetComponent<Collision2D>());
+                //collision.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                collision.gameObject.GetComponent<Rigidbody2D>().AddForce(-collision.contacts[0].normal * bouncePlayerPower, ForceMode2D.Impulse);
+            }
+            Destroy(gameObject);
+        }
+
+        //Si en mode Possession pour détruire la bullet quand elle touche la balle
+        if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.Ball && GameParameters.instance.Mode == GameParameters.WhichMode.Possession)
+            Destroy(gameObject);
     }
 
- 
+    IEnumerator TakeAShot(Collision2D collision)
+    {
+        yield return new WaitForSeconds(.01f);
+        //collision.gameObject.GetComponent<PlayerMovement>().movementInput = Vector2.zero;
+        collision.gameObject.GetComponent<Rigidbody2D>().AddForce(-collision.contacts[0].normal * bouncePlayerPower, ForceMode2D.Impulse);
+    }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -45,48 +66,5 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        //if (collision.transform.CompareTag("Ball"))
-        //{
-            //GetComponent<CapsuleCollider2D>().isTrigger = false;
-            //var test = transform.rotation.z;
-            //print("test = " + test);
-            //collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, test) * bulletPower, ForceMode2D.Impulse);
-            //Destroy(gameObject);
-        //}
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        //print("ça touche manouch");
-        /*if (collision.transform.CompareTag("BulletP1") && tag == "BulletP2")
-        {
-            print("P2 rencontre P1");
-            if (collision.gameObject.GetComponent<Bullet>().timer > timer)
-            {
-                print("P2 > P1");
-                Destroy(gameObject);
-            }
-            else if (collision.gameObject.GetComponent<Bullet>().timer == timer)
-            {
-                Destroy(collision.gameObject);
-                Destroy(gameObject);
-            }
-        }
-
-        if (collision.transform.CompareTag("BulletP2") && tag == "BulletP1")
-        {
-            print("P1 rencontre P2");
-            if (collision.gameObject.GetComponent<Bullet>().timer > timer)
-            {
-                print("P1 > P2");
-                Destroy(gameObject);
-            }
-            else if (collision.gameObject.GetComponent<Bullet>().timer == timer)
-            {
-                Destroy(collision.gameObject);
-                Destroy(gameObject);
-            }
-        }*/
     }
 }

@@ -19,25 +19,18 @@ public class Ball : MonoBehaviour
 
         if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.Bumper)
         {
-            //Rigidbody2D otherRb = collision.rigidbody;
             rb.velocity = Vector2.zero;
             rb.AddForce(-collision.contacts[0].normal * bumperPower, ForceMode2D.Impulse);
             collision.gameObject.GetComponent<ReboundAnimation>().StartBounce();
             gameObject.GetComponent<ReboundAnimation>().StartBounce();
-            //ChangeColor(0);
         }
 
         if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP1)
         {
-            //var coord = Vector2.Distance(transform.position, collision.transform.position);
-            //print(coord);
-            print("ball contre bullet");
             ChangeColor(1);
-            //rb.AddForce(collision.contacts[0].normal * bulletPower * collision.gameObject.GetComponent<Bullet>().timer, ForceMode2D.Impulse);
             rb.AddForce(collision.contacts[0].normal * bulletPower, ForceMode2D.Impulse);
             gameObject.GetComponent<ReboundAnimation>().StartBounce();
             Destroy(collision.gameObject);
-            //rb.velocity = Vector2.zero;
         }
         if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP2)
         {
@@ -45,7 +38,6 @@ public class Ball : MonoBehaviour
             rb.AddForce(collision.contacts[0].normal * bulletPower, ForceMode2D.Impulse);
             gameObject.GetComponent<ReboundAnimation>().StartBounce();
             Destroy(collision.gameObject);
-            //rb.velocity = Vector2.zero;
         }
 
         if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1 && color != 1)

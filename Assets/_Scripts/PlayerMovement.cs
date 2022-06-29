@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float Speed;
     [SerializeField] Rigidbody2D rb;
     [SerializeField] SpriteRenderer MainSprite;
+    [SerializeField] int bouncePower;
 
     [HideInInspector] public bool CanMove;
 
@@ -16,21 +17,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        //CanMove = true;
         print("P" + Manager.instance.NbOfPlayer);
         Manager.instance.Players.Add(gameObject);
         gameObject.GetComponentInChildren<CursorMovement>().WhichPlayer = Manager.instance.NbOfPlayer;
         if (Manager.instance.NbOfPlayer == 1)
         {
-            //gameObject.tag = "P1";
-            //gameObject.GetComponent<WhoAreYou>().ChoisiBieng = WhoAreYou.ChooseYourChampion.P1;
             MainSprite.color = Color.cyan;
             transform.position = Manager.instance.SpawnPoints[0].position;
             Manager.instance.NbOfPlayer++;
         }
         else
         {
-            //gameObject.tag = "P2";
             gameObject.GetComponent<WhoAreYou>().ChoisiBieng = WhoAreYou.ChooseYourChampion.P2;
             MainSprite.color = Color.red;
             transform.position = Manager.instance.SpawnPoints[1].position;
@@ -40,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (movementInput != Vector2.zero)
+        if (movementInput != Vector2.zero && CanMove)
             Movement();
 
         if (!CanMove)
@@ -55,11 +52,22 @@ public class PlayerMovement : MonoBehaviour
 
     void Movement()
     {
-        //Vector2 m = new Vector2(movementInput.x, movementInput.y) * Speed * Time.deltaTime;
         Vector2 m2 = new Vector2(movementInput.x, movementInput.y) * Speed;
-        if (!CanMove)
-            m2 = Vector2.zero;
-        //transform.Translate(m, Space.World);
+        //if (!CanMove)
+        //    m2 = Vector2.zero;
         rb.velocity = m2;
+    }
+
+
+    public void LaunchBounceBullet()
+    {
+        CanMove = false;
+        StartCoroutine(TakeAShot());
+    }
+    IEnumerator TakeAShot()
+    {
+        //rb.AddForce(collision.contacts[0].normal * bouncePower, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(.5f);
+        CanMove = true;
     }
 }

@@ -23,7 +23,7 @@ public class GameParameters : MonoBehaviour
     {
         Normal,
         Blitz,
-        Rumble,
+        Domination,
         Possession
     }
 

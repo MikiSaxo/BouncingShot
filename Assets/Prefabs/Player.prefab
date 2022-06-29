@@ -376,6 +376,7 @@ MonoBehaviour:
   Speed: 90
   rb: {fileID: 5709792288666449925}
   MainSprite: {fileID: 7762620772492406342}
+  bouncePower: 7500
   CanMove: 0
 --- !u!114 &4709864462000678249
 MonoBehaviour:
