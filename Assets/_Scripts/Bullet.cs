@@ -25,20 +25,19 @@ public class Bullet : MonoBehaviour
         }
 
         if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP1 // Bullets
-            || collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP2)// || collision.transform.CompareTag("Ball"))
+            || collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP2)
         {
             Destroy(gameObject);
         }
 
-        if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1 // P1 & P2
-            || collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2)
+        if ((collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1 // P1 & P2
+            && gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP2) 
+            || (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2
+            && gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP1))
         {
             if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession)
             {
                 collision.gameObject.GetComponent<PlayerMovement>().LaunchBounceBullet();
-                //StartCoroutine(TakeAShot(collision));
-                //collision.gameObject.GetComponent<PlayerMovement>().LaunchBounceBullet(gameObject.GetComponent<Collision2D>());
-                //collision.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 collision.gameObject.GetComponent<Rigidbody2D>().AddForce(-collision.contacts[0].normal * bouncePlayerPower, ForceMode2D.Impulse);
             }
             Destroy(gameObject);

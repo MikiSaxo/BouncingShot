@@ -1597,7 +1597,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5676397298483268074, guid: a2fd047e62a88bf4e8d2c95105191ffe, type: 3}
       propertyPath: m_text
-      value: Mode Rumble
+      value: Mode Domination
       objectReference: {fileID: 0}
     - target: {fileID: 5676397299533997677, guid: a2fd047e62a88bf4e8d2c95105191ffe, type: 3}
       propertyPath: m_Navigation.m_Mode
@@ -1745,7 +1745,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5676397299533997679, guid: a2fd047e62a88bf4e8d2c95105191ffe, type: 3}
       propertyPath: m_Name
-      value: Mode Rumble
+      value: Mode Domination
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2fd047e62a88bf4e8d2c95105191ffe, type: 3}

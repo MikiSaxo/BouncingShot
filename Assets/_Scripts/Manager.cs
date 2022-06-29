@@ -10,6 +10,7 @@ public class Manager : MonoBehaviour
     public Transform[] SpawnPoints;
     public TextMeshProUGUI[] TextScores;
     public int[] NbScores;
+    public float[] NbScoresPoss;
     [SerializeField] string[] Phrases;
     [HideInInspector] public int NbOfPlayer;
     [SerializeField] float timeForDecompteInSec;
@@ -70,33 +71,15 @@ public class Manager : MonoBehaviour
             Ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             Ball.GetComponent<Ball>().ChangeColor(0);
         }
-
-
     }
-    //public void WhichBallTouches(int wasTouch, int whoTouch)
-    //{
-    //    NbScores[whoTouch]++;
-    //    TextScores[whoTouch].text = NbScores[whoTouch].ToString();
 
-    //    Ball.transform.position = SpawnPoints[wasTouch + 1].position;
-    //    Ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-    //    Ball.GetComponent<Ball>().ChangeColor(wasTouch);
+    public void ScorePossession(int whoNotTouch)
+    {
+        NbScoresPoss[whoNotTouch] += Time.deltaTime;
+        int score = (int)NbScoresPoss[whoNotTouch];
+        TextScores[whoNotTouch].text = score.ToString();
+    }
 
-
-    //    TextScores[anounceText].gameObject.SetActive(true);
-    //    if (whoTouch == 2)
-    //    {
-    //        TextScores[anounceText].text = Phrases[1];
-    //        TextScores[anounceText].color = Color.red;
-    //    }
-    //    else
-    //    {
-    //        TextScores[anounceText].text = Phrases[2];
-    //        TextScores[anounceText].color = Color.cyan;
-    //    }
-
-    //    StartCoroutine(Replace());
-    //}
 
     IEnumerator Replace()
     {
