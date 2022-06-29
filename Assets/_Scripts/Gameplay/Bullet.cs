@@ -18,13 +18,9 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.Outside //Outside & Bumper
-            || collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.Bumper)
-        {
-            Destroy(gameObject);
-        }
-
-        if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP1 // Bullets
+        if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.Outside //Outside & Bumper & Bullets
+            || collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.Bumper
+            || collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP1
             || collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP2)
         {
             Destroy(gameObject);
@@ -43,16 +39,8 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
 
-        //Si en mode Possession pour détruire la bullet quand elle touche la balle
-        if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.Ball && GameParameters.instance.Mode == GameParameters.WhichMode.Possession)
+        if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.Ball) // Ball
             Destroy(gameObject);
-    }
-
-    IEnumerator TakeAShot(Collision2D collision)
-    {
-        yield return new WaitForSeconds(.01f);
-        //collision.gameObject.GetComponent<PlayerMovement>().movementInput = Vector2.zero;
-        collision.gameObject.GetComponent<Rigidbody2D>().AddForce(-collision.contacts[0].normal * bouncePlayerPower, ForceMode2D.Impulse);
     }
 
 
