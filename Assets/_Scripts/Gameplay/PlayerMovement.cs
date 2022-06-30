@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using DG.Tweening;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,12 +11,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Rigidbody2D rb;
     [SerializeField] SpriteRenderer MainSprite;
     [SerializeField] int bouncePower, maxDashPower;
+    [SerializeField] Animator DashAnim;
     int dashPower;
-    bool dash, isCooldown;
-    [SerializeField] GameObject FBDash;
+    bool dash, isCooldown, dashAnim;
+    //[SerializeField] GameObject FBDash;
 
-    float nextAttack = 1f;
-    [SerializeField] float attackRate = 1f;
+    float nextDash = 1f;
+    [SerializeField] float dashRate = 1f;
 
     [HideInInspector] public bool CanMove;
 
@@ -55,19 +57,19 @@ public class PlayerMovement : MonoBehaviour
 
         if (isCooldown == false)
         {
-            FBDash.SetActive(true);
+            //FBDash.SetActive(true);
             if (dash)
             {
                 isCooldown = true;
-                nextAttack = attackRate;
+                nextDash = dashRate;
                 Dash();
             }
         }
 
         if (isCooldown)
         {
-            nextAttack -= Time.deltaTime;
-            if (nextAttack <= 0)
+            nextDash -= Time.deltaTime;
+            if (nextDash <= 0)
             {
                 isCooldown = false;
             }
@@ -86,7 +88,8 @@ public class PlayerMovement : MonoBehaviour
     void Dash()
     {
         print("dash");
-        dashPower = maxDashPower;
+        if(movementInput != Vector2.zero)
+            dashPower = maxDashPower;
     }
 
     void Movement()
@@ -104,8 +107,22 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(.1f);
         dashPower = 1;
-        FBDash.SetActive(false);
+        if (!dashAnim)
+        {
+            DashAnim.SetTrigger("LaunchDash");
+            dashAnim = true;
+            print("LaunchDash");
+        }
+        yield return new WaitForSeconds(.1f);
+        dashAnim = false;
+        //FBDash.transform.DOScale(Vector3.zero, 0.01f).OnComplete(ReloadDash);
+        //FBDash.SetActive(false);
     }
+
+    /*void ReloadDash()
+    {
+        //FBDash.transform.DOScale(new Vector3(1, 1, 1), dashRate);
+    }*/
 
     public void LaunchBounceBullet()
     {

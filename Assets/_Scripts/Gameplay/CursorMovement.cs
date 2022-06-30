@@ -13,7 +13,8 @@ public class CursorMovement : MonoBehaviour
 
     public float attackRate = 1f;
     public int WhichPlayer;
-    [SerializeField] GameObject Bullet, Cursor, SpawnBullet, IndicatorCanShoot;
+    [SerializeField] GameObject Bullet, Cursor, SpawnBullet;
+    [SerializeField] GameObject[] IndicatorsCanShoot;
     [SerializeField] float timer;
 
     const float minimumTime = 0.05f;
@@ -38,7 +39,8 @@ public class CursorMovement : MonoBehaviour
 
         if (isCooldown == false && shoot && gameObject.GetComponent<PlayerMovement>().CanMove)
         {
-            IndicatorCanShoot.SetActive(false);
+            IndicatorsCanShoot[0].SetActive(false);
+            IndicatorsCanShoot[1].SetActive(false);
             isCooldown = true;
             nextAttack = attackRate;
             Shoot();
@@ -47,10 +49,15 @@ public class CursorMovement : MonoBehaviour
         if (isCooldown)
         {
             nextAttack -= Time.deltaTime;
+            if (nextAttack <= attackRate/2)
+                IndicatorsCanShoot[0].SetActive(true);
+                IndicatorsCanShoot[0].GetComponent<ReboundAnimation>().StartBounce();
+
             if (nextAttack <= 0)
             {
                 isCooldown = false;
-                IndicatorCanShoot.SetActive(true);
+                IndicatorsCanShoot[1].SetActive(true);
+                IndicatorsCanShoot[1].GetComponent<ReboundAnimation>().StartBounce();
             }
         }
     }
