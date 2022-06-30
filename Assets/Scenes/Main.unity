@@ -2259,7 +2259,7 @@ MonoBehaviour:
   ResetRate: 10
   bumperPower: 10000
   bulletPower: 12000
-  color: 0
+  addBulletPowerSoccer: 250
 --- !u!96 &1148225161
 TrailRenderer:
   serializedVersion: 2
@@ -3276,7 +3276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1892342433572347430, guid: b7cd2e0d87507df4f8d4586ea8a459cf, type: 3}
       propertyPath: Mode
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1892342433572347431, guid: b7cd2e0d87507df4f8d4586ea8a459cf, type: 3}
       propertyPath: m_Name
@@ -4278,6 +4278,18 @@ PrefabInstance:
       propertyPath: Ball
       value: 
       objectReference: {fileID: 1148225155}
+    - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
+      propertyPath: soccerSize.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
+      propertyPath: soccerSize.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
+      propertyPath: soccerSize.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
       propertyPath: goals.Array.size
       value: 2

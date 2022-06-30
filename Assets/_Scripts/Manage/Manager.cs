@@ -17,6 +17,7 @@ public class Manager : MonoBehaviour
     [SerializeField] int nbDecompte;
     public GameObject[] playerScoreVisu;
     [SerializeField] GameObject[] goals;
+    [SerializeField] Vector3 soccerSize;
 
     const int anounceText = 0;
 
@@ -40,8 +41,9 @@ public class Manager : MonoBehaviour
         if (GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
         {
             goals[0].SetActive(true);
-            
             goals[1].SetActive(false);
+
+            Ball.transform.localScale = soccerSize;
         }
     }
 
