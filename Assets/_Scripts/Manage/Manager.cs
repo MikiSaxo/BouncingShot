@@ -16,6 +16,7 @@ public class Manager : MonoBehaviour
     [SerializeField] float timeForDecompteInSec;
     [SerializeField] int nbDecompte;
     public GameObject[] playerScoreVisu;
+    [SerializeField] GameObject[] goals;
 
     const int anounceText = 0;
 
@@ -35,6 +36,13 @@ public class Manager : MonoBehaviour
         TextScores[0].gameObject.SetActive(true);
         TextScores[0].text = Phrases[0];
         TextScores[anounceText].color = Color.yellow;
+
+        if (GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
+        {
+            goals[0].SetActive(true);
+            
+            goals[1].SetActive(false);
+        }
     }
 
     public void LaunchGame()
@@ -45,8 +53,7 @@ public class Manager : MonoBehaviour
     {
         NbScores[whoTouch]++;
         TextScores[whoTouch].text = NbScores[whoTouch].ToString();
-
-        if (GameParameters.instance.Mode == GameParameters.WhichMode.Normal)
+        if (GameParameters.instance.Mode == GameParameters.WhichMode.Normal || GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
         {
             Ball.transform.position = SpawnPoints[wasTouch + 1].position;
             Ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -78,6 +85,7 @@ public class Manager : MonoBehaviour
         int score = (int)NbScoresPoss[whoNotTouch];
         TextScores[whoNotTouch].text = score.ToString();
     }
+
 
     IEnumerator ReplaceBlitz()
     {

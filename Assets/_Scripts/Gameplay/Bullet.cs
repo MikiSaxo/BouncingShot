@@ -31,7 +31,7 @@ public class Bullet : MonoBehaviour
             || (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2
             && gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP1))
         {
-            if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession)
+            if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession || GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
             {
                 collision.gameObject.GetComponent<PlayerMovement>().LaunchBounceBullet();
                 collision.gameObject.GetComponent<Rigidbody2D>().AddForce(-collision.contacts[0].normal * bouncePlayerPower, ForceMode2D.Impulse);

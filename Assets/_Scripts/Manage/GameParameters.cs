@@ -24,7 +24,8 @@ public class GameParameters : MonoBehaviour
         Normal,
         Blitz,
         Domination,
-        Possession
+        Possession,
+        Soccer
     }
 
     public void ChooseMode(int mode)

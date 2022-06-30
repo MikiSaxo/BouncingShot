@@ -15,6 +15,8 @@ public class WhoAreYou : MonoBehaviour
         Outside,
         CampP1,
         CampP2,
+        GoalP1,
+        GoalP2,
     }
     public ChooseYourChampion ChoisiBieng;
 }

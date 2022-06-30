@@ -30,10 +30,11 @@ public class Ball : MonoBehaviour
             StartRebound();
         }
 
-        if (GameParameters.instance.Mode != GameParameters.WhichMode.Possession)
+        if (GameParameters.instance.Mode != GameParameters.WhichMode.Possession && GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
         {
             if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP1) //BulletP1
             {
+                print(GameParameters.instance.Mode);
                 if (GameParameters.instance.Mode != GameParameters.WhichMode.Domination)
                     ChangeColor(1);
                 rb.AddForce(collision.contacts[0].normal * bulletPower, ForceMode2D.Impulse);
@@ -47,7 +48,7 @@ public class Ball : MonoBehaviour
                 rb.AddForce(collision.contacts[0].normal * bulletPower, ForceMode2D.Impulse);
                 StartRebound();
                 Destroy(collision.gameObject);
-            } 
+            }
             if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1 && color != 1) //P1
             {
                 if (GameParameters.instance.Mode != GameParameters.WhichMode.Domination)
@@ -55,7 +56,7 @@ public class Ball : MonoBehaviour
                 if (GameParameters.instance.Mode != GameParameters.WhichMode.Possession)
                     RipplePostProcessor.instance.RippleEffect(transform.position);
                 shakeCamera.CamShake();
-            } 
+            }
             else if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2 && color != 2) //P2
             {
                 if (GameParameters.instance.Mode != GameParameters.WhichMode.Domination)
@@ -66,7 +67,7 @@ public class Ball : MonoBehaviour
             }
         }
 
-        if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession)
+        if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession || GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
         {
             if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1)
             {
@@ -80,13 +81,25 @@ public class Ball : MonoBehaviour
                 //isCooldown = true;
             }
         }
+
+        if (GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
+        {
+            if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.GoalP1)
+            {
+                Manager.instance.WhichBallTouches(1, 2);
+            }
+            else if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.GoalP2)
+            {
+                Manager.instance.WhichBallTouches(2, 1);
+            }
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession)
+        if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession || GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
         {
-            if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2 
+            if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2
                 && collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1)
                 ChangeColor(0);
             else if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1)
@@ -100,7 +113,7 @@ public class Ball : MonoBehaviour
                 //isCooldown = true;
             }
             //else
-               //ChangeColor(0);
+            //ChangeColor(0);
         }
     }
 
@@ -147,7 +160,7 @@ public class Ball : MonoBehaviour
         //        }
         //    }
         //}
-        
+
         if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession || GameParameters.instance.Mode == GameParameters.WhichMode.Domination)
         {
             if (color == 1)
