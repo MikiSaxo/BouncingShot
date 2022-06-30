@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] int bouncePower, maxDashPower;
     int dashPower;
     bool dash, isCooldown;
+    [SerializeField] GameObject FBDash;
 
     float nextAttack = 1f;
     [SerializeField] float attackRate = 1f;
@@ -52,12 +53,15 @@ public class PlayerMovement : MonoBehaviour
             Destroy(GameObject.Find("Bullet(Clone)"));
 
 
-        if (isCooldown == false && dash)
+        if (isCooldown == false)
         {
-            
-            isCooldown = true;
-            nextAttack = attackRate;
-            Dash();
+            FBDash.SetActive(true);
+            if (dash)
+            {
+                isCooldown = true;
+                nextAttack = attackRate;
+                Dash();
+            }
         }
 
         if (isCooldown)
@@ -93,13 +97,14 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = m2;
         if (dashPower == maxDashPower)
             StartCoroutine(ResetDash());
-          //  dashPower = 1;
+        //  dashPower = 1;
     }
 
     IEnumerator ResetDash()
     {
         yield return new WaitForSeconds(.1f);
         dashPower = 1;
+        FBDash.SetActive(false);
     }
 
     public void LaunchBounceBullet()

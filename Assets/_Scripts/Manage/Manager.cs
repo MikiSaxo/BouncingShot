@@ -68,9 +68,7 @@ public class Manager : MonoBehaviour
 
         if (GameParameters.instance.Mode == GameParameters.WhichMode.Blitz)
         {
-            Ball.transform.position = SpawnPoints[4].position;
-            Ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            Ball.GetComponent<Ball>().ChangeColor(0);
+            StartCoroutine(ReplaceBlitz());
         }
     }
 
@@ -81,15 +79,29 @@ public class Manager : MonoBehaviour
         TextScores[whoNotTouch].text = score.ToString();
     }
 
+    IEnumerator ReplaceBlitz()
+    {
+        Ball.SetActive(false);
+        yield return new WaitForSeconds(.5f);
+        Ball.SetActive(true);
+        Ball.transform.position = SpawnPoints[4].position;
+        Ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        Ball.GetComponent<Ball>().ChangeColor(0);
+    }
 
     IEnumerator Replace()
     {
-        Players[0].transform.position = SpawnPoints[0].position;
-        Players[1].transform.position = SpawnPoints[1].position;
-
-
         Players[0].GetComponent<PlayerMovement>().CanMove = false;
         Players[1].GetComponent<PlayerMovement>().CanMove = false;
+
+
+        Players[0].GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        Players[1].GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        
+
+        Players[0].transform.position = SpawnPoints[0].position;
+        Players[1].transform.position = SpawnPoints[1].position;
+        
         yield return new WaitForSeconds(1f);
         TextScores[anounceText].gameObject.SetActive(false);
 
