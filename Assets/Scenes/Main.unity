@@ -1462,7 +1462,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 25
+  m_Mass: 400
   m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -1518,7 +1518,7 @@ MonoBehaviour:
   spr: {fileID: 1361862963}
   shakeCamera: {fileID: 1885141297}
   Child: {fileID: 1777582540}
-  ResetRate: 0.5
+  ResetRate: 10
   bumperPower: 1000
   bulletPower: 900
   color: 0
@@ -2579,11 +2579,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1892342433572347430, guid: b7cd2e0d87507df4f8d4586ea8a459cf, type: 3}
       propertyPath: Mode
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1892342433572347431, guid: b7cd2e0d87507df4f8d4586ea8a459cf, type: 3}
       propertyPath: m_Name
       value: GameParameters
+      objectReference: {fileID: 0}
+    - target: {fileID: 1892342433572347431, guid: b7cd2e0d87507df4f8d4586ea8a459cf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7cd2e0d87507df4f8d4586ea8a459cf, type: 3}

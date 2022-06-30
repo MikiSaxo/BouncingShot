@@ -49,6 +49,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""b7c2b222-0402-410e-b384-36c662c1dcd4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -139,6 +147,28 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Lock"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""70773e4a-6d8d-4591-81c5-53334db54bad"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller1"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8d0c1a24-3910-4844-9e77-5b2722f8e443"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller2"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -174,6 +204,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Gameplay_Rotate = m_Gameplay.FindAction("Rotate", throwIfNotFound: true);
         m_Gameplay_Shoot = m_Gameplay.FindAction("Shoot", throwIfNotFound: true);
         m_Gameplay_Lock = m_Gameplay.FindAction("Lock", throwIfNotFound: true);
+        m_Gameplay_Dash = m_Gameplay.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -227,6 +258,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Rotate;
     private readonly InputAction m_Gameplay_Shoot;
     private readonly InputAction m_Gameplay_Lock;
+    private readonly InputAction m_Gameplay_Dash;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -235,6 +267,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Rotate => m_Wrapper.m_Gameplay_Rotate;
         public InputAction @Shoot => m_Wrapper.m_Gameplay_Shoot;
         public InputAction @Lock => m_Wrapper.m_Gameplay_Lock;
+        public InputAction @Dash => m_Wrapper.m_Gameplay_Dash;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -256,6 +289,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Lock.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLock;
                 @Lock.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLock;
                 @Lock.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnLock;
+                @Dash.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDash;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -272,6 +308,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Lock.started += instance.OnLock;
                 @Lock.performed += instance.OnLock;
                 @Lock.canceled += instance.OnLock;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
             }
         }
     }
@@ -300,5 +339,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnRotate(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnLock(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }

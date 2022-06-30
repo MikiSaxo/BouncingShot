@@ -63,7 +63,22 @@ public class Ball : MonoBehaviour
                 if (GameParameters.instance.Mode != GameParameters.WhichMode.Possession)
                     RipplePostProcessor.instance.RippleEffect(transform.position);
                 shakeCamera.CamShake();
-            } 
+            }
+        }
+
+        if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession)
+        {
+            if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1)
+            {
+                print("change color 1");
+                ChangeColor(1);
+                //isCooldown = true;
+            }
+            else if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2)
+            {
+                ChangeColor(2);
+                //isCooldown = true;
+            }
         }
     }
 
@@ -77,27 +92,27 @@ public class Ball : MonoBehaviour
             else if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1)
             {
                 ChangeColor(1);
-                isCooldown = true;
+                //isCooldown = true;
             }
             else if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2)
             {
                 ChangeColor(2);
-                isCooldown = true;
+                //isCooldown = true;
             }
-            else
-                ChangeColor(0);
+            //else
+               //ChangeColor(0);
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession)
-            isCooldown = false;
-    }
+    //private void OnCollisionExit2D(Collision2D collision)
+    //{
+    //    if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession)
+    //        isCooldown = false;
+    //}
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        print(collision);
+        //print(collision);
         if (GameParameters.instance.Mode == GameParameters.WhichMode.Domination)
         {
             if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.CampP2
@@ -114,24 +129,24 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession)
-        {
-            if (isCooldown == false)
-            {
-                isCooldown = true;
-                nextReset = ResetRate;
-            }
+        //if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession)
+        //{
+        //    if (isCooldown == false)
+        //    {
+        //        isCooldown = true;
+        //        nextReset = ResetRate;
+        //    }
 
-            if (isCooldown)
-            {
-                nextReset -= Time.deltaTime;
-                if (nextReset <= 0)
-                {
-                    isCooldown = false;
-                    ChangeColor(0);
-                }
-            }
-        }
+        //    if (isCooldown)
+        //    {
+        //        nextReset -= Time.deltaTime;
+        //        if (nextReset <= 0)
+        //        {
+        //            isCooldown = false;
+        //            //ChangeColor(0);
+        //        }
+        //    }
+        //}
         
         if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession || GameParameters.instance.Mode == GameParameters.WhichMode.Domination)
         {

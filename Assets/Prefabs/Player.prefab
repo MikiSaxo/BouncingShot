@@ -356,6 +356,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 0007c3a8-a931-4fe5-a268-349a039b1ea4
     m_ActionName: Gameplay/Lock[/XInputControllerWindows/leftTrigger,/XInputControllerWindows/leftTrigger,/XInputControllerWindows/leftTrigger,/XInputControllerWindows/leftTrigger,/XInputControllerWindows/leftTrigger,/XInputControllerWindows/leftTrigger]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5709792288666449930}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b7c2b222-0402-410e-b384-36c662c1dcd4
+    m_ActionName: Gameplay/Dash[/XInputControllerWindows/rightShoulder,/XInputControllerWindows/rightShoulder,/XInputControllerWindows/rightShoulder,/XInputControllerWindows/rightShoulder]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Controller1
   m_DefaultActionMap: Gameplay
@@ -373,10 +389,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a44601a547d74b4ab33afd15f738122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 90
+  Speed: 10
   rb: {fileID: 5709792288666449925}
   MainSprite: {fileID: 7762620772492406342}
-  bouncePower: 7500
+  bouncePower: 5000
+  maxDashPower: 3
+  attackRate: 1
   CanMove: 0
 --- !u!114 &4709864462000678249
 MonoBehaviour:
@@ -426,8 +444,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
-  m_LinearDrag: 400
+  m_Mass: 400
+  m_LinearDrag: 7
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}

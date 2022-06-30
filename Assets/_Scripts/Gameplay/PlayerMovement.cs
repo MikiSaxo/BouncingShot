@@ -9,7 +9,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float Speed;
     [SerializeField] Rigidbody2D rb;
     [SerializeField] SpriteRenderer MainSprite;
-    [SerializeField] int bouncePower;
+    [SerializeField] int bouncePower, maxDashPower;
+    int dashPower;
+    bool dash, isCooldown;
+
+    float nextAttack = 1f;
+    [SerializeField] float attackRate = 1f;
 
     [HideInInspector] public bool CanMove;
 
@@ -17,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        dashPower = 1;
         print("P" + Manager.instance.NbOfPlayer);
         Manager.instance.Players.Add(gameObject);
         gameObject.GetComponentInChildren<CursorMovement>().WhichPlayer = Manager.instance.NbOfPlayer;
@@ -43,8 +49,24 @@ public class PlayerMovement : MonoBehaviour
             Movement();
 
         if (!CanMove)
-        {
             Destroy(GameObject.Find("Bullet(Clone)"));
+
+
+        if (isCooldown == false && dash)
+        {
+            
+            isCooldown = true;
+            nextAttack = attackRate;
+            Dash();
+        }
+
+        if (isCooldown)
+        {
+            nextAttack -= Time.deltaTime;
+            if (nextAttack <= 0)
+            {
+                isCooldown = false;
+            }
         }
     }
     public void OnMove(InputAction.CallbackContext context)
@@ -52,14 +74,33 @@ public class PlayerMovement : MonoBehaviour
         movementInput = context.ReadValue<Vector2>();
     }
 
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        dash = context.action.triggered;
+    }
+
+    void Dash()
+    {
+        print("dash");
+        dashPower = maxDashPower;
+    }
+
     void Movement()
     {
-        Vector2 m2 = new Vector2(movementInput.x, movementInput.y) * Speed;
+        Vector2 m2 = new Vector2(movementInput.x, movementInput.y) * Speed * dashPower;
         //if (!CanMove)
         //    m2 = Vector2.zero;
         rb.velocity = m2;
+        if (dashPower == maxDashPower)
+            StartCoroutine(ResetDash());
+          //  dashPower = 1;
     }
 
+    IEnumerator ResetDash()
+    {
+        yield return new WaitForSeconds(.1f);
+        dashPower = 1;
+    }
 
     public void LaunchBounceBullet()
     {
