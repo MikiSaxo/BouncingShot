@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 405621909292024935}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.2, z: 0.5925}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_Children: []
   m_Father: {fileID: 1656307625301104429}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!212 &4486193822414591632
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2943692232703413446, guid: 6b7463e18cfa4a4468f21c8160c520be, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d927c1b9d334a3f41aafd415b156e5fc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -93,8 +93,8 @@ GameObject:
   - component: {fileID: 1656307625301104429}
   - component: {fileID: 6057572811945631881}
   - component: {fileID: 3379961108525010167}
-  - component: {fileID: 1898442114763607448}
   - component: {fileID: 2823030733197363653}
+  - component: {fileID: 4105107464884600898}
   - component: {fileID: 7811242687621445699}
   m_Layer: 0
   m_Name: Bullet
@@ -156,9 +156,22 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 4
---- !u!61 &1898442114763607448
-BoxCollider2D:
+  m_Constraints: 0
+--- !u!114 &2823030733197363653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9034547383929328815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f7080372d397e34387dcb3469db569a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChoisiBieng: 2
+--- !u!60 &4105107464884600898
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -180,22 +193,14 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.51160944, y: 0.2555703}
-  m_EdgeRadius: 0
---- !u!114 &2823030733197363653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9034547383929328815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f7080372d397e34387dcb3469db569a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ChoisiBieng: 2
+  m_Points:
+    m_Paths:
+    - - {x: -0.0017134696, y: 0.17939432}
+      - {x: -0.15967387, y: 0.08841654}
+      - {x: -0.15917884, y: -0.08192529}
+      - {x: -0.0033473447, y: -0.16831943}
+      - {x: 0.14814955, y: -0.084274635}
+      - {x: 0.15170266, y: 0.0900983}
 --- !u!96 &7811242687621445699
 TrailRenderer:
   serializedVersion: 2

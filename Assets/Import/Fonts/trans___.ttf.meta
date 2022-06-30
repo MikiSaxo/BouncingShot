@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2ce6added6da4fd4080df4c5bc92b10b
+guid: 38f69fe5f8c0bb441809321ed6256dda
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Blackout
+  - Transuranium
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
