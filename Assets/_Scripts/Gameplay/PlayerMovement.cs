@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float dashRate = 1f;
 
     [HideInInspector] public bool CanMove;
+    [HideInInspector] public bool isShotByBumper;
 
     Vector2 movementInput = Vector2.zero;
 
@@ -132,7 +133,13 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator TakeAShot()
     {
         //rb.AddForce(collision.contacts[0].normal * bouncePower, ForceMode2D.Impulse);
-        yield return new WaitForSeconds(.5f);
+        if(!isShotByBumper)
+            yield return new WaitForSeconds(.5f);
+        else if (isShotByBumper)
+        {
+            yield return new WaitForSeconds(.3f);
+            isShotByBumper = false;
+        }
         CanMove = true;
     }
 }

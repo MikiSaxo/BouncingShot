@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7541983493391853688}
   - component: {fileID: 3867183364867002878}
   - component: {fileID: 8114902617848294762}
+  - component: {fileID: 8015613889668583381}
   m_Layer: 0
   m_Name: BumperSquare
   m_TagString: Bumper
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 8
   m_Sprite: {fileID: 2943692232703413446, guid: 6b7463e18cfa4a4468f21c8160c520be, type: 3}
   m_Color: {r: 0.17697577, g: 0.9150943, b: 0.30026168, a: 1}
   m_FlipX: 0
@@ -145,3 +146,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChoisiBieng: 5
+--- !u!114 &8015613889668583381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7696027579430211602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb6d6b156705914ba6cbaf93012cc99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bumperPlayerPower: 12000

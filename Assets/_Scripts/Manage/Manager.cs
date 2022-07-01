@@ -59,7 +59,12 @@ public class Manager : MonoBehaviour
         {
             Ball.transform.position = SpawnPoints[wasTouch + 1].position;
             Ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            Ball.GetComponent<Ball>().ChangeColor(wasTouch);
+            if(GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
+            {
+                Ball.GetComponent<Ball>().ChangeColor(wasTouch);
+                Ball.GetComponent<Ball>().bulletPower = Ball.GetComponent<Ball>().bullerPowerNormal;
+                Ball.GetComponent<Rigidbody2D>().drag = 1;
+            }
 
             TextScores[anounceText].gameObject.SetActive(true);
             if (whoTouch == 2)
