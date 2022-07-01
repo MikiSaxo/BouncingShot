@@ -8,7 +8,8 @@ public class CursorMovement : MonoBehaviour
 {
     Vector2 movementInputRotate = Vector2.zero;
     Vector3 transferPosition;
-    bool shoot, isLock, isCooldown;
+    bool shoot, isCooldown;
+    public bool IsLock;
     float nextAttack = 1f;
 
     public float attackRate = 1f;
@@ -21,13 +22,13 @@ public class CursorMovement : MonoBehaviour
 
     private void Start()
     {
-        //timer = 0;
+        IsLock = true;
     }
 
     void Update()
     {
         //Timer();
-        if (isLock)
+        if (IsLock)
         {
             RotateLock();
         }
@@ -75,7 +76,7 @@ public class CursorMovement : MonoBehaviour
 
     public void OnLock(InputAction.CallbackContext context)
     {
-        isLock = context.action.triggered;
+        IsLock = context.action.triggered;
         //isLock = context.ReadValue<bool>();
         print("lockkkkkk");
     }
@@ -95,7 +96,7 @@ public class CursorMovement : MonoBehaviour
 
     void Rotate()
     {
-        if (!isLock)
+        if (!IsLock)
         {
             float angle = Mathf.Atan2(movementInputRotate.y, movementInputRotate.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));

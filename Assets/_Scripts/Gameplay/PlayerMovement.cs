@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float Speed;
     [SerializeField] Rigidbody2D rb;
     [SerializeField] SpriteRenderer MainSprite;
-    [SerializeField] int bouncePower, maxDashPower;
+    [SerializeField] int maxDashPower;
     [SerializeField] Animator DashAnim;
     int dashPower;
     bool dash, isCooldown, dashAnim;

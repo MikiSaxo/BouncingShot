@@ -42,6 +42,7 @@ public class Manager : MonoBehaviour
         {
             goals[0].SetActive(true);
             goals[1].SetActive(false);
+            goals[2].SetActive(true);
 
             Ball.transform.localScale = soccerSize;
         }
@@ -59,7 +60,8 @@ public class Manager : MonoBehaviour
         {
             Ball.transform.position = SpawnPoints[wasTouch + 1].position;
             Ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            if(GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
+
+            if(GameParameters.instance.Mode == GameParameters.WhichMode.Normal)
             {
                 Ball.GetComponent<Ball>().ChangeColor(wasTouch);
                 Ball.GetComponent<Ball>().bulletPower = Ball.GetComponent<Ball>().bullerPowerNormal;
@@ -77,6 +79,7 @@ public class Manager : MonoBehaviour
                 TextScores[anounceText].text = Phrases[2];
                 TextScores[anounceText].color = Color.cyan;
             }
+
             StartCoroutine(Replace());
         }
 
@@ -106,8 +109,12 @@ public class Manager : MonoBehaviour
 
     IEnumerator Replace()
     {
+        Ball.SetActive(false);
+
         Players[0].GetComponent<PlayerMovement>().CanMove = false;
         Players[1].GetComponent<PlayerMovement>().CanMove = false;
+        Players[0].GetComponent<CursorMovement>().IsLock = true;
+        Players[1].GetComponent<CursorMovement>().IsLock = true;
 
 
         Players[0].GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -117,7 +124,9 @@ public class Manager : MonoBehaviour
         Players[0].transform.position = SpawnPoints[0].position;
         Players[1].transform.position = SpawnPoints[1].position;
         
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(.1f);
+        Ball.SetActive(true);
+        yield return new WaitForSeconds(.9f);
         TextScores[anounceText].gameObject.SetActive(false);
 
         StartCoroutine(Decompte());
@@ -127,12 +136,14 @@ public class Manager : MonoBehaviour
     {
         TextScores[0].gameObject.SetActive(false);
         TextScores[3].gameObject.SetActive(true);
+
         for (int i = nbDecompte; i > 0; i--)
         {
             TextScores[3].text = i.ToString();
             yield return new WaitForSeconds(timeForDecompteInSec);
         }
         TextScores[3].gameObject.SetActive(false);
+
         Players[0].GetComponent<PlayerMovement>().CanMove = true;
         Players[1].GetComponent<PlayerMovement>().CanMove = true;
     }

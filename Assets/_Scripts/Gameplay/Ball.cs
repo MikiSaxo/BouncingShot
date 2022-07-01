@@ -13,14 +13,16 @@ public class Ball : MonoBehaviour
     bool isCooldown;
     public float ResetRate = 1f;
 
-    [SerializeField] int bumperPower, addBulletPowerSoccer;
+    [SerializeField] int bumperPower, addBulletPower;
     int color;
-    public int bulletPower, bullerPowerNormal;
+    public int bulletPower, bullerPowerNormal, bullerPowerSoccer;
 
     private void Start()
     {
         if (GameParameters.instance.Mode == GameParameters.WhichMode.Normal)
             bulletPower = bullerPowerNormal;
+        if (GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
+            bulletPower = bullerPowerSoccer;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -82,7 +84,7 @@ public class Ball : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP1 || collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP2)
             {
-                bulletPower += addBulletPowerSoccer;
+                bulletPower += addBulletPower;
                 rb.drag -= 0.01f;
             }
         }
