@@ -398,7 +398,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 7
+  m_SortingOrder: 8
   m_Sprite: {fileID: 21300000, guid: 2ff99184f93fe8040bf33d7e3028fa1d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -627,11 +627,11 @@ MonoBehaviour:
   Speed: 10
   rb: {fileID: 5709792288666449925}
   MainSprite: {fileID: 7762620772492406342}
-  bouncePower: 5000
   maxDashPower: 3
   DashAnim: {fileID: 6044310531899296040}
   dashRate: 1
   CanMove: 0
+  isShotByBumper: 0
 --- !u!114 &4709864462000678249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -644,6 +644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c93fc3b4d3599874c903a98d00efbaa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsLock: 0
   attackRate: 0.75
   WhichPlayer: 0
   Bullet: {fileID: 9034547383929328815, guid: 50526f866de9adb488ca45d9c435cac5, type: 3}
