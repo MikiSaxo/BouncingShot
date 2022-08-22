@@ -14,7 +14,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Animator DashAnim;
     int dashPower;
     bool dash, isCooldown, dashAnim;
-    //[SerializeField] GameObject FBDash;
 
     float nextDash = 1f;
     [SerializeField] float dashRate = 1f;
@@ -58,7 +57,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (isCooldown == false)
         {
-            //FBDash.SetActive(true);
             if (dash)
             {
                 isCooldown = true;
@@ -96,12 +94,9 @@ public class PlayerMovement : MonoBehaviour
     void Movement()
     {
         Vector2 m2 = new Vector2(movementInput.x, movementInput.y) * Speed * dashPower;
-        //if (!CanMove)
-        //    m2 = Vector2.zero;
         rb.velocity = m2;
         if (dashPower == maxDashPower)
             StartCoroutine(ResetDash());
-        //  dashPower = 1;
     }
 
     IEnumerator ResetDash()
@@ -116,14 +111,7 @@ public class PlayerMovement : MonoBehaviour
         }
         yield return new WaitForSeconds(.1f);
         dashAnim = false;
-        //FBDash.transform.DOScale(Vector3.zero, 0.01f).OnComplete(ReloadDash);
-        //FBDash.SetActive(false);
     }
-
-    /*void ReloadDash()
-    {
-        //FBDash.transform.DOScale(new Vector3(1, 1, 1), dashRate);
-    }*/
 
     public void LaunchBounceBullet()
     {
@@ -132,7 +120,6 @@ public class PlayerMovement : MonoBehaviour
     }
     IEnumerator TakeAShot()
     {
-        //rb.AddForce(collision.contacts[0].normal * bouncePower, ForceMode2D.Impulse);
         if(!isShotByBumper)
             yield return new WaitForSeconds(.5f);
         else if (isShotByBumper)

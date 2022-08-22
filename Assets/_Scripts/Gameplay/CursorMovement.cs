@@ -23,11 +23,11 @@ public class CursorMovement : MonoBehaviour
     private void Start()
     {
         IsLock = true;
+        StartCoroutine(DeLock());
     }
 
     void Update()
     {
-        //Timer();
         if (IsLock)
         {
             RotateLock();
@@ -71,29 +71,15 @@ public class CursorMovement : MonoBehaviour
     public void OnShoot(InputAction.CallbackContext context)
     {
         shoot = context.action.triggered;
-        //shoot = context.ReadValue<bool>();
     }
 
     public void OnLock(InputAction.CallbackContext context)
     {
         IsLock = context.action.triggered;
-        //isLock = context.ReadValue<bool>();
         print("lockkkkkk");
     }
 
-    //void Timer()
-    //{
-    //    if (shoot == true)
-    //    {
-    //        timer += Time.deltaTime;
-    //    }
-    //    else
-    //    {
-    //        if (gameObject.GetComponent<PlayerMovement>().CanMove && timer > minimumTime)
-    //            Shoot();
-    //    }
-    //}
-
+     
     void Rotate()
     {
         if (!IsLock)
@@ -105,18 +91,20 @@ public class CursorMovement : MonoBehaviour
 
     void RotateLock()
     {
-        //print("rotalocks");
         Vector2 direction = Manager.instance.Ball.transform.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 50 * Time.deltaTime);
     }
 
+    IEnumerator DeLock()
+    {
+        yield return new WaitForSeconds(1f);
+        IsLock = false;
+    }
+
     void Shoot()
     {
-        //if (timer > 1)
-        //    timer = 1;
-        //RipplePostProcessor.instance.RippleEffect(transform.position);
         gameObject.GetComponent<ReboundAnimation>().StartBounce();
         print("shoot");
         transferPosition = new Vector3(SpawnBullet.transform.position.x, SpawnBullet.transform.position.y, 0);
@@ -125,20 +113,9 @@ public class CursorMovement : MonoBehaviour
         if (GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2)
             b.gameObject.GetComponent<WhoAreYou>().ChoisiBieng = WhoAreYou.ChooseYourChampion.BulletP2;
         
-        //if (timer < 0.2f)
-        //    timer = minimumTime*2;
-        //b.transform.localScale = new Vector3(1 * timer, 1 * timer, 1);
-        //b.GetComponent<Bullet>().timer = timer;
-        //timer = 0;
         if (WhichPlayer == 1)
-        {
-            //b.tag = "BulletP1";
             b.GetComponentInChildren<SpriteRenderer>().color = Color.cyan;
-        }
         else if (WhichPlayer == 2)
-        {
-            //b.tag = "BulletP2";
             b.GetComponentInChildren<SpriteRenderer>().color = Color.red;
-        }
     }
 }

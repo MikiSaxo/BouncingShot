@@ -128,6 +128,8 @@ public class Manager : MonoBehaviour
         Ball.SetActive(true);
         yield return new WaitForSeconds(.9f);
         TextScores[anounceText].gameObject.SetActive(false);
+        Players[0].GetComponent<CursorMovement>().IsLock = false;
+        Players[1].GetComponent<CursorMovement>().IsLock = false;
 
         StartCoroutine(Decompte());
     }
