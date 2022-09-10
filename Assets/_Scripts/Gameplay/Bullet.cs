@@ -12,8 +12,7 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
-        rb.velocity = transform.right * Speed;// * (timer * Speed / 2);
-        //Child.tag = tag;
+        rb.velocity = transform.right * Speed;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

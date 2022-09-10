@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class Manager : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class Manager : MonoBehaviour
     [SerializeField] GameObject[] goals;
     [SerializeField] Vector3 soccerSize;
     public Color[] statesColor;
+    public Image[] borders;
+    private float timeFadeBorders = 0f;
 
     const int anounceText = 0;
 
@@ -47,6 +50,8 @@ public class Manager : MonoBehaviour
 
             Ball.transform.localScale = soccerSize;
         }
+        timeFadeBorders = 3;
+        SpawnBordersColors();
     }
 
     public void LaunchGame()
@@ -62,7 +67,7 @@ public class Manager : MonoBehaviour
             Ball.transform.position = SpawnPoints[wasTouch + 1].position;
             Ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
-            if(GameParameters.instance.Mode == GameParameters.WhichMode.Normal)
+            if (GameParameters.instance.Mode == GameParameters.WhichMode.Normal)
             {
                 Ball.GetComponent<Ball>().ChangeColor(wasTouch);
                 Ball.GetComponent<Ball>().bulletPower = Ball.GetComponent<Ball>().bullerPowerNormal;
@@ -73,12 +78,12 @@ public class Manager : MonoBehaviour
             if (whoTouch == 2)
             {
                 TextScores[anounceText].text = Phrases[1];
-                TextScores[anounceText].color = Color.red;
+                TextScores[anounceText].color = statesColor[2];
             }
             else
             {
                 TextScores[anounceText].text = Phrases[2];
-                TextScores[anounceText].color = Color.cyan;
+                TextScores[anounceText].color = statesColor[1];
             }
 
             StartCoroutine(Replace());
@@ -120,11 +125,11 @@ public class Manager : MonoBehaviour
 
         Players[0].GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         Players[1].GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        
+
 
         Players[0].transform.position = SpawnPoints[0].position;
         Players[1].transform.position = SpawnPoints[1].position;
-        
+
         yield return new WaitForSeconds(.1f);
         Ball.SetActive(true);
         yield return new WaitForSeconds(.9f);
@@ -149,5 +154,43 @@ public class Manager : MonoBehaviour
 
         Players[0].GetComponent<PlayerMovement>().CanMove = true;
         Players[1].GetComponent<PlayerMovement>().CanMove = true;
+        StartCoroutine(ResetColor());
+    }
+
+    public void ChangeBordersColor(Color _color)
+    {
+        for (int i = 0; i < borders.Length; i++)
+        {
+            borders[i].GetComponent<Image>().color = _color;
+        }
+        StartCoroutine(ResetColor());
+    }
+    private float fadingSpeed = 0.05f;
+
+    IEnumerator ResetColor()
+    {
+        for (float i = 1f; i >= 0; i -= fadingSpeed)
+        {
+            for (int j = 0; j < borders.Length; j++)
+            {
+                var tempColor = borders[j].color;
+                tempColor.a = i;
+                borders[j].color = tempColor;
+            }
+            yield return new WaitForSeconds(fadingSpeed);
+        }
+    }
+
+    void SpawnBordersColors()
+    {
+        for (int i = 0; i < borders.Length/2; i++)
+        {
+            borders[i].GetComponent<Image>().color = statesColor[2];
+        }
+        for (int i = borders.Length / 2; i < borders.Length; i++)
+        {
+            borders[i].GetComponent<Image>().color = statesColor[1];
+        }
+        //StartCoroutine(ResetColor());
     }
 }

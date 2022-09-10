@@ -8,7 +8,8 @@ public class Ball : MonoBehaviour
     [SerializeField] SpriteRenderer spr;
     public ShakeCamera shakeCamera;
     [SerializeField] GameObject Child;
-    
+
+    private Color[] statesColor = new Color[3];
 
     public float ResetRate = 1f;
 
@@ -23,6 +24,10 @@ public class Ball : MonoBehaviour
         if (GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
             bulletPower = bullerPowerSoccer;
 
+        for (int i = 0; i < Manager.instance.statesColor.Length; i++)
+        {
+            statesColor[i] = Manager.instance.statesColor[i];
+        }
         ChangeColor(0);
     }
 
@@ -45,7 +50,7 @@ public class Ball : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP1) //BulletP1
             {
-                print(GameParameters.instance.Mode);
+                //print(GameParameters.instance.Mode);
                 if (GameParameters.instance.Mode != GameParameters.WhichMode.Domination && GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
                     ChangeColor(1);
                 rb.AddForce(collision.contacts[0].normal * bulletPower, ForceMode2D.Impulse);
@@ -65,7 +70,10 @@ public class Ball : MonoBehaviour
                 if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1 && color == 2) //P1
                 {
                     if (GameParameters.instance.Mode != GameParameters.WhichMode.Domination)
+                    {
                         Manager.instance.WhichBallTouches(1, 2);
+                        Manager.instance.ChangeBordersColor(statesColor[2]);
+                    }
                     if (GameParameters.instance.Mode != GameParameters.WhichMode.Possession && GameParameters.instance.Mode != GameParameters.WhichMode.Domination)
                         RipplePostProcessor.instance.RippleEffect(transform.position);
                     shakeCamera.CamShake();
@@ -73,7 +81,10 @@ public class Ball : MonoBehaviour
                 else if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2 && color == 1) //P2
                 {
                     if (GameParameters.instance.Mode != GameParameters.WhichMode.Domination)
+                    {
                         Manager.instance.WhichBallTouches(2, 1);
+                        Manager.instance.ChangeBordersColor(statesColor[1]);
+                    }
                     if (GameParameters.instance.Mode != GameParameters.WhichMode.Possession && GameParameters.instance.Mode != GameParameters.WhichMode.Domination)
                         RipplePostProcessor.instance.RippleEffect(transform.position);
                     shakeCamera.CamShake();
@@ -107,10 +118,12 @@ public class Ball : MonoBehaviour
             if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.GoalP1)
             {
                 Manager.instance.WhichBallTouches(1, 2);
+                Manager.instance.ChangeBordersColor(statesColor[2]);
             }
             else if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.GoalP2)
             {
                 Manager.instance.WhichBallTouches(2, 1);
+                Manager.instance.ChangeBordersColor(statesColor[1]);
             }
         }
     }
@@ -125,6 +138,7 @@ public class Ball : MonoBehaviour
             else if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1)
             {
                 ChangeColor(1);
+                
             }
             else if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2)
             {
@@ -164,11 +178,17 @@ public class Ball : MonoBehaviour
     {
         color = which;
         if (color == 0)
-            spr.color = Manager.instance.statesColor[0];
+            spr.color = statesColor[0];
         if (color == 1)
-            spr.color = Manager.instance.statesColor[1];
+        {
+            spr.color = statesColor[1];
+            //Manager.instance.ChangeBordersColor(statesColor[1]);
+        }
         if (color == 2)
-            spr.color = Manager.instance.statesColor[2];
+        {
+            spr.color = statesColor[2];
+            //Manager.instance.ChangeBordersColor(statesColor[2]);
+        }
     }
 
     void StartRebound()
