@@ -21,7 +21,8 @@ public class Manager : MonoBehaviour
     [SerializeField] Vector3 soccerSize;
     public Color[] statesColor;
     public Image[] borders;
-    private float timeFadeBorders = 0f;
+    private float fadingSpeed = 0.05f;
+    [SerializeField] private bool stopCorou = false;
 
     const int anounceText = 0;
 
@@ -50,7 +51,6 @@ public class Manager : MonoBehaviour
 
             Ball.transform.localScale = soccerSize;
         }
-        timeFadeBorders = 3;
         SpawnBordersColors();
     }
 
@@ -92,6 +92,7 @@ public class Manager : MonoBehaviour
         if (GameParameters.instance.Mode == GameParameters.WhichMode.Blitz)
         {
             StartCoroutine(ReplaceBlitz());
+            ChangeBordersColor(statesColor[whoTouch], true);
         }
     }
 
@@ -154,28 +155,74 @@ public class Manager : MonoBehaviour
 
         Players[0].GetComponent<PlayerMovement>().CanMove = true;
         Players[1].GetComponent<PlayerMovement>().CanMove = true;
-        StartCoroutine(ResetColor());
+
+        if(borders[0].color.a >= 0.1f)
+            StartCoroutine(TransiResetColor());
     }
 
-    public void ChangeBordersColor(Color _color)
+    public void ChangeBordersColor(Color _color, bool needReset)
     {
         for (int i = 0; i < borders.Length; i++)
         {
             borders[i].GetComponent<Image>().color = _color;
         }
+
+        if(needReset)
+        {
+            StartCoroutine(TransiResetColor());
+            print(borders[0].color.a);
+        }
+    }
+    
+    IEnumerator TransiResetColor()
+    {
+        print("salut c la transi");
+        stopCorou = true;
+        yield return new WaitForSeconds(.1f);
+        if(GameParameters.instance.Mode != GameParameters.WhichMode.Domination || GameParameters.instance.Mode != GameParameters.WhichMode.Possession)
+            stopCorou = false;
         StartCoroutine(ResetColor());
     }
-    private float fadingSpeed = 0.05f;
+
+    IEnumerator test()
+    {
+        var j = 0;
+        for (int i = 0; i < 100; i++)
+        {
+            if (stopCorou)
+                break;
+
+            j++;
+            print(j);
+            yield return new WaitForSeconds(1f);
+        }
+    }
 
     IEnumerator ResetColor()
     {
+        if (stopCorou)
+            print("ça pu");
+
         for (float i = 1f; i >= 0; i -= fadingSpeed)
         {
             for (int j = 0; j < borders.Length; j++)
             {
+                if (stopCorou)
+                {
+                    print("j'ai stop");
+                    j = borders.Length;
+                    break;
+                }
+
                 var tempColor = borders[j].color;
                 tempColor.a = i;
                 borders[j].color = tempColor;
+            }
+            if (stopCorou)
+            {
+                print("j'ai arrete");
+                i = 0;
+                break;
             }
             yield return new WaitForSeconds(fadingSpeed);
         }
@@ -191,6 +238,5 @@ public class Manager : MonoBehaviour
         {
             borders[i].GetComponent<Image>().color = statesColor[1];
         }
-        //StartCoroutine(ResetColor());
     }
 }

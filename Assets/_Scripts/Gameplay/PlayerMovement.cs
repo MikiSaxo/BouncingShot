@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
         if (Manager.instance.NbOfPlayer == 1)
         {
             MainSprite.color = Manager.instance.statesColor[1];
+            gameObject.GetComponent<TrailRenderer>().startColor = Manager.instance.statesColor[1];
+            gameObject.GetComponent<TrailRenderer>().endColor = Manager.instance.statesColor[1];
             transform.position = Manager.instance.SpawnPoints[0].position;
             Manager.instance.NbOfPlayer++;
             Manager.instance.playerScoreVisu[0].GetComponent<FollowObject>().target = gameObject.transform;
@@ -40,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
         {
             gameObject.GetComponent<WhoAreYou>().ChoisiBieng = WhoAreYou.ChooseYourChampion.P2;
             MainSprite.color = Manager.instance.statesColor[2];
+            gameObject.GetComponent<TrailRenderer>().startColor = Manager.instance.statesColor[2];
+            gameObject.GetComponent<TrailRenderer>().endColor = Manager.instance.statesColor[2];
             transform.position = Manager.instance.SpawnPoints[1].position;
             Manager.instance.LaunchGame();
             Manager.instance.playerScoreVisu[1].GetComponent<FollowObject>().target = gameObject.transform;
@@ -86,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Dash()
     {
-        print("dash");
+        //print("dash");
         if(movementInput != Vector2.zero)
             dashPower = maxDashPower;
     }
@@ -107,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
         {
             DashAnim.SetTrigger("LaunchDash");
             dashAnim = true;
-            print("LaunchDash");
+            //print("LaunchDash");
         }
         yield return new WaitForSeconds(.1f);
         dashAnim = false;

@@ -995,6 +995,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Border_vl
       objectReference: {fileID: 0}
+    - target: {fileID: 202234167886201169, guid: d6e8785153aa55542b00951dab93f0c6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8091879397661344040, guid: d6e8785153aa55542b00951dab93f0c6, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4434,7 +4438,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1892342433572347430, guid: b7cd2e0d87507df4f8d4586ea8a459cf, type: 3}
       propertyPath: Mode
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1892342433572347431, guid: b7cd2e0d87507df4f8d4586ea8a459cf, type: 3}
       propertyPath: m_Name
@@ -6821,6 +6825,10 @@ PrefabInstance:
     - target: {fileID: 202234167886201169, guid: d6e8785153aa55542b00951dab93f0c6, type: 3}
       propertyPath: m_Name
       value: Border_vr
+      objectReference: {fileID: 0}
+    - target: {fileID: 202234167886201169, guid: d6e8785153aa55542b00951dab93f0c6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4685151142915249190, guid: d6e8785153aa55542b00951dab93f0c6, type: 3}
       propertyPath: m_Size.y
