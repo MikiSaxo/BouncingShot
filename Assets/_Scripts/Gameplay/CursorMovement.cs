@@ -114,8 +114,14 @@ public class CursorMovement : MonoBehaviour
             b.gameObject.GetComponent<WhoAreYou>().ChoisiBieng = WhoAreYou.ChooseYourChampion.BulletP2;
         
         if (WhichPlayer == 1)
-            b.GetComponentInChildren<SpriteRenderer>().color = Color.cyan;
+        {
+            b.GetComponentInChildren<SpriteRenderer>().color = Manager.instance.statesColor[1];
+            b.GetComponentInChildren<TrailRenderer>().startColor = Manager.instance.statesColor[1];
+        }
         else if (WhichPlayer == 2)
-            b.GetComponentInChildren<SpriteRenderer>().color = Color.red;
+        {
+            b.GetComponentInChildren<SpriteRenderer>().color = Manager.instance.statesColor[2];
+            b.GetComponentInChildren<TrailRenderer>().startColor = Manager.instance.statesColor[2];
+        }
     }
 }

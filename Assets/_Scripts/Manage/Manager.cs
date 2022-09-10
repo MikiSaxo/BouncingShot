@@ -18,6 +18,7 @@ public class Manager : MonoBehaviour
     public GameObject[] playerScoreVisu;
     [SerializeField] GameObject[] goals;
     [SerializeField] Vector3 soccerSize;
+    public Color[] statesColor;
 
     const int anounceText = 0;
 

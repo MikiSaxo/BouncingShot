@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
         gameObject.GetComponentInChildren<CursorMovement>().WhichPlayer = Manager.instance.NbOfPlayer;
         if (Manager.instance.NbOfPlayer == 1)
         {
-            MainSprite.color = Color.cyan;
+            MainSprite.color = Manager.instance.statesColor[1];
             transform.position = Manager.instance.SpawnPoints[0].position;
             Manager.instance.NbOfPlayer++;
             Manager.instance.playerScoreVisu[0].GetComponent<FollowObject>().target = gameObject.transform;
@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             gameObject.GetComponent<WhoAreYou>().ChoisiBieng = WhoAreYou.ChooseYourChampion.P2;
-            MainSprite.color = Color.red;
+            MainSprite.color = Manager.instance.statesColor[2];
             transform.position = Manager.instance.SpawnPoints[1].position;
             Manager.instance.LaunchGame();
             Manager.instance.playerScoreVisu[1].GetComponent<FollowObject>().target = gameObject.transform;

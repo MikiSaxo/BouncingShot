@@ -8,6 +8,7 @@ public class Ball : MonoBehaviour
     [SerializeField] SpriteRenderer spr;
     public ShakeCamera shakeCamera;
     [SerializeField] GameObject Child;
+    
 
     public float ResetRate = 1f;
 
@@ -21,6 +22,8 @@ public class Ball : MonoBehaviour
             bulletPower = bullerPowerNormal;
         if (GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
             bulletPower = bullerPowerSoccer;
+
+        ChangeColor(0);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -161,11 +164,11 @@ public class Ball : MonoBehaviour
     {
         color = which;
         if (color == 0)
-            spr.color = Color.white;
+            spr.color = Manager.instance.statesColor[0];
         if (color == 1)
-            spr.color = Color.cyan;
+            spr.color = Manager.instance.statesColor[1];
         if (color == 2)
-            spr.color = Color.red;
+            spr.color = Manager.instance.statesColor[2];
     }
 
     void StartRebound()
