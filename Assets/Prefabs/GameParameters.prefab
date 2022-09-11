@@ -44,3 +44,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mode: 0
+  NbOfPlayers: 0
+  RedColors: 0
+  BlueColors: 0
+  blueColorToChoose:
+  - {r: 0.45573044, g: 0, b: 1, a: 1}
+  - {r: 0.32604218, g: 0, b: 1, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 0, g: 0.26041698, b: 1, a: 1}
+  - {r: 0, g: 0.6127057, b: 1, a: 1}
+  - {r: 0, g: 1, b: 1, a: 1}
+  - {r: 0, g: 1, b: 0.57264996, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  redColorToChoose:
+  - {r: 1, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0.7807932, a: 1}
+  - {r: 1, g: 0, b: 0.5067587, a: 1}
+  - {r: 1, g: 0, b: 0.22822618, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0.23016784, b: 0, a: 1}
+  - {r: 1, g: 0.62734854, b: 0, a: 1}
+  - {r: 1, g: 1, b: 0, a: 1}
