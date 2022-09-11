@@ -9,12 +9,12 @@ public class Ball : MonoBehaviour
     public ShakeCamera shakeCamera;
     [SerializeField] GameObject Child;
 
-    private Color[] statesColor = new Color[3];
+    private Color[] statesColor = new Color[5];
 
     public float ResetRate = 1f;
 
     [SerializeField] int bumperPower, addBulletPower;
-    int color;
+    [HideInInspector] public int color;
     public int bulletPower, bullerPowerNormal, bullerPowerSoccer;
 
     private void Start()
@@ -156,6 +156,28 @@ public class Ball : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        //if (GameParameters.instance.Mode == GameParameters.WhichMode.Domination)
+        //{
+        //    if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.CampP2
+        //        && collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.CampP1)
+        //        ChangeColor(0);
+        //    else if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.CampP1)
+        //    {
+        //        ChangeColor(1);
+        //        Manager.instance.ChangeBordersColor(statesColor[1], false);
+        //    }
+        //    else if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.CampP2)
+        //    {
+        //        ChangeColor(2);
+        //        Manager.instance.ChangeBordersColor(statesColor[2], false);
+        //    }
+        //    else
+        //        ChangeColor(0);
+        //}
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         if (GameParameters.instance.Mode == GameParameters.WhichMode.Domination)
         {
             if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.CampP2
@@ -171,8 +193,8 @@ public class Ball : MonoBehaviour
                 ChangeColor(2);
                 Manager.instance.ChangeBordersColor(statesColor[2], false);
             }
-            else
-                ChangeColor(0);
+            //else
+                //ChangeColor(0);
         }
     }
 
@@ -190,8 +212,13 @@ public class Ball : MonoBehaviour
     public void ChangeColor(int which)
     {
         color = which;
+        //print("alloooo : " + color);
         if (color == 0)
+        {
             spr.color = statesColor[0];
+            spr.gameObject.GetComponent<TrailRenderer>().startColor = Color.white;
+            spr.gameObject.GetComponent<TrailRenderer>().endColor = Color.white;
+        }
         if (color == 1)
         {
             spr.color = statesColor[1];

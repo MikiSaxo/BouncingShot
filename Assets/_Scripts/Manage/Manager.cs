@@ -21,6 +21,9 @@ public class Manager : MonoBehaviour
     [SerializeField] Vector3 soccerSize;
     public Color[] statesColor;
     public Image[] borders;
+    [SerializeField] private GameObject[] domiBG;
+    [SerializeField] private GameObject[] leftSquare;
+    [SerializeField] private GameObject[] rightSquare;
     private float fadingSpeed = 0.05f;
     [SerializeField] private bool stopCorou = false;
 
@@ -51,6 +54,23 @@ public class Manager : MonoBehaviour
 
             Ball.transform.localScale = soccerSize;
         }
+
+        if (GameParameters.instance.Mode == GameParameters.WhichMode.Domination)
+        {
+            domiBG[0].SetActive(true);
+            domiBG[1].SetActive(true);
+            //domiBG[0].GetComponent<Image>().color = statesColor[3];
+            //domiBG[1].GetComponent<Image>().color = statesColor[4];
+            for (int i = 0; i < leftSquare.Length; i++)
+            {
+                leftSquare[i].GetComponent<Image>().color = statesColor[3];
+            }
+            for (int i = 0; i < rightSquare.Length; i++)
+            {
+                rightSquare[i].GetComponent<Image>().color = statesColor[4];
+            }
+        }
+
         SpawnBordersColors();
     }
 
@@ -156,8 +176,14 @@ public class Manager : MonoBehaviour
         Players[0].GetComponent<PlayerMovement>().CanMove = true;
         Players[1].GetComponent<PlayerMovement>().CanMove = true;
 
-        if(borders[0].color.a >= 0.1f)
-            StartCoroutine(TransiResetColor());
+        if (borders[0].color.a >= 0.1f)
+        {
+            if(GameParameters.instance.Mode != GameParameters.WhichMode.Domination && GameParameters.instance.Mode != GameParameters.WhichMode.Possession)
+            {
+                print("c chiant la");
+                StartCoroutine(TransiResetColor());
+            }
+        }
     }
 
     public void ChangeBordersColor(Color _color, bool needReset)
@@ -167,20 +193,19 @@ public class Manager : MonoBehaviour
             borders[i].GetComponent<Image>().color = _color;
         }
 
-        if(needReset)
+        if (needReset)
         {
             StartCoroutine(TransiResetColor());
             print(borders[0].color.a);
         }
     }
-    
+
     IEnumerator TransiResetColor()
     {
         print("salut c la transi");
         stopCorou = true;
         yield return new WaitForSeconds(.1f);
-        if(GameParameters.instance.Mode != GameParameters.WhichMode.Domination || GameParameters.instance.Mode != GameParameters.WhichMode.Possession)
-            stopCorou = false;
+        stopCorou = false;
         StartCoroutine(ResetColor());
     }
 
@@ -230,7 +255,7 @@ public class Manager : MonoBehaviour
 
     void SpawnBordersColors()
     {
-        for (int i = 0; i < borders.Length/2; i++)
+        for (int i = 0; i < borders.Length / 2; i++)
         {
             borders[i].GetComponent<Image>().color = statesColor[2];
         }

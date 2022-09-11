@@ -76,7 +76,7 @@ public class CursorMovement : MonoBehaviour
     public void OnLock(InputAction.CallbackContext context)
     {
         IsLock = context.action.triggered;
-        print("lockkkkkk");
+        //print("lockkkkkk");
     }
 
      
@@ -106,7 +106,7 @@ public class CursorMovement : MonoBehaviour
     void Shoot()
     {
         gameObject.GetComponent<ReboundAnimation>().StartBounce();
-        print("shoot");
+        //print("shoot");
         transferPosition = new Vector3(SpawnBullet.transform.position.x, SpawnBullet.transform.position.y, 0);
         GameObject b = Instantiate(Bullet, transferPosition, Cursor.transform.rotation);
         

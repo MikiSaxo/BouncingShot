@@ -54,5 +54,7 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        else
+            return;
     }
 }
