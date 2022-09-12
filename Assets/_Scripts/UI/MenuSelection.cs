@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.InputSystem;
 
 public class MenuSelection : MonoBehaviour
 {
@@ -27,8 +28,14 @@ public class MenuSelection : MonoBehaviour
 
     private int currentPoint = 0;
     private int currentMapIndex = 0;
+    private int currentButtonsIndex = 0;
     private bool[] canResetTp = new bool[2];
     private bool cannotTp = false;
+
+    private bool IsBack;
+    private bool canBack;
+    private float nextAttack;
+    [SerializeField] float attackRate;
 
     public static MenuSelection Instance;
     private void Awake()
@@ -62,9 +69,27 @@ public class MenuSelection : MonoBehaviour
 
         if (currentSelected != null)
             ChangeText();
+
+        if (!canBack)
+        {
+            nextAttack -= Time.deltaTime;
+            if (nextAttack <= 0)
+            {
+                canBack = true;
+                nextAttack = attackRate;
+            }
+        }
+        if (IsBack && canBack && currentButtonsIndex > 0)
+        {
+            GoBackMenus();
+            canBack = false;
+
+            if (currentButtonsIndex < 4)
+                indexOfMaps.enabled = false;
+        }
     }
 
-    public void OnStart()
+        public void OnStart()
     {
         EventSystem.current.SetSelectedGameObject(null);
         NextMenus(0);
@@ -72,11 +97,28 @@ public class MenuSelection : MonoBehaviour
 
     public void NextMenus(int index)
     {
+        currentButtonsIndex = index;
         EventSystem.current.SetSelectedGameObject(chooseFirstButtons[index]);
 
         if (index == 3)
             ChangeIndexOfMap();
     }
+
+    public void GoBackMenus()
+    {
+        canBack = false;
+        MoveToRightMenus();
+        currentButtonsIndex--;
+        NextMenus(currentButtonsIndex);
+
+        print("alllzgjz^ghiz");
+    }
+
+    public void OnBack(InputAction.CallbackContext context)
+    {
+        IsBack = context.action.triggered;
+    }
+
 
     public void OnQuit()
     {
@@ -91,7 +133,7 @@ public class MenuSelection : MonoBehaviour
 
     public void MoveToRightMenus()
     {
-        currentPoint--;
+        currentPoint -= 1;
         menus.transform.DOMoveX(tpPoints[currentPoint].position.x, 1f);
     }
 
@@ -127,12 +169,12 @@ public class MenuSelection : MonoBehaviour
 
     IEnumerator CanTpTop()
     {
-        yield return new WaitForSeconds(transiTimeMap/2);
+        yield return new WaitForSeconds(transiTimeMap / 2);
         if (canResetTp[0])
         {
             currentMapIndex = 1;
             ChangeIndexOfMap();
-            yield return new WaitForSeconds(transiTimeMap/2);
+            yield return new WaitForSeconds(transiTimeMap / 2);
 
             maps.transform.DOMoveY(tpPointsMap[0].position.y, 0f);
             print("tpTop");
@@ -140,7 +182,7 @@ public class MenuSelection : MonoBehaviour
         else
         {
             ChangeIndexOfMap();
-            yield return new WaitForSeconds(transiTimeMap/2);
+            yield return new WaitForSeconds(transiTimeMap / 2);
         }
 
         canResetTp[0] = false;

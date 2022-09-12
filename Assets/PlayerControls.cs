@@ -171,6 +171,191 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Gameplay1"",
+            ""id"": ""29d4dcf0-4f45-4112-aceb-d659e805f431"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""2e2a73c7-7317-4771-b8b8-f7af3358385f"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Rotate"",
+                    ""type"": ""Value"",
+                    ""id"": ""b2ce237f-b904-40b7-80a7-1b9c1959d94f"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""3d336154-c3ff-4fc3-9605-576a836131a4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Lock"",
+                    ""type"": ""Button"",
+                    ""id"": ""23acdafc-2cd7-46ba-a3f5-a62055547eec"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""2020f555-3fcb-4301-b4b4-fcf63089e283"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""a2027f06-0b08-45af-b6fd-2ff814f41413"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller1"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eee15663-e6b9-497b-9f58-bbeb4cd9bd59"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller2"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""34ff243c-317d-49a0-ad9b-0da03469806c"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller1"",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3200d822-6ffd-4a9c-af46-a8a163f3c9f9"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller2"",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be3c5477-2d6a-4c02-8bd7-96509eb6c02a"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller1"",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d0faec4c-081f-4485-8cf3-694e319eadcb"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller2"",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3519bc7a-9e14-4405-9e77-c5dbb6b8eb34"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller1"",
+                    ""action"": ""Lock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e267e50b-a39e-4d51-85e1-d22e797e8df8"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller2"",
+                    ""action"": ""Lock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""54703f8e-61a2-49bc-9421-5dfe8ef28272"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller1"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b43a7384-4d2d-4e7c-a7a9-fdeb2529b715"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller2"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Menu"",
+            ""id"": ""3c4fa10f-a1e7-4f70-9ba3-287b15420ceb"",
+            ""actions"": [
+                {
+                    ""name"": ""Back"",
+                    ""type"": ""Button"",
+                    ""id"": ""44f0a7af-28a4-4bf5-81f3-e234f5fca2df"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""2275aa11-2ce5-4dd3-9e46-6e95b98e51e7"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller1;Controller2"",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -205,6 +390,16 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Gameplay_Shoot = m_Gameplay.FindAction("Shoot", throwIfNotFound: true);
         m_Gameplay_Lock = m_Gameplay.FindAction("Lock", throwIfNotFound: true);
         m_Gameplay_Dash = m_Gameplay.FindAction("Dash", throwIfNotFound: true);
+        // Gameplay1
+        m_Gameplay1 = asset.FindActionMap("Gameplay1", throwIfNotFound: true);
+        m_Gameplay1_Move = m_Gameplay1.FindAction("Move", throwIfNotFound: true);
+        m_Gameplay1_Rotate = m_Gameplay1.FindAction("Rotate", throwIfNotFound: true);
+        m_Gameplay1_Shoot = m_Gameplay1.FindAction("Shoot", throwIfNotFound: true);
+        m_Gameplay1_Lock = m_Gameplay1.FindAction("Lock", throwIfNotFound: true);
+        m_Gameplay1_Dash = m_Gameplay1.FindAction("Dash", throwIfNotFound: true);
+        // Menu
+        m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
+        m_Menu_Back = m_Menu.FindAction("Back", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -315,6 +510,104 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         }
     }
     public GameplayActions @Gameplay => new GameplayActions(this);
+
+    // Gameplay1
+    private readonly InputActionMap m_Gameplay1;
+    private IGameplay1Actions m_Gameplay1ActionsCallbackInterface;
+    private readonly InputAction m_Gameplay1_Move;
+    private readonly InputAction m_Gameplay1_Rotate;
+    private readonly InputAction m_Gameplay1_Shoot;
+    private readonly InputAction m_Gameplay1_Lock;
+    private readonly InputAction m_Gameplay1_Dash;
+    public struct Gameplay1Actions
+    {
+        private @PlayerControls m_Wrapper;
+        public Gameplay1Actions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Gameplay1_Move;
+        public InputAction @Rotate => m_Wrapper.m_Gameplay1_Rotate;
+        public InputAction @Shoot => m_Wrapper.m_Gameplay1_Shoot;
+        public InputAction @Lock => m_Wrapper.m_Gameplay1_Lock;
+        public InputAction @Dash => m_Wrapper.m_Gameplay1_Dash;
+        public InputActionMap Get() { return m_Wrapper.m_Gameplay1; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(Gameplay1Actions set) { return set.Get(); }
+        public void SetCallbacks(IGameplay1Actions instance)
+        {
+            if (m_Wrapper.m_Gameplay1ActionsCallbackInterface != null)
+            {
+                @Move.started -= m_Wrapper.m_Gameplay1ActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_Gameplay1ActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_Gameplay1ActionsCallbackInterface.OnMove;
+                @Rotate.started -= m_Wrapper.m_Gameplay1ActionsCallbackInterface.OnRotate;
+                @Rotate.performed -= m_Wrapper.m_Gameplay1ActionsCallbackInterface.OnRotate;
+                @Rotate.canceled -= m_Wrapper.m_Gameplay1ActionsCallbackInterface.OnRotate;
+                @Shoot.started -= m_Wrapper.m_Gameplay1ActionsCallbackInterface.OnShoot;
+                @Shoot.performed -= m_Wrapper.m_Gameplay1ActionsCallbackInterface.OnShoot;
+                @Shoot.canceled -= m_Wrapper.m_Gameplay1ActionsCallbackInterface.OnShoot;
+                @Lock.started -= m_Wrapper.m_Gameplay1ActionsCallbackInterface.OnLock;
+                @Lock.performed -= m_Wrapper.m_Gameplay1ActionsCallbackInterface.OnLock;
+                @Lock.canceled -= m_Wrapper.m_Gameplay1ActionsCallbackInterface.OnLock;
+                @Dash.started -= m_Wrapper.m_Gameplay1ActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_Gameplay1ActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_Gameplay1ActionsCallbackInterface.OnDash;
+            }
+            m_Wrapper.m_Gameplay1ActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @Rotate.started += instance.OnRotate;
+                @Rotate.performed += instance.OnRotate;
+                @Rotate.canceled += instance.OnRotate;
+                @Shoot.started += instance.OnShoot;
+                @Shoot.performed += instance.OnShoot;
+                @Shoot.canceled += instance.OnShoot;
+                @Lock.started += instance.OnLock;
+                @Lock.performed += instance.OnLock;
+                @Lock.canceled += instance.OnLock;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
+            }
+        }
+    }
+    public Gameplay1Actions @Gameplay1 => new Gameplay1Actions(this);
+
+    // Menu
+    private readonly InputActionMap m_Menu;
+    private IMenuActions m_MenuActionsCallbackInterface;
+    private readonly InputAction m_Menu_Back;
+    public struct MenuActions
+    {
+        private @PlayerControls m_Wrapper;
+        public MenuActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Back => m_Wrapper.m_Menu_Back;
+        public InputActionMap Get() { return m_Wrapper.m_Menu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MenuActions set) { return set.Get(); }
+        public void SetCallbacks(IMenuActions instance)
+        {
+            if (m_Wrapper.m_MenuActionsCallbackInterface != null)
+            {
+                @Back.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
+                @Back.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
+                @Back.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
+            }
+            m_Wrapper.m_MenuActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Back.started += instance.OnBack;
+                @Back.performed += instance.OnBack;
+                @Back.canceled += instance.OnBack;
+            }
+        }
+    }
+    public MenuActions @Menu => new MenuActions(this);
     private int m_Controller1SchemeIndex = -1;
     public InputControlScheme Controller1Scheme
     {
@@ -340,5 +633,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnLock(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+    }
+    public interface IGameplay1Actions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnRotate(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
+        void OnLock(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
+    }
+    public interface IMenuActions
+    {
+        void OnBack(InputAction.CallbackContext context);
     }
 }
