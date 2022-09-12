@@ -17,9 +17,9 @@ public class SquareFeedback : MonoBehaviour
             if (GameParameters.instance.Mode != GameParameters.WhichMode.Domination)
             {
                 if (collision.gameObject.GetComponent<Ball>().color == 1)
-                    gameObject.GetComponent<Image>().color = Manager.instance.statesColor[3];
+                    gameObject.GetComponent<Image>().color = Manager.instance.statesColor[1];
                 else if (collision.gameObject.GetComponent<Ball>().color == 2)
-                    gameObject.GetComponent<Image>().color = Manager.instance.statesColor[4];
+                    gameObject.GetComponent<Image>().color = Manager.instance.statesColor[2];
             }
 
             ResetScale();

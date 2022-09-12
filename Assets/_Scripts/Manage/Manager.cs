@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
 
@@ -45,6 +46,9 @@ public class Manager : MonoBehaviour
         TextScores[0].gameObject.SetActive(true);
         TextScores[0].text = Phrases[0];
         TextScores[anounceText].color = Color.yellow;
+
+        statesColor[1] = GameParameters.instance.blueColorToChoose[GameParameters.instance.BlueColors];
+        statesColor[2 ] = GameParameters.instance.redColorToChoose[GameParameters.instance.RedColors];
 
         if (GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
         {

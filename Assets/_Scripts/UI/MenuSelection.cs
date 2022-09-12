@@ -20,8 +20,15 @@ public class MenuSelection : MonoBehaviour
     [SerializeField] GameObject[] redColors;
     [SerializeField] GameObject[] validateIconsColor;
     [SerializeField] GameObject followIconColor;
+    [SerializeField] Transform[] tpPointsMap;
+    [SerializeField] GameObject maps;
+    [SerializeField] TextMeshProUGUI indexOfMaps;
+    [SerializeField] float transiTimeMap;
 
     private int currentPoint = 0;
+    private int currentMapIndex = 0;
+    private bool[] canResetTp = new bool[2];
+    private bool cannotTp = false;
 
     public static MenuSelection Instance;
     private void Awake()
@@ -32,6 +39,7 @@ public class MenuSelection : MonoBehaviour
     private void Start()
     {
         menus.transform.DOMoveX(tpPoints[0].position.x, 1f);
+        currentMapIndex = 1;
     }
 
     public void ChangeBlueColor(int index, Color color)
@@ -58,19 +66,16 @@ public class MenuSelection : MonoBehaviour
 
     public void OnStart()
     {
-        //SceneManager.LoadScene(1);
         EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(chooseFirstButtons[0]);
+        NextMenus(0);
     }
 
-    public void SelectNbPlayers()
+    public void NextMenus(int index)
     {
-        EventSystem.current.SetSelectedGameObject(chooseFirstButtons[1]);
-    }
+        EventSystem.current.SetSelectedGameObject(chooseFirstButtons[index]);
 
-    public void ChooseNbPlayers()
-    {
-        EventSystem.current.SetSelectedGameObject(chooseFirstButtons[2]);
+        if (index == 3)
+            ChangeIndexOfMap();
     }
 
     public void OnQuit()
@@ -98,6 +103,101 @@ public class MenuSelection : MonoBehaviour
     public void ValidateRedSide()
     {
         validateIconsColor[1].transform.position = followIconColor.transform.position;
+    }
+
+    public void MoveMapTop()
+    {
+        if (cannotTp)
+            return;
+
+        currentMapIndex++;
+        cannotTp = true;
+
+        if (currentMapIndex >= tpPointsMap.Length - 1)
+            canResetTp[0] = true;
+
+        maps.transform.DOMoveY(tpPointsMap[currentMapIndex].position.y, transiTimeMap);
+        LaunchCanTpTop();
+    }
+
+    void LaunchCanTpTop()
+    {
+        StartCoroutine(CanTpTop());
+    }
+
+    IEnumerator CanTpTop()
+    {
+        yield return new WaitForSeconds(transiTimeMap/2);
+        if (canResetTp[0])
+        {
+            currentMapIndex = 1;
+            ChangeIndexOfMap();
+            yield return new WaitForSeconds(transiTimeMap/2);
+
+            maps.transform.DOMoveY(tpPointsMap[0].position.y, 0f);
+            print("tpTop");
+        }
+        else
+        {
+            ChangeIndexOfMap();
+            yield return new WaitForSeconds(transiTimeMap/2);
+        }
+
+        canResetTp[0] = false;
+        cannotTp = false;
+    }
+
+    //public void MoveMapDown()
+    //{
+    //    if (cannotTp)
+    //        return;
+
+    //    currentMapIndex--;
+    //    cannotTp = true;
+
+    //    if (currentMapIndex <= 0)
+    //        canResetTp[1] = true;
+
+    //    maps.transform.DOMoveY(tpPointsMap[currentMapIndex].position.y, 1f);
+    //    LaunchCanTpDown();
+    //}
+
+    //void LaunchCanTpDown()
+    //{
+    //    StartCoroutine(CanTpDown());
+    //}
+
+    //IEnumerator CanTpDown()
+    //{
+    //    yield return new WaitForSeconds(.5f);
+    //    if (canResetTp[1])
+    //    {
+    //        currentMapIndex = tpPointsMap.Length - 2;
+    //        ChangeIndexOfMap();
+    //        yield return new WaitForSeconds(.5f);
+
+    //        maps.transform.DOMoveY(tpPointsMap[tpPointsMap.Length - 1].position.y, 0f);
+    //        print("TpDown");
+    //    }
+    //    else
+    //    {
+    //        ChangeIndexOfMap();
+    //        yield return new WaitForSeconds(.5f);
+    //    }
+
+    //    canResetTp[1] = false;
+    //    cannotTp = false;
+    //}
+
+    void ChangeIndexOfMap()
+    {
+        indexOfMaps.enabled = true;
+        indexOfMaps.text = $"{currentMapIndex}";
+    }
+
+    public void LoadMainScene()
+    {
+        SceneManager.LoadScene(1);
     }
 
     void ChangeText()

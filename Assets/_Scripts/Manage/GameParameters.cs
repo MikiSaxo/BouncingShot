@@ -13,6 +13,9 @@ public class GameParameters : MonoBehaviour
     public int BlueColors;
     public Color[] blueColorToChoose;
     public Color[] redColorToChoose;
+    public int mapIndex;
+
+    private bool hasStartOnce = false;
 
     public enum WhichMode
     {
@@ -37,13 +40,16 @@ public class GameParameters : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < blueColorToChoose.Length; i++)
+        if (MenuSelection.Instance != null)
         {
-            MenuSelection.Instance.ChangeBlueColor(i, blueColorToChoose[i]);
-        }
-        for (int i = 0; i < redColorToChoose.Length; i++)
-        {
-            MenuSelection.Instance.ChangeRedColor(i, redColorToChoose[i]);
+            for (int i = 0; i < blueColorToChoose.Length; i++)
+            {
+                MenuSelection.Instance.ChangeBlueColor(i, blueColorToChoose[i]);
+            }
+            for (int i = 0; i < redColorToChoose.Length; i++)
+            {
+                MenuSelection.Instance.ChangeRedColor(i, redColorToChoose[i]);
+            }
         }
     }
 
@@ -51,8 +57,6 @@ public class GameParameters : MonoBehaviour
     {
         Mode = (WhichMode)mode;
         print(Mode);
-        MenuSelection.Instance.SelectNbPlayers();
-        //SceneManager.LoadScene(1);
     }
 
     public void ChooseNbPlayers(int howMany)
@@ -69,5 +73,10 @@ public class GameParameters : MonoBehaviour
     public void ChooseRedColor(int whichColor)
     {
         RedColors = whichColor;
+    }
+
+    public void ChooseMap(int index)
+    {
+        mapIndex = index;
     }
 }
