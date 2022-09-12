@@ -189,47 +189,6 @@ public class MenuSelection : MonoBehaviour
         cannotTp = false;
     }
 
-    //public void MoveMapDown()
-    //{
-    //    if (cannotTp)
-    //        return;
-
-    //    currentMapIndex--;
-    //    cannotTp = true;
-
-    //    if (currentMapIndex <= 0)
-    //        canResetTp[1] = true;
-
-    //    maps.transform.DOMoveY(tpPointsMap[currentMapIndex].position.y, 1f);
-    //    LaunchCanTpDown();
-    //}
-
-    //void LaunchCanTpDown()
-    //{
-    //    StartCoroutine(CanTpDown());
-    //}
-
-    //IEnumerator CanTpDown()
-    //{
-    //    yield return new WaitForSeconds(.5f);
-    //    if (canResetTp[1])
-    //    {
-    //        currentMapIndex = tpPointsMap.Length - 2;
-    //        ChangeIndexOfMap();
-    //        yield return new WaitForSeconds(.5f);
-
-    //        maps.transform.DOMoveY(tpPointsMap[tpPointsMap.Length - 1].position.y, 0f);
-    //        print("TpDown");
-    //    }
-    //    else
-    //    {
-    //        ChangeIndexOfMap();
-    //        yield return new WaitForSeconds(.5f);
-    //    }
-
-    //    canResetTp[1] = false;
-    //    cannotTp = false;
-    //}
 
     void ChangeIndexOfMap()
     {
@@ -238,10 +197,6 @@ public class MenuSelection : MonoBehaviour
         GameParameters.instance.ChooseMap(currentMapIndex);
     }
 
-    public void LoadMainScene()
-    {
-        SceneManager.LoadScene(1);
-    }
 
     void ChangeText()
     {
