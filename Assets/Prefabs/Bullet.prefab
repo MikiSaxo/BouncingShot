@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 4647257099180009612}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.023402791, y: 0.056738757, z: 0.1418469}
+  m_LocalScale: {x: 0.03525526, y: 0.068886526, z: 0.17221631}
   m_Children: []
   m_Father: {fileID: 1656307625301104429}
   m_RootOrder: 0
@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 3379961108525010167}
   - component: {fileID: 2823030733197363653}
   - component: {fileID: 7811242687621445699}
-  - component: {fileID: 6039770980579915157}
   - component: {fileID: 2533480951134541911}
   m_Layer: 0
   m_Name: Bullet
@@ -221,15 +220,15 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.06684517
-        inSlope: -0.58908796
-        outSlope: -0.58908796
+        value: 0.16047311
+        inSlope: -0.13200217
+        outSlope: -0.13200217
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.5148002
+        outWeight: 0.1623562
       - serializedVersion: 3
-        time: 0.40532508
+        time: 0.7367002
         value: 0
         inSlope: 0.027114475
         outSlope: 0.027114475
@@ -268,7 +267,7 @@ TrailRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 13107
+      atime1: 37008
       atime2: 0
       atime3: 0
       atime4: 0
@@ -287,32 +286,6 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!61 &6039770980579915157
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9034547383929328815}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.14772755, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.0051594973, y: 0.012138202}
-  m_EdgeRadius: 0
 --- !u!70 &2533480951134541911
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -327,5 +300,5 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.001633853, y: 1.9477042e-10}
-  m_Size: {x: 0.28462264, y: 0.120782666}
+  m_Size: {x: 0.3523307, y: 0.18074353}
   m_Direction: 1

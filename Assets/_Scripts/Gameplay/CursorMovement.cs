@@ -17,12 +17,13 @@ public class CursorMovement : MonoBehaviour
     [SerializeField] GameObject Bullet, Cursor, SpawnBullet;
     [SerializeField] GameObject[] IndicatorsCanShoot;
     [SerializeField] float timer;
-
-    const float minimumTime = 0.05f;
+    [SerializeField] GameObject canShootDetector;
+    private bool canShoot = false;
 
     private void Start()
     {
         IsLock = true;
+        canShoot = true;
         StartCoroutine(DeLock());
     }
 
@@ -38,7 +39,7 @@ public class CursorMovement : MonoBehaviour
                 Rotate();
         }
 
-        if (isCooldown == false && shoot && gameObject.GetComponent<PlayerMovement>().CanMove)
+        if (isCooldown == false && shoot && gameObject.GetComponent<PlayerMovement>().CanMove && canShoot)
         {
             IndicatorsCanShoot[0].SetActive(false);
             IndicatorsCanShoot[1].SetActive(false);
@@ -77,6 +78,11 @@ public class CursorMovement : MonoBehaviour
     {
         IsLock = context.action.triggered;
         //print("lockkkkkk");
+    }
+
+    public void CanShoot(bool which)
+    {
+        canShoot = which;
     }
 
      

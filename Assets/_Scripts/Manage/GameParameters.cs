@@ -13,9 +13,8 @@ public class GameParameters : MonoBehaviour
     public int BlueColors;
     public Color[] blueColorToChoose;
     public Color[] redColorToChoose;
-    public int mapIndex;
+    public int MapIndex;
 
-    private bool hasStartOnce = false;
 
     public enum WhichMode
     {
@@ -77,6 +76,6 @@ public class GameParameters : MonoBehaviour
 
     public void ChooseMap(int index)
     {
-        mapIndex = index;
+        MapIndex = index-1;
     }
 }

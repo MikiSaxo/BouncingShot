@@ -193,6 +193,7 @@ public class MenuSelection : MonoBehaviour
     {
         indexOfMaps.enabled = true;
         indexOfMaps.text = $"{currentMapIndex}";
+        GameParameters.instance.ChooseMap(currentMapIndex);
     }
 
     public void LoadMainScene()

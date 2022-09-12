@@ -27,6 +27,7 @@ public class Manager : MonoBehaviour
     [SerializeField] private GameObject[] rightSquare;
     private float fadingSpeed = 0.05f;
     [SerializeField] private bool stopCorou = false;
+    [SerializeField] private GameObject[] maps;
 
     const int anounceText = 0;
 
@@ -48,7 +49,13 @@ public class Manager : MonoBehaviour
         TextScores[anounceText].color = Color.yellow;
 
         statesColor[1] = GameParameters.instance.blueColorToChoose[GameParameters.instance.BlueColors];
-        statesColor[2 ] = GameParameters.instance.redColorToChoose[GameParameters.instance.RedColors];
+        statesColor[2] = GameParameters.instance.redColorToChoose[GameParameters.instance.RedColors];
+
+        for (int i = 0; i < maps.Length; i++)
+        {
+            if(i != GameParameters.instance.MapIndex)
+                maps[i].gameObject.SetActive(false);
+        }
 
         if (GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
         {
@@ -184,7 +191,7 @@ public class Manager : MonoBehaviour
         {
             if(GameParameters.instance.Mode != GameParameters.WhichMode.Domination && GameParameters.instance.Mode != GameParameters.WhichMode.Possession)
             {
-                print("c chiant la");
+                //print("c chiant la");
                 StartCoroutine(TransiResetColor());
             }
         }
@@ -206,53 +213,29 @@ public class Manager : MonoBehaviour
 
     IEnumerator TransiResetColor()
     {
-        print("salut c la transi");
+        //print("salut c la transi");
         stopCorou = true;
         yield return new WaitForSeconds(.1f);
         stopCorou = false;
         StartCoroutine(ResetColor());
     }
 
-    IEnumerator test()
-    {
-        var j = 0;
-        for (int i = 0; i < 100; i++)
-        {
-            if (stopCorou)
-                break;
-
-            j++;
-            print(j);
-            yield return new WaitForSeconds(1f);
-        }
-    }
-
     IEnumerator ResetColor()
     {
-        if (stopCorou)
-            print("ça pu");
-
         for (float i = 1f; i >= 0; i -= fadingSpeed)
         {
             for (int j = 0; j < borders.Length; j++)
             {
                 if (stopCorou)
-                {
-                    print("j'ai stop");
-                    j = borders.Length;
                     break;
-                }
 
                 var tempColor = borders[j].color;
                 tempColor.a = i;
                 borders[j].color = tempColor;
             }
             if (stopCorou)
-            {
-                print("j'ai arrete");
-                i = 0;
                 break;
-            }
+
             yield return new WaitForSeconds(fadingSpeed);
         }
     }
