@@ -1,30 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using DG.Tweening;
 
 public class FadeSystem : MonoBehaviour
 {
-    [SerializeField] GameObject[] sideFade = null;
-    float[] sideFadeStartPosX = new float[2];
+    [SerializeField] GameObject invisible = null;
+    [SerializeField] float timeFadeOn;
+    [SerializeField] float timeFadeOff;
 
     private void Start()
     {
-        sideFadeStartPosX[0] = sideFade[0].transform.position.x;
-        sideFadeStartPosX[1] = sideFade[1].transform.position.x;
-        print(sideFadeStartPosX[0]);
-        FadeOn();
+        invisible.transform.DOScale(Vector3.zero, 0f);
+        FadeOff();
     }
 
-    void FadeOn()
+    public void FadeOn(bool canLaunch)
     {
-        sideFade[0].transform.DOMoveX(0, 1f);
-        sideFade[1].transform.DOMoveX(0, 1f).OnComplete(FadeOff);
+        if(canLaunch)
+            invisible.transform.DOScale(Vector3.zero, timeFadeOn).OnComplete(LoadMainScene);
+        else
+            invisible.transform.DOScale(Vector3.zero, timeFadeOn);
     }
 
-    void FadeOff()
+    public void FadeOff()
     {
-        sideFade[0].transform.DOMoveX(sideFadeStartPosX[0], 1f);
-        sideFade[1].transform.DOMoveX(sideFadeStartPosX[1], 1f);
+        invisible.transform.DOScale(Vector3.one, timeFadeOff);
+    }
+
+    public void LoadMainScene()
+    {
+        SceneManager.LoadScene(1);
     }
 }
