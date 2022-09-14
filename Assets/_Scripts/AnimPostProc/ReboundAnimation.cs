@@ -7,10 +7,6 @@ public class ReboundAnimation : MonoBehaviour
 {
     [SerializeField] float durationMin, durationMax, durationEnd;
     [SerializeField] Vector3 minScale, maxScale;
-    void Start()
-    {
-        //StartBounce();
-    }
 
     public void StartBounce()
     {

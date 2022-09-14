@@ -21,8 +21,8 @@ public class Ball : MonoBehaviour
     {
         if (GameParameters.instance.Mode == GameParameters.WhichMode.Normal)
             bulletPower = bullerPowerNormal;
-        if (GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
-            bulletPower = bullerPowerSoccer;
+        //if (GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
+            //bulletPower = bullerPowerSoccer;
 
         for (int i = 0; i < Manager.instance.statesColor.Length; i++)
         {
@@ -41,60 +41,60 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.Bumper) //Bumper
         {
             rb.velocity = Vector2.zero;
-            rb.AddForce(-collision.contacts[0].normal * bumperPower, ForceMode2D.Impulse);
+            rb.AddForce(collision.contacts[0].normal * bumperPower, ForceMode2D.Impulse);
             collision.gameObject.GetComponent<ReboundAnimation>().StartBounce();
             StartRebound();
         }
 
-        if (GameParameters.instance.Mode != GameParameters.WhichMode.Possession) //&& GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
+
+        if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP1) //BulletP1
         {
-            if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP1) //BulletP1
+            if (GameParameters.instance.Mode != GameParameters.WhichMode.Domination && GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
+                ChangeColor(1);
+            rb.AddForce(collision.contacts[0].normal * bulletPower, ForceMode2D.Impulse);
+            StartRebound();
+
+            if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession)
+                Manager.instance.ChangeBordersColor(statesColor[1], false);
+
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP2) //BulletP2
+        {
+            if (GameParameters.instance.Mode != GameParameters.WhichMode.Domination && GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
+                ChangeColor(2);
+            rb.AddForce(collision.contacts[0].normal * bulletPower, ForceMode2D.Impulse);
+            StartRebound();
+
+            if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession)
+                Manager.instance.ChangeBordersColor(statesColor[1], false);
+
+            Destroy(collision.gameObject);
+        }
+
+        if (GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
+        {
+            if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1 && color == 2) //P1
             {
-                //print(GameParameters.instance.Mode);
-                if (GameParameters.instance.Mode != GameParameters.WhichMode.Domination && GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
+                if (GameParameters.instance.Mode != GameParameters.WhichMode.Domination)
                 {
-                    ChangeColor(1);
-                    //Manager.instance.ChangeBordersColor(statesColor[1], true);
+                    Manager.instance.WhichBallTouches(1, 2);
+                    Manager.instance.ChangeBordersColor(statesColor[1], true);
                 }
-                rb.AddForce(collision.contacts[0].normal * bulletPower, ForceMode2D.Impulse);
-                StartRebound();
-                Destroy(collision.gameObject);
+                if (GameParameters.instance.Mode != GameParameters.WhichMode.Possession && GameParameters.instance.Mode != GameParameters.WhichMode.Domination)
+                    RipplePostProcessor.instance.RippleEffect(transform.position);
+                //shakeCamera.CamShake();
             }
-            if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP2) //BulletP2
+            else if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2 && color == 1) //P2
             {
-                if (GameParameters.instance.Mode != GameParameters.WhichMode.Domination && GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
+                if (GameParameters.instance.Mode != GameParameters.WhichMode.Domination)
                 {
-                    ChangeColor(2);
-                    //Manager.instance.ChangeBordersColor(statesColor[2], true);
+                    Manager.instance.WhichBallTouches(2, 1);
+                    Manager.instance.ChangeBordersColor(statesColor[2], true);
                 }
-                rb.AddForce(collision.contacts[0].normal * bulletPower, ForceMode2D.Impulse);
-                StartRebound();
-                Destroy(collision.gameObject);
-            }
-            if (GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
-            {
-                if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1 && color == 2) //P1
-                {
-                    if (GameParameters.instance.Mode != GameParameters.WhichMode.Domination)
-                    {
-                        Manager.instance.WhichBallTouches(1, 2);
-                        Manager.instance.ChangeBordersColor(statesColor[2], true);
-                    }
-                    if (GameParameters.instance.Mode != GameParameters.WhichMode.Possession && GameParameters.instance.Mode != GameParameters.WhichMode.Domination)
-                        RipplePostProcessor.instance.RippleEffect(transform.position);
-                    shakeCamera.CamShake();
-                }
-                else if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2 && color == 1) //P2
-                {
-                    if (GameParameters.instance.Mode != GameParameters.WhichMode.Domination)
-                    {
-                        Manager.instance.WhichBallTouches(2, 1);
-                        Manager.instance.ChangeBordersColor(statesColor[1], true);
-                    }
-                    if (GameParameters.instance.Mode != GameParameters.WhichMode.Possession && GameParameters.instance.Mode != GameParameters.WhichMode.Domination)
-                        RipplePostProcessor.instance.RippleEffect(transform.position);
-                    shakeCamera.CamShake();
-                }
+                if (GameParameters.instance.Mode != GameParameters.WhichMode.Possession && GameParameters.instance.Mode != GameParameters.WhichMode.Domination)
+                    RipplePostProcessor.instance.RippleEffect(transform.position);
+                //shakeCamera.CamShake();
             }
         }
 
@@ -107,7 +107,7 @@ public class Ball : MonoBehaviour
             }
         }
 
-        if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession)// || GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
+        if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession)
         {
             if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1)
             {
@@ -138,43 +138,18 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession)// || GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
+        if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession)
         {
             if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2
                 && collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1)
                 ChangeColor(0);
             else if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1)
-            {
                 ChangeColor(1);
-            }
             else if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2)
-            {
                 ChangeColor(2);
-            }
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        //if (GameParameters.instance.Mode == GameParameters.WhichMode.Domination)
-        //{
-        //    if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.CampP2
-        //        && collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.CampP1)
-        //        ChangeColor(0);
-        //    else if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.CampP1)
-        //    {
-        //        ChangeColor(1);
-        //        Manager.instance.ChangeBordersColor(statesColor[1], false);
-        //    }
-        //    else if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.CampP2)
-        //    {
-        //        ChangeColor(2);
-        //        Manager.instance.ChangeBordersColor(statesColor[2], false);
-        //    }
-        //    else
-        //        ChangeColor(0);
-        //}
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -193,8 +168,6 @@ public class Ball : MonoBehaviour
                 ChangeColor(2);
                 Manager.instance.ChangeBordersColor(statesColor[2], false);
             }
-            //else
-                //ChangeColor(0);
         }
     }
 
@@ -212,7 +185,6 @@ public class Ball : MonoBehaviour
     public void ChangeColor(int which)
     {
         color = which;
-        //print("alloooo : " + color);
         if (color == 0)
         {
             spr.color = statesColor[0];

@@ -29,6 +29,8 @@ public class Manager : MonoBehaviour
     [SerializeField] private bool stopCorou = false;
     [SerializeField] private GameObject[] maps;
 
+    [HideInInspector] public bool IsReplacing = false;
+
     const int anounceText = 0;
 
     public static Manager instance;
@@ -63,10 +65,10 @@ public class Manager : MonoBehaviour
             goals[1].SetActive(false);
             goals[2].SetActive(true);
 
-            Ball.transform.localScale = soccerSize;
+            //Ball.transform.localScale = soccerSize;
         }
 
-        if (GameParameters.instance.Mode == GameParameters.WhichMode.Domination)
+        if (GameParameters.instance.Mode == GameParameters.WhichMode.Domination || GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
         {
             domiBG[0].SetActive(true);
             domiBG[1].SetActive(true);
@@ -74,11 +76,11 @@ public class Manager : MonoBehaviour
             //domiBG[1].GetComponent<Image>().color = statesColor[4];
             for (int i = 0; i < leftSquare.Length; i++)
             {
-                leftSquare[i].GetComponent<Image>().color = statesColor[3];
+                leftSquare[i].GetComponent<Image>().color = statesColor[1];
             }
             for (int i = 0; i < rightSquare.Length; i++)
             {
-                rightSquare[i].GetComponent<Image>().color = statesColor[4];
+                rightSquare[i].GetComponent<Image>().color = statesColor[2];
             }
         }
 
@@ -148,6 +150,7 @@ public class Manager : MonoBehaviour
     IEnumerator Replace()
     {
         Ball.SetActive(false);
+        IsReplacing = true;
 
         Players[0].GetComponent<PlayerMovement>().CanMove = false;
         Players[1].GetComponent<PlayerMovement>().CanMove = false;
@@ -189,7 +192,7 @@ public class Manager : MonoBehaviour
 
         if (borders[0].color.a >= 0.1f)
         {
-            if(GameParameters.instance.Mode != GameParameters.WhichMode.Domination && GameParameters.instance.Mode != GameParameters.WhichMode.Possession)
+            if(GameParameters.instance.Mode != GameParameters.WhichMode.Domination && GameParameters.instance.Mode != GameParameters.WhichMode.Possession && GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
             {
                 //print("c chiant la");
                 StartCoroutine(TransiResetColor());

@@ -55,8 +55,11 @@ public class PlayerMovement : MonoBehaviour
         if (movementInput != Vector2.zero && CanMove)
             Movement();
 
-        if (!CanMove)
+        if (!CanMove && Manager.instance.IsReplacing)
+        {
             Destroy(GameObject.Find("Bullet(Clone)"));
+            Manager.instance.IsReplacing = false;
+        }
 
 
         if (isCooldown == false)
@@ -90,7 +93,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Dash()
     {
-        //print("dash");
         if(movementInput != Vector2.zero)
             dashPower = maxDashPower;
     }
@@ -111,7 +113,6 @@ public class PlayerMovement : MonoBehaviour
         {
             DashAnim.SetTrigger("LaunchDash");
             dashAnim = true;
-            //print("LaunchDash");
         }
         yield return new WaitForSeconds(.1f);
         dashAnim = false;
