@@ -10,7 +10,7 @@ using UnityEngine.InputSystem;
 
 public class MenuSelection : MonoBehaviour
 {
-    [SerializeField] GameObject currentSelected;
+    private GameObject currentSelected;
     [SerializeField] GameObject[] chooseFirstButtons;
     [SerializeField] GameObject[] Buttons;
     [SerializeField] Transform[] tpPoints;
@@ -24,6 +24,7 @@ public class MenuSelection : MonoBehaviour
     [SerializeField] Transform[] tpPointsMap;
     [SerializeField] GameObject maps;
     [SerializeField] TextMeshProUGUI indexOfMaps;
+    [SerializeField] TextMeshProUGUI textOfMaps;
     [SerializeField] float transiTimeMap;
 
     private int currentPoint = 0;
@@ -177,7 +178,7 @@ public class MenuSelection : MonoBehaviour
             yield return new WaitForSeconds(transiTimeMap / 2);
 
             maps.transform.DOMoveY(tpPointsMap[0].position.y, 0f);
-            print("tpTop");
+            //print("tpTop");
         }
         else
         {
@@ -193,6 +194,7 @@ public class MenuSelection : MonoBehaviour
     void ChangeIndexOfMap()
     {
         indexOfMaps.enabled = true;
+        textOfMaps.enabled = true;
         indexOfMaps.text = $"{currentMapIndex}";
         GameParameters.instance.ChooseMap(currentMapIndex);
     }
