@@ -7,7 +7,7 @@ public class ShakeCamera : MonoBehaviour
 {
     //public Animator CamAnim;
 
-    [SerializeField] private bool start = false;
+    public bool Start = false;
     [SerializeField] private AnimationCurve curve;
     public float durationShaking = 1f;
     //public float durationZoom = 0f;
@@ -21,9 +21,9 @@ public class ShakeCamera : MonoBehaviour
 
     private void Update()
     {
-        if (start)
+        if (Start)
         {
-            start = false;
+            Start = false;
             StartCoroutine(Shaking(0));
         }
     }

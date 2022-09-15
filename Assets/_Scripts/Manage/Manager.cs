@@ -125,7 +125,7 @@ public class Manager : MonoBehaviour
         if (GameParameters.instance.Mode == GameParameters.WhichMode.Blitz)
         {
             StartCoroutine(ReplaceBlitz());
-            ChangeBordersColor(statesColor[whoTouch], true);
+            //ChangeBordersColor(statesColor[whoTouch], true);
         }
     }
 
@@ -195,7 +195,7 @@ public class Manager : MonoBehaviour
             if(GameParameters.instance.Mode != GameParameters.WhichMode.Domination && GameParameters.instance.Mode != GameParameters.WhichMode.Possession && GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
             {
                 //print("c chiant la");
-                StartCoroutine(TransiResetColor());
+                //StartCoroutine(TransiResetColor());
             }
         }
     }

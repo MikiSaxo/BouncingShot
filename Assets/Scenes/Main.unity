@@ -11101,7 +11101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd7594716aaf2c2478dad169714392da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  start: 0
+  Start: 0
   curve:
     serializedVersion: 2
     m_Curve:
@@ -11115,8 +11115,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.29165515
     - serializedVersion: 3
-      time: 0.15711744
-      value: 0.027793929
+      time: 0.20701368
+      value: 0.039808396
       inSlope: -0.2178456
       outSlope: -0.2178456
       tangentMode: 0
@@ -11126,25 +11126,25 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.55681086
       value: 0.0017139586
-      inSlope: 0.0057589877
-      outSlope: 0.0057589877
+      inSlope: 0.0005927269
+      outSlope: 0.0005927269
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.11888588
-      outWeight: 0.33333334
+      outWeight: 0.44243827
     - serializedVersion: 3
       time: 0.99676514
       value: 0
-      inSlope: 0.013103079
-      outSlope: 0.013103079
+      inSlope: -0.0018450575
+      outSlope: -0.0018450575
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.12583545
+      inWeight: 0.51031077
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  durationShaking: 0.3
+  durationShaking: 0.1
 --- !u!114 &519420035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27394,6 +27394,7 @@ MonoBehaviour:
   spr: {fileID: 1191233799}
   shakeCamera: {fileID: 1885141297}
   Child: {fileID: 1777582540}
+  camAnim: {fileID: 519420034}
   ResetRate: 10
   bumperPower: 10000
   addBulletPower: 500
@@ -40656,7 +40657,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1892342433572347430, guid: b7cd2e0d87507df4f8d4586ea8a459cf, type: 3}
       propertyPath: Mode
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1892342433572347430, guid: b7cd2e0d87507df4f8d4586ea8a459cf, type: 3}
       propertyPath: MapIndex
@@ -54515,6 +54516,30 @@ PrefabInstance:
     - target: {fileID: 256931305622729957, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
       propertyPath: m_Name
       value: PlayerManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 256931305622729958, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
+      propertyPath: m_JoinBehavior
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 256931305622729958, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_Id
+      value: 61e02061-0767-4206-a4fa-ea69e406c8a6
+      objectReference: {fileID: 0}
+    - target: {fileID: 256931305622729958, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_Name
+      value: Join
+      objectReference: {fileID: 0}
+    - target: {fileID: 256931305622729958, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
+      propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 256931305622729958, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
+      propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 256931305622729958, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
+      propertyPath: m_PlayerJoinedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 256931305622729959, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
       propertyPath: m_RootOrder
