@@ -21,6 +21,9 @@ public class Ball : MonoBehaviour
     [SerializeField] GameObject fx_RedbondBall;
     [SerializeField] GameObject fx_TouchPlayerBall;
     [SerializeField] GameObject fx_BallBumper;
+
+    [SerializeField] float[] vib_p1col1;
+    [SerializeField] float[] vib_p1col2;
     //private Vector3 transferPosition;
 
     private void Start()
@@ -85,30 +88,41 @@ public class Ball : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
-        if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1 && color == 2) //P1
+        if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1 && color == 2) //P1 nasty
         {
             var transferPosition = new Vector3(transform.position.x - collision.contacts[0].normal.x, transform.position.y - collision.contacts[0].normal.y, 0);
             Instantiate(fx_TouchPlayerBall, transferPosition, collision.gameObject.transform.rotation);
 
+
             if (GameParameters.instance.Mode != GameParameters.WhichMode.Domination && GameParameters.instance.Mode != GameParameters.WhichMode.Possession && GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
             {
+                collision.gameObject.GetComponent<VibrateController>().StartVibration(vib_p1col2[0], vib_p1col2[1], vib_p1col2[2]);
                 Manager.instance.WhichBallTouches(1, 2);
                 RipplePostProcessor.instance.RippleEffect(transform.position);
             }
-            //if (GameParameters.instance.Mode != GameParameters.WhichMode.Possession && GameParameters.instance.Mode != GameParameters.WhichMode.Domination)
+            else
+                collision.gameObject.GetComponent<VibrateController>().StartVibration(vib_p1col1[0], vib_p1col1[1], vib_p1col1[2]);
         }
-        else if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2 && color == 1) //P2
+        else if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2 && color == 1) //P2 nasty
         {
             var transferPosition = new Vector3(transform.position.x - collision.contacts[0].normal.x, transform.position.y - collision.contacts[0].normal.y, 0);
             Instantiate(fx_TouchPlayerBall, transferPosition, collision.gameObject.transform.rotation);
 
+
             if (GameParameters.instance.Mode != GameParameters.WhichMode.Domination && GameParameters.instance.Mode != GameParameters.WhichMode.Possession && GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
             {
+                collision.gameObject.GetComponent<VibrateController>().StartVibration(vib_p1col2[0], vib_p1col2[1], vib_p1col2[2]);
                 Manager.instance.WhichBallTouches(2, 1);
                 RipplePostProcessor.instance.RippleEffect(transform.position);
             }
-            //if (GameParameters.instance.Mode != GameParameters.WhichMode.Possession && GameParameters.instance.Mode != GameParameters.WhichMode.Domination)
+            else
+                collision.gameObject.GetComponent<VibrateController>().StartVibration(vib_p1col1[0], vib_p1col1[1], vib_p1col1[2]);
         }
+        else if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1 && color == 1) //P1 friendly
+            collision.gameObject.GetComponent<VibrateController>().StartVibration(vib_p1col1[0], vib_p1col1[1], vib_p1col1[2]);
+        else if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2 && color == 2) //P1 friendly
+            collision.gameObject.GetComponent<VibrateController>().StartVibration(vib_p1col1[0], vib_p1col1[1], vib_p1col1[2]);
+
 
         if (GameParameters.instance.Mode == GameParameters.WhichMode.Normal)
         {

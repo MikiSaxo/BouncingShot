@@ -333,6 +333,7 @@ Transform:
   - {fileID: 725878811882023940}
   - {fileID: 7067641670500714744}
   - {fileID: 380202139029168479}
+  - {fileID: 7109955455941310208}
   m_Father: {fileID: 5709792288666449924}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -560,6 +561,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5709792288666449924}
+  - component: {fileID: 1142973781417622005}
   - component: {fileID: 5709792288666449931}
   - component: {fileID: 5709792288666449930}
   - component: {fileID: 4709864462000678249}
@@ -592,6 +594,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1142973781417622005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5709792288666449926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24808580f2c45ee42861eb5d0bebfba5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerIndex: 3
+  vib: {fileID: 6033013419862124534}
 --- !u!114 &5709792288666449931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -724,6 +740,14 @@ MonoBehaviour:
   maxDashPower: 3
   DashAnim: {fileID: 6044310531899296040}
   dashRate: 1
+  vib_Spawn:
+  - 0.8
+  - 0.8
+  - 0.6
+  vib_Dash:
+  - 0
+  - 0.4
+  - 0.15
   CanMove: 0
   isShotByBumper: 0
 --- !u!114 &4709864462000678249
@@ -751,6 +775,14 @@ MonoBehaviour:
   normalScaleSprite: {fileID: 5867463036448406936}
   fx_Shoot: {fileID: 7446929579682652256, guid: 400099312fa80a3448f2f1217977ffad, type: 3}
   fx_Spawn: {fileID: 725878811882023940}
+  vib_Shoot:
+  - 0.2
+  - 0.2
+  - 0.1
+  vib_Look:
+  - 0.25
+  - 0
+  - 0.3
 --- !u!114 &8340642246981135561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -971,6 +1003,37 @@ Transform:
   - {fileID: 2619556143556235479}
   m_Father: {fileID: 5698265879038090210}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6033013419862124534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7109955455941310208}
+  m_Layer: 0
+  m_Name: vib
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7109955455941310208
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6033013419862124534}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5698265879038090210}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6110279870795788387
 GameObject:

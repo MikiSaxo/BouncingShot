@@ -74,6 +74,10 @@ public class Bullet : MonoBehaviour
             || (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2
             && gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP2))
         {
+            var transferPosition = new Vector3(transform.position.x - collision.contacts[0].normal.x * .5f, transform.position.y - collision.contacts[0].normal.y * .5f, 0);
+            Instantiate(fx_TouchPlayerBullet, transferPosition, collision.gameObject.transform.rotation);
+
+
             Destroy(gameObject);
         }
 

@@ -24,7 +24,10 @@ public class CursorMovement : MonoBehaviour
     private Vector3 getNormalSpritePos;
     private bool canShoot = false;
     private float facingAngle = 0;
-    private bool canResetNormalSprPos = false;
+    private bool hasLock = false;
+
+    [SerializeField] float[] vib_Shoot;
+    [SerializeField] float[] vib_Look;
 
     private void Start()
     {
@@ -36,11 +39,10 @@ public class CursorMovement : MonoBehaviour
     void Update()
     {
         if (IsLock)
-        {
             RotateLock();
-        }
         else
         {
+            hasLock = false;
             if (movementInputRotate != Vector2.zero)
                 Rotate();
         }
@@ -107,6 +109,12 @@ public class CursorMovement : MonoBehaviour
 
     void RotateLock()
     {
+        if (!hasLock)
+        {
+            gameObject.GetComponent<VibrateController>().StartVibration(vib_Look[0], vib_Look[1], vib_Look[2]);
+            hasLock = true;
+        }
+
         Vector2 direction = Manager.instance.Ball.transform.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         facingAngle = angle;
@@ -123,6 +131,8 @@ public class CursorMovement : MonoBehaviour
     void Shoot()
     {
         gameObject.GetComponent<ReboundAnimation>().StartBounce();
+        gameObject.GetComponent<VibrateController>().StartVibration(vib_Shoot[0], vib_Shoot[1], vib_Shoot[2]);
+
         MoveBackfeedback();
         transferPosition = new Vector3(SpawnBullet.transform.position.x, SpawnBullet.transform.position.y, 0);
         GameObject b = Instantiate(Bullet, transferPosition, Cursor.transform.rotation);
@@ -143,12 +153,12 @@ public class CursorMovement : MonoBehaviour
             b.GetComponentInChildren<TrailRenderer>().startColor = Manager.instance.statesColor[2];
         }
     }
-
+    const float _powerBack = -.3f;
     void MoveBackfeedback()
     {
         getNormalSpritePos = normalScaleSprite.transform.position;
         
         Vector2 finalMovement = new Vector2(Mathf.Cos(facingAngle * Mathf.Deg2Rad), Mathf.Sin(facingAngle * Mathf.Deg2Rad));
-        normalScaleSprite.transform.DOMove(new Vector3(getNormalSpritePos.x + finalMovement.x * -.2f, getNormalSpritePos.y + finalMovement.y * -.2f, 0), 0f);
+        normalScaleSprite.transform.DOMove(new Vector3(getNormalSpritePos.x + finalMovement.x * _powerBack, getNormalSpritePos.y + finalMovement.y * _powerBack, 0), 0f);
     }
 }

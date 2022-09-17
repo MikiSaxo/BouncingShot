@@ -86,11 +86,14 @@ public class MenuSelection : MonoBehaviour
             canBack = false;
 
             if (currentButtonsIndex < 4)
+            {
                 indexOfMaps.enabled = false;
+                textOfMaps.enabled = false;
+            }
         }
     }
 
-        public void OnStart()
+    public void OnStart()
     {
         EventSystem.current.SetSelectedGameObject(null);
         NextMenus(0);

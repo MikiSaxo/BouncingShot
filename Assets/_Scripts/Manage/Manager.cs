@@ -26,7 +26,7 @@ public class Manager : MonoBehaviour
     [SerializeField] private GameObject[] leftSquare;
     [SerializeField] private GameObject[] rightSquare;
     private float fadingSpeed = 0.05f;
-    [SerializeField] private bool stopCorou = false;
+    private bool stopCorou = false;
     [SerializeField] private GameObject[] maps;
 
     [HideInInspector] public bool IsReplacing = false;
@@ -180,12 +180,15 @@ public class Manager : MonoBehaviour
         TextScores[0].gameObject.SetActive(false);
         TextScores[3].gameObject.SetActive(true);
 
+        ChangeBordersColor(statesColor[3], false);
+
         for (int i = nbDecompte; i > 0; i--)
         {
             TextScores[3].text = i.ToString();
             yield return new WaitForSeconds(timeForDecompteInSec);
         }
         TextScores[3].gameObject.SetActive(false);
+        ChangeBordersColor(statesColor[0], false);
 
         Players[0].GetComponent<PlayerMovement>().CanMove = true;
         Players[1].GetComponent<PlayerMovement>().CanMove = true;

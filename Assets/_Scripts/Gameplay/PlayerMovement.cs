@@ -18,6 +18,9 @@ public class PlayerMovement : MonoBehaviour
     float nextDash = 1f;
     [SerializeField] float dashRate = 1f;
 
+    [SerializeField] float[] vib_Spawn;
+    [SerializeField] float[] vib_Dash;
+
     [HideInInspector] public bool CanMove;
     [HideInInspector] public bool isShotByBumper;
 
@@ -37,6 +40,9 @@ public class PlayerMovement : MonoBehaviour
             transform.position = Manager.instance.SpawnPoints[0].position;
             Manager.instance.NbOfPlayer++;
             Manager.instance.playerScoreVisu[0].GetComponent<FollowObject>().target = gameObject.transform;
+
+            gameObject.GetComponent<VibrateController>().playerIndex = XInputDotNetPure.PlayerIndex.One;
+            gameObject.GetComponent<VibrateController>().StartVibration(vib_Spawn[0], vib_Spawn[1], vib_Spawn[2]);
         }
         else
         {
@@ -47,6 +53,9 @@ public class PlayerMovement : MonoBehaviour
             transform.position = Manager.instance.SpawnPoints[1].position;
             Manager.instance.LaunchGame();
             Manager.instance.playerScoreVisu[1].GetComponent<FollowObject>().target = gameObject.transform;
+
+            gameObject.GetComponent<VibrateController>().playerIndex = XInputDotNetPure.PlayerIndex.Two;
+            gameObject.GetComponent<VibrateController>().StartVibration(vib_Spawn[0], vib_Spawn[1], vib_Spawn[2]);
         }
     }
 
@@ -94,7 +103,10 @@ public class PlayerMovement : MonoBehaviour
     void Dash()
     {
         if(movementInput != Vector2.zero)
+        {
+            gameObject.GetComponent<VibrateController>().StartVibration(vib_Dash[0], vib_Dash[1], vib_Dash[2]);
             dashPower = maxDashPower;
+        }
     }
 
     void Movement()

@@ -27405,6 +27405,14 @@ MonoBehaviour:
   fx_RedbondBall: {fileID: 3438140927419333384, guid: 9bf32320bba1d3947b131b1f99c83f64, type: 3}
   fx_TouchPlayerBall: {fileID: 8710676063011410124, guid: 6a5e4579788843e4193953306a47d959, type: 3}
   fx_BallBumper: {fileID: 8977913278807975452, guid: b2d1537ff6030c34eaba8a0e4dc696e0, type: 3}
+  vib_p1col1:
+  - 0.3
+  - 0.3
+  - 0.15
+  vib_p1col2:
+  - 0.8
+  - 0.8
+  - 0.3
 --- !u!114 &1148225163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40667,6 +40675,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1892342433572347430, guid: b7cd2e0d87507df4f8d4586ea8a459cf, type: 3}
+      propertyPath: BlueColors
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1892342433572347430, guid: b7cd2e0d87507df4f8d4586ea8a459cf, type: 3}
       propertyPath: NbOfPlayers
       value: 2
       objectReference: {fileID: 0}
@@ -52444,7 +52456,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d0507b7a7975e56479793c21e71019a0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 07a5242e02d199c4a8b9a504cbd10140, type: 2}
   m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -52714,7 +52726,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
       propertyPath: statesColor.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
       propertyPath: NbScoresPoss.Array.size
@@ -54478,19 +54490,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
       propertyPath: statesColor.Array.data[3].a
-      value: 0.19607843
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
       propertyPath: statesColor.Array.data[3].b
-      value: 0
+      value: 0.9056604
       objectReference: {fileID: 0}
     - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
       propertyPath: statesColor.Array.data[3].g
-      value: 0.83137256
+      value: 0.9056604
       objectReference: {fileID: 0}
     - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
       propertyPath: statesColor.Array.data[3].r
-      value: 0.8292934
+      value: 0.9056604
       objectReference: {fileID: 0}
     - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
       propertyPath: statesColor.Array.data[4].a
