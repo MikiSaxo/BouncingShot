@@ -120,11 +120,14 @@ public class PlayerMovement : MonoBehaviour
 
     public void LaunchBounceBullet()
     {
+        gameObject.GetComponent<ReboundAnimation>().StartBounce();
         CanMove = false;
         StartCoroutine(TakeAShot());
     }
     IEnumerator TakeAShot()
     {
+        var getColor = MainSprite.color;
+        MainSprite.color = Color.white;
         if(!isShotByBumper)
             yield return new WaitForSeconds(.5f);
         else if (isShotByBumper)
@@ -132,6 +135,7 @@ public class PlayerMovement : MonoBehaviour
             yield return new WaitForSeconds(.3f);
             isShotByBumper = false;
         }
+        MainSprite.color = getColor;
         CanMove = true;
     }
 }

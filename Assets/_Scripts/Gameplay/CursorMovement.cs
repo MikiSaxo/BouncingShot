@@ -19,6 +19,8 @@ public class CursorMovement : MonoBehaviour
     [SerializeField] float timer;
     //[SerializeField] GameObject canShootDetector;
     [SerializeField] GameObject normalScaleSprite;
+    [SerializeField] GameObject fx_Shoot;
+    [SerializeField] Transform fx_Spawn;
     private Vector3 getNormalSpritePos;
     private bool canShoot = false;
     private float facingAngle = 0;
@@ -124,6 +126,8 @@ public class CursorMovement : MonoBehaviour
         MoveBackfeedback();
         transferPosition = new Vector3(SpawnBullet.transform.position.x, SpawnBullet.transform.position.y, 0);
         GameObject b = Instantiate(Bullet, transferPosition, Cursor.transform.rotation);
+        GameObject go = Instantiate(fx_Shoot, transferPosition, Cursor.transform.rotation);
+        go.transform.position = fx_Spawn.position;
 
         if (GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2)
             b.gameObject.GetComponent<WhoAreYou>().ChoisiBieng = WhoAreYou.ChooseYourChampion.BulletP2;

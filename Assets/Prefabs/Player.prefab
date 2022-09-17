@@ -330,6 +330,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 790458659883460412}
+  - {fileID: 725878811882023940}
   - {fileID: 7067641670500714744}
   - {fileID: 380202139029168479}
   m_Father: {fileID: 5709792288666449924}
@@ -548,7 +549,7 @@ Transform:
   - {fileID: 4709087484109964877}
   - {fileID: 3203629015826775165}
   m_Father: {fileID: 5698265879038090210}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5709792288666449926
 GameObject:
@@ -748,6 +749,8 @@ MonoBehaviour:
   - {fileID: 7808881100478190954}
   timer: 0
   normalScaleSprite: {fileID: 5867463036448406936}
+  fx_Shoot: {fileID: 7446929579682652256, guid: 400099312fa80a3448f2f1217977ffad, type: 3}
+  fx_Spawn: {fileID: 725878811882023940}
 --- !u!114 &8340642246981135561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -967,7 +970,7 @@ Transform:
   - {fileID: 40596948070288650}
   - {fileID: 2619556143556235479}
   m_Father: {fileID: 5698265879038090210}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6110279870795788387
 GameObject:
@@ -1258,6 +1261,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &8487827747033382549
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 725878811882023940}
+  m_Layer: 0
+  m_Name: SpawnFXShoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &725878811882023940
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8487827747033382549}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.811, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5698265879038090210}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8851731020352152703
 GameObject:
   m_ObjectHideFlags: 0

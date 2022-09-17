@@ -139,6 +139,10 @@ MonoBehaviour:
   Child: {fileID: 4647257099180009612}
   bulletPower: 0
   bouncePlayerPower: 10000
+  fx_TouchBall: {fileID: 2867182598891937881, guid: ea4d8bb5caef1694b8ee3e6f838a714e, type: 3}
+  fx_TouchPlayerBullet: {fileID: 1518738699944753700, guid: 90cd295c8f7da8648919dda0f0a80c1d, type: 3}
+  fx_BulletBullet: {fileID: 5421151901146787969, guid: 2f1fa7124e9a922459c0831ae3ac8757, type: 3}
+  fx_Shoot: {fileID: 7446929579682652256, guid: 400099312fa80a3448f2f1217977ffad, type: 3}
 --- !u!50 &3379961108525010167
 Rigidbody2D:
   serializedVersion: 4
@@ -294,6 +298,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.001633853, y: 1.9477042e-10}
-  m_Size: {x: 0.3523307, y: 0.18074353}
+  m_Offset: {x: -0.0016340318, y: 1.9479174e-10}
+  m_Size: {x: 0.3523312, y: 0.18074384}
   m_Direction: 1
