@@ -698,26 +698,6 @@ MonoBehaviour:
     m_ActionName: Gameplay/Dash[/XInputControllerWindows/rightShoulder,/XInputControllerWindows/rightShoulder,/XInputControllerWindows/rightShoulder,/XInputControllerWindows/rightShoulder]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 2e2a73c7-7317-4771-b8b8-f7af3358385f
-    m_ActionName: Gameplay1/Move[/XInputControllerWindows/leftStick,/XInputControllerWindows1/leftStick]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: b2ce237f-b904-40b7-80a7-1b9c1959d94f
-    m_ActionName: Gameplay1/Rotate[/XInputControllerWindows/rightStick,/XInputControllerWindows1/rightStick]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 3d336154-c3ff-4fc3-9605-576a836131a4
-    m_ActionName: Gameplay1/Shoot[/XInputControllerWindows/rightTrigger,/XInputControllerWindows1/rightTrigger]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 23acdafc-2cd7-46ba-a3f5-a62055547eec
-    m_ActionName: Gameplay1/Lock[/XInputControllerWindows/leftTrigger,/XInputControllerWindows1/leftTrigger]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 2020f555-3fcb-4301-b4b4-fcf63089e283
-    m_ActionName: Gameplay1/Dash[/XInputControllerWindows/rightShoulder,/XInputControllerWindows1/rightShoulder]
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 44f0a7af-28a4-4bf5-81f3-e234f5fca2df
     m_ActionName: Menu/Back[/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast]
   m_NeverAutoSwitchControlSchemes: 1
@@ -767,7 +747,7 @@ MonoBehaviour:
   - {fileID: 8851731020352152703}
   - {fileID: 7808881100478190954}
   timer: 0
-  canShootDetector: {fileID: 0}
+  normalScaleSprite: {fileID: 5867463036448406936}
 --- !u!114 &8340642246981135561
 MonoBehaviour:
   m_ObjectHideFlags: 0
