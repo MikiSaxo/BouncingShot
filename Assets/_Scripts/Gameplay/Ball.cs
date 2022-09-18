@@ -72,7 +72,7 @@ public class Ball : MonoBehaviour
 
         if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP1) //BulletP1
         {
-            if (GameParameters.instance.Mode != GameParameters.WhichMode.Domination && GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
+            if (GameParameters.instance.Mode != GameParameters.WhichMode.Domination)// && GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
             {
                 if (color != 1)
                     ChangeColor(1);
@@ -84,7 +84,7 @@ public class Ball : MonoBehaviour
         }
         if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP2) //BulletP2
         {
-            if (GameParameters.instance.Mode != GameParameters.WhichMode.Domination && GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
+            if (GameParameters.instance.Mode != GameParameters.WhichMode.Domination)// && GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
             {
                 if (color != 2)
                     ChangeColor(2);
@@ -105,10 +105,11 @@ public class Ball : MonoBehaviour
             {
                 collision.gameObject.GetComponent<VibrateController>().StartVibration(vib_p1col2[0], vib_p1col2[1], vib_p1col2[2]);
                 Manager.instance.WhichBallTouches(1, 2);
-                RipplePostProcessor.instance.RippleEffect(transform.position);
             }
             else
                 collision.gameObject.GetComponent<VibrateController>().StartVibration(vib_p1col1[0], vib_p1col1[1], vib_p1col1[2]);
+
+            RipplePostProcessor.instance.RippleEffect(transform.position);
         }
         else if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P2 && color == 1) //P2 nasty
         {
@@ -120,10 +121,11 @@ public class Ball : MonoBehaviour
             {
                 collision.gameObject.GetComponent<VibrateController>().StartVibration(vib_p1col2[0], vib_p1col2[1], vib_p1col2[2]);
                 Manager.instance.WhichBallTouches(2, 1);
-                RipplePostProcessor.instance.RippleEffect(transform.position);
             }
             else
                 collision.gameObject.GetComponent<VibrateController>().StartVibration(vib_p1col1[0], vib_p1col1[1], vib_p1col1[2]);
+
+            RipplePostProcessor.instance.RippleEffect(transform.position);
         }
         else if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1 && color == 1) //P1 friendly
             collision.gameObject.GetComponent<VibrateController>().StartVibration(vib_p1col1[0], vib_p1col1[1], vib_p1col1[2]);
@@ -140,7 +142,7 @@ public class Ball : MonoBehaviour
             }
         }
 
-        if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession)
+        if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession || GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
         {
             if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1)
             {

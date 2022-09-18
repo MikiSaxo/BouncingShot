@@ -22,9 +22,12 @@ public class Manager : MonoBehaviour
     [SerializeField] Vector3 soccerSize;
     public Color[] statesColor;
     public Image[] borders;
+    public Image[] bordersSoccer;
     [SerializeField] private GameObject[] domiBG;
     [SerializeField] private GameObject[] leftSquare;
     [SerializeField] private GameObject[] rightSquare;
+    [SerializeField] private GameObject[] leftSquareSoccer;
+    [SerializeField] private GameObject[] rightSquareSoccer;
     private float fadingSpeed = 0.05f;
     private bool stopCorou = false;
     [SerializeField] private GameObject[] maps;
@@ -57,18 +60,11 @@ public class Manager : MonoBehaviour
 
         for (int i = 0; i < maps.Length; i++)
         {
-            if(i != GameParameters.instance.MapIndex)
+            if (i != GameParameters.instance.MapIndex)
                 maps[i].gameObject.SetActive(false);
         }
 
-        if (GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
-        {
-            goals[0].SetActive(true);
-            goals[1].SetActive(false);
-            goals[2].SetActive(true);
 
-            //Ball.transform.localScale = soccerSize;
-        }
 
         if (GameParameters.instance.Mode == GameParameters.WhichMode.Domination || GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
         {
@@ -76,13 +72,34 @@ public class Manager : MonoBehaviour
             domiBG[1].SetActive(true);
             //domiBG[0].GetComponent<Image>().color = statesColor[3];
             //domiBG[1].GetComponent<Image>().color = statesColor[4];
-            for (int i = 0; i < leftSquare.Length; i++)
+            if (GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
             {
-                leftSquare[i].GetComponent<Image>().color = statesColor[1];
+                for (int i = 0; i < leftSquare.Length; i++)
+                {
+                    leftSquare[i].GetComponent<Image>().color = statesColor[1];
+                }
+                for (int i = 0; i < rightSquare.Length; i++)
+                {
+                    rightSquare[i].GetComponent<Image>().color = statesColor[2];
+                }
             }
-            for (int i = 0; i < rightSquare.Length; i++)
+            else
             {
-                rightSquare[i].GetComponent<Image>().color = statesColor[2];
+                goals[0].SetActive(true);
+                goals[1].GetComponent<Image>().color = statesColor[1];
+                goals[2].GetComponent<Image>().color = statesColor[2];
+                goals[3].SetActive(false);
+                goals[4].SetActive(true);
+
+                //Ball.transform.localScale = soccerSize;
+                for (int i = 0; i < leftSquareSoccer.Length; i++)
+                {
+                    leftSquareSoccer[i].GetComponent<Image>().color = statesColor[1];
+                }
+                for (int i = 0; i < rightSquareSoccer.Length; i++)
+                {
+                    rightSquareSoccer[i].GetComponent<Image>().color = statesColor[2];
+                }
             }
         }
 
@@ -194,34 +211,31 @@ public class Manager : MonoBehaviour
 
         Players[0].GetComponent<PlayerMovement>().CanMove = true;
         Players[1].GetComponent<PlayerMovement>().CanMove = true;
-
-        if (borders[0].color.a >= 0.1f)
-        {
-            if(GameParameters.instance.Mode != GameParameters.WhichMode.Domination && GameParameters.instance.Mode != GameParameters.WhichMode.Possession && GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
-            {
-                //print("c chiant la");
-                //StartCoroutine(TransiResetColor());
-            }
-        }
     }
 
     public void ChangeBordersColor(Color _color, bool needReset)
     {
-        for (int i = 0; i < borders.Length; i++)
+        if (GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
         {
-            borders[i].GetComponent<Image>().color = _color;
+            for (int i = 0; i < borders.Length; i++)
+            {
+                borders[i].GetComponent<Image>().color = _color;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < bordersSoccer.Length; i++)
+            {
+                bordersSoccer[i].GetComponent<Image>().color = _color;
+            }
         }
 
         if (needReset)
-        {
             StartCoroutine(TransiResetColor());
-            print(borders[0].color.a);
-        }
     }
 
     IEnumerator TransiResetColor()
     {
-        //print("salut c la transi");
         stopCorou = true;
         yield return new WaitForSeconds(.1f);
         stopCorou = false;
@@ -232,14 +246,29 @@ public class Manager : MonoBehaviour
     {
         for (float i = 1f; i >= 0; i -= fadingSpeed)
         {
-            for (int j = 0; j < borders.Length; j++)
+            if (GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
             {
-                if (stopCorou)
-                    break;
+                for (int j = 0; j < borders.Length; j++)
+                {
+                    if (stopCorou)
+                        break;
 
-                var tempColor = borders[j].color;
-                tempColor.a = i;
-                borders[j].color = tempColor;
+                    var tempColor = borders[j].color;
+                    tempColor.a = i;
+                    borders[j].color = tempColor;
+                }
+            }
+            else
+            {
+                for (int j = 0; j < bordersSoccer.Length; j++)
+                {
+                    if (stopCorou)
+                        break;
+
+                    var tempColor = bordersSoccer[j].color;
+                    tempColor.a = i;
+                    bordersSoccer[j].color = tempColor;
+                }
             }
             if (stopCorou)
                 break;
@@ -250,13 +279,27 @@ public class Manager : MonoBehaviour
 
     void SpawnBordersColors()
     {
-        for (int i = 0; i < borders.Length / 2; i++)
+        if (GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
         {
-            borders[i].GetComponent<Image>().color = statesColor[2];
+            for (int i = 0; i < borders.Length / 2; i++)
+            {
+                borders[i].GetComponent<Image>().color = statesColor[2];
+            }
+            for (int i = borders.Length / 2; i < borders.Length; i++)
+            {
+                borders[i].GetComponent<Image>().color = statesColor[1];
+            }
         }
-        for (int i = borders.Length / 2; i < borders.Length; i++)
+        else
         {
-            borders[i].GetComponent<Image>().color = statesColor[1];
+            for (int i = 0; i < bordersSoccer.Length / 2; i++)
+            {
+                bordersSoccer[i].GetComponent<Image>().color = statesColor[2];
+            }
+            for (int i = bordersSoccer.Length / 2; i < bordersSoccer.Length; i++)
+            {
+                bordersSoccer[i].GetComponent<Image>().color = statesColor[1];
+            }
         }
     }
 
@@ -268,6 +311,8 @@ public class Manager : MonoBehaviour
     public void SwitchVibra()
     {
         print("has switch");
+        if (NbOfPlayer < 2)
+            return;
         if (Players[0].gameObject.GetComponent<VibrateController>().playerIndex == XInputDotNetPure.PlayerIndex.One)
         {
             Players[0].gameObject.GetComponent<VibrateController>().playerIndex = XInputDotNetPure.PlayerIndex.Two;
