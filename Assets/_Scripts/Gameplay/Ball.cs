@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Ball : MonoBehaviour
 {
@@ -33,6 +34,12 @@ public class Ball : MonoBehaviour
         //if (GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
         //bulletPower = bullerPowerSoccer;
 
+        StartCoroutine(ChangeColor());
+    }
+
+    IEnumerator ChangeColor()
+    {
+        yield return new WaitForSeconds(.001f);
         for (int i = 0; i < Manager.instance.statesColor.Length; i++)
         {
             statesColor[i] = Manager.instance.statesColor[i];

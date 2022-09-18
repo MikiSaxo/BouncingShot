@@ -12,14 +12,20 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] SpriteRenderer MainSprite;
     [SerializeField] int maxDashPower;
     [SerializeField] Animator DashAnim;
-    int dashPower;
-    bool dash, isCooldown, dashAnim;
+    private int dashPower;
+    private bool dash, isCooldown, dashAnim, pause;
+    public bool IsPaused;
 
-    float nextDash = 1f;
+    private float nextDash = 1f;
     [SerializeField] float dashRate = 1f;
 
     [SerializeField] float[] vib_Spawn;
     [SerializeField] float[] vib_Dash;
+
+    private float timeScaleInZone = .01f;
+    const float timeScaleSlowMo = .02f;
+    private float canPauseLaunch;
+    private float canPauseLeave;
 
     [HideInInspector] public bool CanMove;
     [HideInInspector] public bool isShotByBumper;
@@ -43,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
             gameObject.GetComponent<VibrateController>().playerIndex = XInputDotNetPure.PlayerIndex.One;
             gameObject.GetComponent<VibrateController>().StartVibration(vib_Spawn[0], vib_Spawn[1], vib_Spawn[2]);
+            //print(Gamepad.current);
         }
         else
         {
@@ -56,6 +63,8 @@ public class PlayerMovement : MonoBehaviour
 
             gameObject.GetComponent<VibrateController>().playerIndex = XInputDotNetPure.PlayerIndex.Two;
             gameObject.GetComponent<VibrateController>().StartVibration(vib_Spawn[0], vib_Spawn[1], vib_Spawn[2]);
+            //print(Gamepad.current);
+
         }
     }
 
@@ -70,6 +79,17 @@ public class PlayerMovement : MonoBehaviour
             Manager.instance.IsReplacing = false;
         }
 
+        if (pause)
+        {
+            if (!IsPaused && canPauseLaunch >= 1f)
+                LaunchPause();
+            else if(IsPaused && canPauseLeave >= 1f)
+                LeavePause();
+        }
+        if(!IsPaused)
+            canPauseLaunch += Time.deltaTime;
+        else
+            canPauseLeave += Time.deltaTime * 100;
 
         if (isCooldown == false)
         {
@@ -100,9 +120,39 @@ public class PlayerMovement : MonoBehaviour
         dash = context.action.triggered;
     }
 
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        pause = context.action.triggered;
+    }
+
+
+    void LaunchPause()
+    {
+        Time.timeScale = timeScaleInZone;
+        Time.fixedDeltaTime = timeScaleSlowMo * Time.timeScale;
+        Manager.instance.EnablePause(true);
+        gameObject.GetComponent<VibrateController>().StopVibra();
+        CanMove = false;
+        gameObject.GetComponent<CursorMovement>().CanShoot(false);
+        IsPaused = true;
+        canPauseLeave = 0;
+    }
+
+    public void LeavePause()
+    {
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = timeScaleSlowMo * Time.timeScale;
+        Manager.instance.EnablePause(false);
+        CanMove = true;
+        gameObject.GetComponent<CursorMovement>().CanShoot(true);
+        IsPaused = false;
+        canPauseLaunch = 0;
+        gameObject.GetComponent<VibrateController>().StopVibra();
+    }
+
     void Dash()
     {
-        if(movementInput != Vector2.zero)
+        if (movementInput != Vector2.zero)
         {
             gameObject.GetComponent<VibrateController>().StartVibration(vib_Dash[0], vib_Dash[1], vib_Dash[2]);
             dashPower = maxDashPower;
@@ -140,7 +190,7 @@ public class PlayerMovement : MonoBehaviour
     {
         var getColor = MainSprite.color;
         MainSprite.color = Color.white;
-        if(!isShotByBumper)
+        if (!isShotByBumper)
             yield return new WaitForSeconds(.5f);
         else if (isShotByBumper)
         {

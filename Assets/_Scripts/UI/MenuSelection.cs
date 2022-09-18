@@ -27,6 +27,7 @@ public class MenuSelection : MonoBehaviour
     [SerializeField] TextMeshProUGUI textOfMaps;
     [SerializeField] float transiTimeMap;
 
+
     private int currentPoint = 0;
     private int currentMapIndex = 0;
     private int currentButtonsIndex = 0;
@@ -213,4 +214,5 @@ public class MenuSelection : MonoBehaviour
             }
         }
     }
+
 }

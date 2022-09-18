@@ -28,6 +28,8 @@ public class Manager : MonoBehaviour
     private float fadingSpeed = 0.05f;
     private bool stopCorou = false;
     [SerializeField] private GameObject[] maps;
+    [SerializeField] GameObject pauseMenu;
+
 
     [HideInInspector] public bool IsReplacing = false;
 
@@ -256,5 +258,26 @@ public class Manager : MonoBehaviour
         {
             borders[i].GetComponent<Image>().color = statesColor[1];
         }
+    }
+
+    public void EnablePause(bool which)
+    {
+        pauseMenu.SetActive(which);
+    }
+
+    public void SwitchVibra()
+    {
+        print("has switch");
+        if (Players[0].gameObject.GetComponent<VibrateController>().playerIndex == XInputDotNetPure.PlayerIndex.One)
+        {
+            Players[0].gameObject.GetComponent<VibrateController>().playerIndex = XInputDotNetPure.PlayerIndex.Two;
+            Players[1].gameObject.GetComponent<VibrateController>().playerIndex = XInputDotNetPure.PlayerIndex.One;
+        }
+        else
+        {
+            Players[0].gameObject.GetComponent<VibrateController>().playerIndex = XInputDotNetPure.PlayerIndex.One;
+            Players[1].gameObject.GetComponent<VibrateController>().playerIndex = XInputDotNetPure.PlayerIndex.Two;
+        }
+        Players[0].GetComponent<PlayerMovement>().LeavePause();
     }
 }
