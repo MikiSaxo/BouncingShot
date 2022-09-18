@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     const float timeScaleSlowMo = .02f;
     private float canPauseLaunch;
     private float canPauseLeave;
+    private Color getColor;
 
     [HideInInspector] public bool CanMove;
     [HideInInspector] public bool isShotByBumper;
@@ -41,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
         if (Manager.instance.NbOfPlayer == 1)
         {
             MainSprite.color = Manager.instance.statesColor[1];
+            getColor = Manager.instance.statesColor[1];
             gameObject.GetComponent<TrailRenderer>().startColor = Manager.instance.statesColor[1];
             gameObject.GetComponent<TrailRenderer>().endColor = Manager.instance.statesColor[1];
             transform.position = Manager.instance.SpawnPoints[0].position;
@@ -56,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
         {
             gameObject.GetComponent<WhoAreYou>().ChoisiBieng = WhoAreYou.ChooseYourChampion.P2;
             MainSprite.color = Manager.instance.statesColor[2];
+            getColor = Manager.instance.statesColor[2];
             gameObject.GetComponent<TrailRenderer>().startColor = Manager.instance.statesColor[2];
             gameObject.GetComponent<TrailRenderer>().endColor = Manager.instance.statesColor[2];
             transform.position = Manager.instance.SpawnPoints[1].position;
@@ -191,7 +194,6 @@ public class PlayerMovement : MonoBehaviour
     }
     IEnumerator TakeAShot()
     {
-        var getColor = MainSprite.color;
         MainSprite.color = Color.white;
         if (!isShotByBumper)
             yield return new WaitForSeconds(.5f);

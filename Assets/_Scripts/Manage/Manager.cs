@@ -6,6 +6,8 @@ using TMPro;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
+
 
 
 public class Manager : MonoBehaviour
@@ -36,13 +38,14 @@ public class Manager : MonoBehaviour
     [SerializeField] private GameObject[] domiBG;
     [SerializeField] private GameObject[] leftSquare;
     [SerializeField] private GameObject[] rightSquare;
-    [SerializeField] private GameObject[] leftSquareSoccer;
-    [SerializeField] private GameObject[] rightSquareSoccer;
     private float fadingSpeed = 0.05f;
     private bool stopCorou = false;
+    [SerializeField] private GameObject superMap;
     [SerializeField] private GameObject[] maps;
+    [SerializeField] private GameObject superMapSoccer;
     [SerializeField] private GameObject[] mapsSoccer;
     [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject[] chooseButtonMain;
 
     public bool CanLeaveAnim = false;
     public bool IsGameEnded = false;
@@ -76,6 +79,8 @@ public class Manager : MonoBehaviour
 
         if (GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
         {
+            superMap.SetActive(true);
+            superMapSoccer.SetActive(false);
             for (int i = 0; i < maps.Length; i++)
             {
                 if (i != GameParameters.instance.MapIndex)
@@ -84,6 +89,8 @@ public class Manager : MonoBehaviour
         }
         else
         {
+            superMap.SetActive(false);
+            superMapSoccer.SetActive(true);
             for (int i = 0; i < mapsSoccer.Length; i++)
             {
                 if (i != GameParameters.instance.MapIndex)
@@ -117,15 +124,6 @@ public class Manager : MonoBehaviour
                 goals[4].SetActive(true);
 
                 //Ball.transform.localScale = soccerSize;
-
-                for (int i = 0; i < leftSquareSoccer.Length; i++)
-                {
-                    leftSquareSoccer[i].GetComponent<Image>().color = statesColor[1];
-                }
-                for (int i = 0; i < rightSquareSoccer.Length; i++)
-                {
-                    rightSquareSoccer[i].GetComponent<Image>().color = statesColor[2];
-                }
             }
         }
 
@@ -186,89 +184,101 @@ public class Manager : MonoBehaviour
 
     public void ScorePossession(int whoNotTouch)
     {
-        NbScoresPoss[whoNotTouch] += Time.deltaTime;
-        int score = (int)NbScoresPoss[whoNotTouch];
-        TextScores[whoNotTouch].text = score.ToString();
-        IsEndgame(score, whoNotTouch);
+        if (!IsGameEnded)
+        {
+            NbScoresPoss[whoNotTouch] += Time.deltaTime;
+            int score = (int)NbScoresPoss[whoNotTouch];
+            TextScores[whoNotTouch].text = score.ToString();
+            IsEndgame(score, whoNotTouch);
+        }
     }
 
     IEnumerator ReplaceBlitz()
     {
-        Ball.SetActive(false);
-        yield return new WaitForSeconds(.5f);
-        Ball.SetActive(true);
-        Ball.transform.position = SpawnPoints[4].position;
-        Ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        Ball.GetComponent<Ball>().ChangeColor(0);
+        if (!IsGameEnded)
+        {
+            Ball.SetActive(false);
+            yield return new WaitForSeconds(.5f);
+            Ball.SetActive(true);
+            Ball.transform.position = SpawnPoints[4].position;
+            Ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            Ball.GetComponent<Ball>().ChangeColor(0);
+        }
     }
 
     IEnumerator Replace()
     {
-        Ball.SetActive(false);
-        IsReplacing = true;
+        if (!IsGameEnded)
+        {
+            Ball.SetActive(false);
+            IsReplacing = true;
 
-        Players[0].GetComponent<PlayerMovement>().CanMove = false;
-        Players[1].GetComponent<PlayerMovement>().CanMove = false;
-        Players[0].GetComponent<CursorMovement>().IsLock = true;
-        Players[1].GetComponent<CursorMovement>().IsLock = true;
-
-
-        Players[0].GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        Players[1].GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            Players[0].GetComponent<PlayerMovement>().CanMove = false;
+            Players[1].GetComponent<PlayerMovement>().CanMove = false;
+            Players[0].GetComponent<CursorMovement>().IsLock = true;
+            Players[1].GetComponent<CursorMovement>().IsLock = true;
 
 
-        Players[0].transform.position = SpawnPoints[0].position;
-        Players[1].transform.position = SpawnPoints[1].position;
+            Players[0].GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            Players[1].GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
-        yield return new WaitForSeconds(.1f);
-        Ball.SetActive(true);
-        yield return new WaitForSeconds(.9f);
-        TextScores[anounceText].gameObject.SetActive(false);
-        Players[0].GetComponent<CursorMovement>().IsLock = false;
-        Players[1].GetComponent<CursorMovement>().IsLock = false;
 
-        StartCoroutine(Decompte());
+            Players[0].transform.position = SpawnPoints[0].position;
+            Players[1].transform.position = SpawnPoints[1].position;
+
+            yield return new WaitForSeconds(.1f);
+            Ball.SetActive(true);
+            yield return new WaitForSeconds(.9f);
+            TextScores[anounceText].gameObject.SetActive(false);
+            Players[0].GetComponent<CursorMovement>().IsLock = false;
+            Players[1].GetComponent<CursorMovement>().IsLock = false;
+
+            StartCoroutine(Decompte());
+        }
     }
 
     IEnumerator Decompte()
     {
-        if (!hasPresentedScore)
+        if (!IsGameEnded)
         {
-            TextScores[0].color = Color.white;
+            if (!hasPresentedScore)
+            {
+                TextScores[0].color = Color.white;
 
-            if (GameParameters.instance.Mode == GameParameters.WhichMode.Normal)
-                TextScores[0].text = $"<color=yellow>{ScoreToDoNormal}</color>{Phrases[3]}";
-            if (GameParameters.instance.Mode == GameParameters.WhichMode.Blitz)
-                TextScores[0].text = $"<color=yellow>{ScoreToDoBlitz}</color>{Phrases[3]}";
-            if (GameParameters.instance.Mode == GameParameters.WhichMode.Domination)
-                TextScores[0].text = $"<color=yellow>{ScoreToDoDomination}</color>{Phrases[3]}";
-            if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession)
-                TextScores[0].text = $"<color=yellow>{ScoreToDoPossession}</color>{Phrases[3]}";
-            if (GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
-                TextScores[0].text = $"<color=yellow>{ScoreToDoSoccer}</color>{Phrases[3]}";
+                if (GameParameters.instance.Mode == GameParameters.WhichMode.Normal)
+                    TextScores[0].text = $"<color=yellow>{ScoreToDoNormal}</color>{Phrases[3]}";
+                if (GameParameters.instance.Mode == GameParameters.WhichMode.Blitz)
+                    TextScores[0].text = $"<color=yellow>{ScoreToDoBlitz}</color>{Phrases[3]}";
+                if (GameParameters.instance.Mode == GameParameters.WhichMode.Domination)
+                    TextScores[0].text = $"<color=yellow>{ScoreToDoDomination}</color>{Phrases[3]}";
+                if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession)
+                    TextScores[0].text = $"<color=yellow>{ScoreToDoPossession}</color>{Phrases[3]}";
+                if (GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
+                    TextScores[0].text = $"<color=yellow>{ScoreToDoSoccer}</color>{Phrases[3]}";
 
-            yield return new WaitForSeconds(1f);
-            TextScores[0].transform.DOScale(Vector3.zero, .5f);
-            hasPresentedScore = true;
-            yield return new WaitForSeconds(.5f);
-            TextScores[0].transform.DOScale(Vector3.one, 0);
+                yield return new WaitForSeconds(1f);
+                TextScores[0].transform.DOScale(Vector3.zero, .2f);
+                hasPresentedScore = true;
+                yield return new WaitForSeconds(.5f);
+                TextScores[0].transform.DOScale(Vector3.one, 0);
+            }
+
+            TextScores[0].gameObject.SetActive(false);
+            TextScores[3].gameObject.SetActive(true);
+
+            ChangeBordersColor(statesColor[3], false);
+
+            for (int i = nbDecompte; i > 0; i--)
+            {
+                TextScores[3].text = i.ToString();
+                yield return new WaitForSeconds(timeForDecompteInSec);
+            }
+            TextScores[3].gameObject.SetActive(false);
+            ChangeBordersColor(statesColor[0], false);
+
+            Players[0].GetComponent<PlayerMovement>().CanMove = true;
+            Players[1].GetComponent<PlayerMovement>().CanMove = true;
         }
-
-        TextScores[0].gameObject.SetActive(false);
-        TextScores[3].gameObject.SetActive(true);
-
-        ChangeBordersColor(statesColor[3], false);
-
-        for (int i = nbDecompte; i > 0; i--)
-        {
-            TextScores[3].text = i.ToString();
-            yield return new WaitForSeconds(timeForDecompteInSec);
-        }
-        TextScores[3].gameObject.SetActive(false);
-        ChangeBordersColor(statesColor[0], false);
-
-        Players[0].GetComponent<PlayerMovement>().CanMove = true;
-        Players[1].GetComponent<PlayerMovement>().CanMove = true;
     }
 
     public void ChangeBordersColor(Color _color, bool needReset)
@@ -364,6 +374,8 @@ public class Manager : MonoBehaviour
     public void EnablePause(bool which)
     {
         pauseMenu.SetActive(which);
+        if (which)
+            EventSystem.current.SetSelectedGameObject(chooseButtonMain[0]);
     }
 
     public void SwitchVibra()
@@ -419,13 +431,24 @@ public class Manager : MonoBehaviour
         if (GameParameters.instance.Mode == GameParameters.WhichMode.Soccer && score >= ScoreToDoSoccer)
             EndGame(whodwin);
 
-        //EventSystem.current.SetSelectedGameObject(chooseFirstButtons[index]);
-        
+        EventSystem.current.SetSelectedGameObject(chooseButtonMain[1]);
+
     }
 
     void EndGame(int whowin)
     {
         print("whowin " + whowin);
+
+        ChangeBordersColor(statesColor[whowin], false);
+        for (int i = 0; i < leftSquare.Length; i++)
+        {
+            leftSquare[i].GetComponent<Image>().color = statesColor[whowin];
+        }
+        for (int i = 0; i < rightSquare.Length; i++)
+        {
+            rightSquare[i].GetComponent<Image>().color = statesColor[whowin];
+        }
+
         IsGameEnded = true;
         StopPlayers();
         winMenu.SetActive(true);
@@ -433,6 +456,9 @@ public class Manager : MonoBehaviour
         Color test = statesColor[whowin];
         string colorHex = ColorUtility.ToHtmlStringRGB(test);
         TextScores[0].text = $"<color=#{colorHex}>Team {whowin}</color>{Phrases[4]}";
+
+        //Time.timeScale = .001f;
+        //Time.fixedDeltaTime = .02f * Time.timeScale;
     }
 
     void StopPlayers()
