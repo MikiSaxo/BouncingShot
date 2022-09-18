@@ -14,6 +14,7 @@ public class Manager : MonoBehaviour
     public int[] NbScores;
     public float[] NbScoresPoss;
     [SerializeField] string[] Phrases;
+    [SerializeField] string[] anounce;
     [HideInInspector] public int NbOfPlayer;
     [SerializeField] float timeForDecompteInSec;
     [SerializeField] int nbDecompte;
@@ -51,12 +52,12 @@ public class Manager : MonoBehaviour
 
     private void Start()
     {
-        TextScores[0].gameObject.SetActive(true);
-        TextScores[0].text = Phrases[0];
-        TextScores[anounceText].color = Color.yellow;
-
         statesColor[1] = GameParameters.instance.blueColorToChoose[GameParameters.instance.BlueColors];
         statesColor[2] = GameParameters.instance.redColorToChoose[GameParameters.instance.RedColors];
+        
+        TextScores[0].gameObject.SetActive(true);
+        TextScores[anounceText].text = anounce[0];
+        TextScores[anounceText].color = statesColor[1];
 
         for (int i = 0; i < maps.Length; i++)
         {
@@ -65,13 +66,11 @@ public class Manager : MonoBehaviour
         }
 
 
-
         if (GameParameters.instance.Mode == GameParameters.WhichMode.Domination || GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
         {
             domiBG[0].SetActive(true);
             domiBG[1].SetActive(true);
-            //domiBG[0].GetComponent<Image>().color = statesColor[3];
-            //domiBG[1].GetComponent<Image>().color = statesColor[4];
+
             if (GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
             {
                 for (int i = 0; i < leftSquare.Length; i++)
@@ -92,6 +91,7 @@ public class Manager : MonoBehaviour
                 goals[4].SetActive(true);
 
                 //Ball.transform.localScale = soccerSize;
+
                 for (int i = 0; i < leftSquareSoccer.Length; i++)
                 {
                     leftSquareSoccer[i].GetComponent<Image>().color = statesColor[1];
@@ -110,6 +110,13 @@ public class Manager : MonoBehaviour
     {
         StartCoroutine(Decompte());
     }
+
+    public void PlayerOneHasJoinded()
+    {
+        TextScores[anounceText].text = anounce[1];
+        TextScores[anounceText].color = statesColor[2];
+    }
+
     public void WhichBallTouches(int wasTouch, int whoTouch)
     {
         NbScores[whoTouch]++;
@@ -125,6 +132,8 @@ public class Manager : MonoBehaviour
                 Ball.GetComponent<Ball>().bulletPower = Ball.GetComponent<Ball>().bullerPowerNormal;
                 Ball.GetComponent<Rigidbody2D>().drag = 1;
             }
+            else
+                Ball.GetComponent<Ball>().ChangeColor(0);
 
             TextScores[anounceText].gameObject.SetActive(true);
             if (whoTouch == 2)

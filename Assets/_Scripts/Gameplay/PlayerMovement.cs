@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
             gameObject.GetComponent<TrailRenderer>().startColor = Manager.instance.statesColor[1];
             gameObject.GetComponent<TrailRenderer>().endColor = Manager.instance.statesColor[1];
             transform.position = Manager.instance.SpawnPoints[0].position;
+            Manager.instance.PlayerOneHasJoinded();
             Manager.instance.NbOfPlayer++;
             Manager.instance.playerScoreVisu[0].GetComponent<FollowObject>().target = gameObject.transform;
 
