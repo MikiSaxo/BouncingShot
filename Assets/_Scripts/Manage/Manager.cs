@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
+using DG.Tweening;
+using UnityEngine.InputSystem;
+
 
 public class Manager : MonoBehaviour
 {
@@ -13,6 +16,12 @@ public class Manager : MonoBehaviour
     public TextMeshProUGUI[] TextScores;
     public int[] NbScores;
     public float[] NbScoresPoss;
+    [SerializeField] int ScoreToDoNormal = 0;
+    [SerializeField] int ScoreToDoBlitz = 0;
+    [SerializeField] int ScoreToDoDomination = 0;
+    [SerializeField] int ScoreToDoPossession = 0;
+    [SerializeField] int ScoreToDoSoccer = 0;
+    private bool hasPresentedScore = false;
     [SerializeField] string[] Phrases;
     [SerializeField] string[] anounce;
     [HideInInspector] public int NbOfPlayer;
@@ -35,6 +44,11 @@ public class Manager : MonoBehaviour
     [SerializeField] private GameObject[] mapsSoccer;
     [SerializeField] GameObject pauseMenu;
 
+    public bool CanLeaveAnim = false;
+    public bool IsGameEnded = false;
+    [SerializeField] GameObject winMenu;
+
+    [SerializeField] GameObject invisibleFade = null;
 
     [HideInInspector] public bool IsReplacing = false;
 
@@ -132,6 +146,7 @@ public class Manager : MonoBehaviour
     public void WhichBallTouches(int wasTouch, int whoTouch)
     {
         NbScores[whoTouch]++;
+        IsEndgame(NbScores[whoTouch], whoTouch);
         TextScores[whoTouch].text = NbScores[whoTouch].ToString();
         if (GameParameters.instance.Mode == GameParameters.WhichMode.Normal || GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
         {
@@ -174,8 +189,8 @@ public class Manager : MonoBehaviour
         NbScoresPoss[whoNotTouch] += Time.deltaTime;
         int score = (int)NbScoresPoss[whoNotTouch];
         TextScores[whoNotTouch].text = score.ToString();
+        IsEndgame(score, whoNotTouch);
     }
-
 
     IEnumerator ReplaceBlitz()
     {
@@ -217,6 +232,28 @@ public class Manager : MonoBehaviour
 
     IEnumerator Decompte()
     {
+        if (!hasPresentedScore)
+        {
+            TextScores[0].color = Color.white;
+
+            if (GameParameters.instance.Mode == GameParameters.WhichMode.Normal)
+                TextScores[0].text = $"<color=yellow>{ScoreToDoNormal}</color>{Phrases[3]}";
+            if (GameParameters.instance.Mode == GameParameters.WhichMode.Blitz)
+                TextScores[0].text = $"<color=yellow>{ScoreToDoBlitz}</color>{Phrases[3]}";
+            if (GameParameters.instance.Mode == GameParameters.WhichMode.Domination)
+                TextScores[0].text = $"<color=yellow>{ScoreToDoDomination}</color>{Phrases[3]}";
+            if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession)
+                TextScores[0].text = $"<color=yellow>{ScoreToDoPossession}</color>{Phrases[3]}";
+            if (GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
+                TextScores[0].text = $"<color=yellow>{ScoreToDoSoccer}</color>{Phrases[3]}";
+
+            yield return new WaitForSeconds(1f);
+            TextScores[0].transform.DOScale(Vector3.zero, .5f);
+            hasPresentedScore = true;
+            yield return new WaitForSeconds(.5f);
+            TextScores[0].transform.DOScale(Vector3.one, 0);
+        }
+
         TextScores[0].gameObject.SetActive(false);
         TextScores[3].gameObject.SetActive(true);
 
@@ -345,5 +382,67 @@ public class Manager : MonoBehaviour
             Players[1].gameObject.GetComponent<VibrateController>().playerIndex = XInputDotNetPure.PlayerIndex.Two;
         }
         Players[0].GetComponent<PlayerMovement>().LeavePause();
+    }
+
+    public void PressLeaveAnim()
+    {
+        Players[0].GetComponent<PlayerMovement>().LeavePause();
+        goals[5].SetActive(false);
+        invisibleFade.transform.DOScale(Vector3.zero, 1.5f).OnComplete(GoToMenu);
+    }
+
+    public void RestartGame()
+    {
+        invisibleFade.transform.DOScale(Vector3.zero, 1.5f).OnComplete(GoToMain);
+    }
+
+    private void GoToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    private void GoToMain()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void IsEndgame(int score, int whodwin)
+    {
+        if (GameParameters.instance.Mode == GameParameters.WhichMode.Normal && score >= ScoreToDoNormal)
+            EndGame(whodwin);
+        if (GameParameters.instance.Mode == GameParameters.WhichMode.Blitz && score >= ScoreToDoBlitz)
+            EndGame(whodwin);
+        if (GameParameters.instance.Mode == GameParameters.WhichMode.Domination && score >= ScoreToDoDomination)
+            EndGame(whodwin);
+        if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession && score >= ScoreToDoPossession)
+            EndGame(whodwin);
+        if (GameParameters.instance.Mode == GameParameters.WhichMode.Soccer && score >= ScoreToDoSoccer)
+            EndGame(whodwin);
+
+        //EventSystem.current.SetSelectedGameObject(chooseFirstButtons[index]);
+        
+    }
+
+    void EndGame(int whowin)
+    {
+        print("whowin " + whowin);
+        IsGameEnded = true;
+        StopPlayers();
+        winMenu.SetActive(true);
+        TextScores[anounceText].gameObject.SetActive(true);
+        Color test = statesColor[whowin];
+        string colorHex = ColorUtility.ToHtmlStringRGB(test);
+        TextScores[0].text = $"<color=#{colorHex}>Team {whowin}</color>{Phrases[4]}";
+    }
+
+    void StopPlayers()
+    {
+        Players[0].GetComponent<VibrateController>().StopVibra();
+        Players[0].GetComponent<CursorMovement>().CanShoot(false);
+        Players[0].GetComponent<PlayerMovement>().CanMove = false;
+
+        Players[1].GetComponent<VibrateController>().StopVibra();
+        Players[1].GetComponent<CursorMovement>().CanShoot(false);
+        Players[1].GetComponent<PlayerMovement>().CanMove = false;
     }
 }

@@ -733,6 +733,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 80cdfb9d-d3a5-4b03-b804-ce19dba42225
     m_ActionName: Gameplay/Pause[/XInputControllerWindows/start,/XInputControllerWindows1/start]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5709792288666449930}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: OnValidate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c4161c27-5a18-48d2-9c0b-d79e626ef660
+    m_ActionName: Gameplay/Validate[/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Controller1
   m_DefaultActionMap: Gameplay
@@ -755,6 +771,7 @@ MonoBehaviour:
   MainSprite: {fileID: 7762620772492406342}
   maxDashPower: 3
   DashAnim: {fileID: 6044310531899296040}
+  IsPaused: 0
   dashRate: 1
   vib_Spawn:
   - 0.8

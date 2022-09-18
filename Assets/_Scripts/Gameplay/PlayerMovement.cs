@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] int maxDashPower;
     [SerializeField] Animator DashAnim;
     private int dashPower;
-    private bool dash, isCooldown, dashAnim, pause;
+    private bool dash, isCooldown, dashAnim, pause, validate;
     public bool IsPaused;
 
     private float nextDash = 1f;
@@ -126,16 +126,18 @@ public class PlayerMovement : MonoBehaviour
         pause = context.action.triggered;
     }
 
-
     void LaunchPause()
     {
+        if (Manager.instance.IsGameEnded)
+            return;
+
         Time.timeScale = timeScaleInZone;
         Time.fixedDeltaTime = timeScaleSlowMo * Time.timeScale;
-        Manager.instance.EnablePause(true);
         gameObject.GetComponent<VibrateController>().StopVibra();
         CanMove = false;
         gameObject.GetComponent<CursorMovement>().CanShoot(false);
         IsPaused = true;
+        Manager.instance.EnablePause(true);
         canPauseLeave = 0;
     }
 

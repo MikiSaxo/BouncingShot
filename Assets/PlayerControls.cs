@@ -80,6 +80,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Validate"",
+                    ""type"": ""Button"",
+                    ""id"": ""c4161c27-5a18-48d2-9c0b-d79e626ef660"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -214,6 +223,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4c0f32e1-6736-4467-931e-2628e210edef"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller1"",
+                    ""action"": ""Validate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""31953c4a-0808-49b8-93cb-13c46dbf3956"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller2"",
+                    ""action"": ""Validate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -279,6 +310,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Gameplay_Lock = m_Gameplay.FindAction("Lock", throwIfNotFound: true);
         m_Gameplay_Dash = m_Gameplay.FindAction("Dash", throwIfNotFound: true);
         m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
+        m_Gameplay_Validate = m_Gameplay.FindAction("Validate", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Back = m_Menu.FindAction("Back", throwIfNotFound: true);
@@ -347,6 +379,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Lock;
     private readonly InputAction m_Gameplay_Dash;
     private readonly InputAction m_Gameplay_Pause;
+    private readonly InputAction m_Gameplay_Validate;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -357,6 +390,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Lock => m_Wrapper.m_Gameplay_Lock;
         public InputAction @Dash => m_Wrapper.m_Gameplay_Dash;
         public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
+        public InputAction @Validate => m_Wrapper.m_Gameplay_Validate;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -384,6 +418,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Pause.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
+                @Validate.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnValidate;
+                @Validate.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnValidate;
+                @Validate.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnValidate;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -406,6 +443,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @Validate.started += instance.OnValidate;
+                @Validate.performed += instance.OnValidate;
+                @Validate.canceled += instance.OnValidate;
             }
         }
     }
@@ -469,6 +509,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnLock(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnValidate(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

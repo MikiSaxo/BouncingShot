@@ -25,7 +25,6 @@ public class Ball : MonoBehaviour
 
     [SerializeField] float[] vib_p1col1;
     [SerializeField] float[] vib_p1col2;
-    //private Vector3 transferPosition;
 
     private void Start()
     {
