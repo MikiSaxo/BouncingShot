@@ -21,8 +21,12 @@ public class MenuSelection : MonoBehaviour
     [SerializeField] GameObject[] redColors;
     [SerializeField] GameObject[] validateIconsColor;
     [SerializeField] GameObject followIconColor;
+
     [SerializeField] Transform[] tpPointsMap;
     [SerializeField] GameObject maps;
+    [SerializeField] Transform[] tpPointsMapSoccer;
+    [SerializeField] GameObject mapsSoccer;
+
     [SerializeField] TextMeshProUGUI indexOfMaps;
     [SerializeField] TextMeshProUGUI textOfMaps;
     [SerializeField] float transiTimeMap;
@@ -33,6 +37,7 @@ public class MenuSelection : MonoBehaviour
     private int currentButtonsIndex = 0;
     private bool[] canResetTp = new bool[2];
     private bool cannotTp = false;
+    private bool hasChooseSoccer = false;
 
     private bool IsBack;
     private bool canBack;
@@ -152,6 +157,22 @@ public class MenuSelection : MonoBehaviour
         validateIconsColor[1].transform.position = followIconColor.transform.position;
     }
 
+    public void HasChooseSoccerMode(bool which)
+    {
+        hasChooseSoccer = which;
+        if (which)
+        {
+            maps.SetActive(false);
+            mapsSoccer.SetActive(true);
+        }
+        else
+        {
+            maps.SetActive(true);
+            mapsSoccer.SetActive(false);
+        }
+        currentMapIndex = 1;
+    }
+
     public void MoveMapTop()
     {
         if (cannotTp)
@@ -160,10 +181,20 @@ public class MenuSelection : MonoBehaviour
         currentMapIndex++;
         cannotTp = true;
 
-        if (currentMapIndex >= tpPointsMap.Length - 1)
-            canResetTp[0] = true;
+        if (!hasChooseSoccer)
+        {
+            if (currentMapIndex >= tpPointsMap.Length - 1)
+                canResetTp[0] = true;
 
-        maps.transform.DOMoveY(tpPointsMap[currentMapIndex].position.y, transiTimeMap);
+            maps.transform.DOMoveY(tpPointsMap[currentMapIndex].position.y, transiTimeMap);
+        }
+        else
+        {
+            if (currentMapIndex >= tpPointsMapSoccer.Length - 1)
+                canResetTp[0] = true;
+
+            mapsSoccer.transform.DOMoveY(tpPointsMapSoccer[currentMapIndex].position.y, transiTimeMap);
+        }
         LaunchCanTpTop();
     }
 
@@ -181,7 +212,10 @@ public class MenuSelection : MonoBehaviour
             ChangeIndexOfMap();
             yield return new WaitForSeconds(transiTimeMap / 2);
 
-            maps.transform.DOMoveY(tpPointsMap[0].position.y, 0f);
+            if (!hasChooseSoccer)
+               maps.transform.DOMoveY(tpPointsMap[0].position.y, 0f);
+            else
+               mapsSoccer.transform.DOMoveY(tpPointsMapSoccer[0].position.y, 0f);
             //print("tpTop");
         }
         else

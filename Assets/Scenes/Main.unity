@@ -42040,7 +42040,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1892342433572347430, guid: b7cd2e0d87507df4f8d4586ea8a459cf, type: 3}
       propertyPath: MapIndex
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1892342433572347430, guid: b7cd2e0d87507df4f8d4586ea8a459cf, type: 3}
       propertyPath: BlueColors
@@ -54559,6 +54559,10 @@ PrefabInstance:
       value: 210
       objectReference: {fileID: 0}
     - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
+      propertyPath: mapsSoccer.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
       propertyPath: rightSquare.Array.size
       value: 208
       objectReference: {fileID: 0}
@@ -54630,6 +54634,14 @@ PrefabInstance:
       propertyPath: leftSquare.Array.data[9]
       value: 
       objectReference: {fileID: 320066042}
+    - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
+      propertyPath: mapsSoccer.Array.data[0]
+      value: 
+      objectReference: {fileID: 1551149918}
+    - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
+      propertyPath: mapsSoccer.Array.data[1]
+      value: 
+      objectReference: {fileID: 1208086888}
     - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
       propertyPath: SpawnPoints.Array.data[0]
       value: 

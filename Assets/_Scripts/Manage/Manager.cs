@@ -32,6 +32,7 @@ public class Manager : MonoBehaviour
     private float fadingSpeed = 0.05f;
     private bool stopCorou = false;
     [SerializeField] private GameObject[] maps;
+    [SerializeField] private GameObject[] mapsSoccer;
     [SerializeField] GameObject pauseMenu;
 
 
@@ -54,15 +55,26 @@ public class Manager : MonoBehaviour
     {
         statesColor[1] = GameParameters.instance.blueColorToChoose[GameParameters.instance.BlueColors];
         statesColor[2] = GameParameters.instance.redColorToChoose[GameParameters.instance.RedColors];
-        
+
         TextScores[0].gameObject.SetActive(true);
         TextScores[anounceText].text = anounce[0];
         TextScores[anounceText].color = statesColor[1];
 
-        for (int i = 0; i < maps.Length; i++)
+        if (GameParameters.instance.Mode != GameParameters.WhichMode.Soccer)
         {
-            if (i != GameParameters.instance.MapIndex)
-                maps[i].gameObject.SetActive(false);
+            for (int i = 0; i < maps.Length; i++)
+            {
+                if (i != GameParameters.instance.MapIndex)
+                    maps[i].gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < mapsSoccer.Length; i++)
+            {
+                if (i != GameParameters.instance.MapIndex)
+                    mapsSoccer[i].gameObject.SetActive(false);
+            }
         }
 
 
