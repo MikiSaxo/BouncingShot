@@ -54790,7 +54790,7 @@ PrefabInstance:
       objectReference: {fileID: 88800977}
     - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
       propertyPath: ScoreToDoBlitz
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
       propertyPath: superMapSoccer
@@ -54798,7 +54798,7 @@ PrefabInstance:
       objectReference: {fileID: 5744443}
     - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
       propertyPath: ScoreToDoNormal
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 256931305622729944, guid: 2cfd7683e84588c499feb26c070316ad, type: 3}
       propertyPath: ScoreToDoSoccer

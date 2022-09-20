@@ -2943,12 +2943,11 @@ MonoBehaviour:
   - {fileID: 1291577786}
   menus: {fileID: 1706029506}
   descriptions:
-  - Envoyer la balle sur l'adversaire pour triompher
-  - "Mode intensif sans temps de repos, il est conseill\xE9 de prendre une dose d'insuline
-    avant de commencer"
-  - 'A vous de jouer, la balle est dans votre camp '
-  - "Accolez vous \xE0 la balle le plus longtemps possible, Colle UHU interdite"
-  - Aller le foot
+  - Send the ball to the opponent to triumph
+  - It is advisable to take a dose of insulin before starting
+  - Hold on to the ball as long as possible, UHU glue not allowed
+  - It's up to you, the ball is in your court
+  - Score goals, may Zizou be with you
   descriptionObject: {fileID: 205294287}
   blueColors:
   - {fileID: 1548141592}
@@ -3055,6 +3054,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 80cdfb9d-d3a5-4b03-b804-ce19dba42225
     m_ActionName: Gameplay/Pause[/XInputControllerWindows/start,/XInputControllerWindows1/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c4161c27-5a18-48d2-9c0b-d79e626ef660
+    m_ActionName: Gameplay/Validate[/XInputControllerWindows/buttonSouth,/DualShock4GamepadHID/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Menu
