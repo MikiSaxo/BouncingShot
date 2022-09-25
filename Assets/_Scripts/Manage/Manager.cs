@@ -7,6 +7,8 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using System;
+
 
 
 
@@ -56,6 +58,8 @@ public class Manager : MonoBehaviour
     [HideInInspector] public bool IsReplacing = false;
 
     const int anounceText = 0;
+
+    public static event Action DestroyGameParameters;
 
     public static Manager instance;
     private void Awake()
@@ -161,15 +165,18 @@ public class Manager : MonoBehaviour
                 Ball.GetComponent<Ball>().ChangeColor(0);
 
             TextScores[anounceText].gameObject.SetActive(true);
-            if (whoTouch == 2)
+            if (!IsGameEnded)
             {
-                TextScores[anounceText].text = Phrases[1];
-                TextScores[anounceText].color = statesColor[2];
-            }
-            else
-            {
-                TextScores[anounceText].text = Phrases[2];
-                TextScores[anounceText].color = statesColor[1];
+                if (whoTouch == 2)
+                {
+                    TextScores[anounceText].text = Phrases[1];
+                    TextScores[anounceText].color = statesColor[2];
+                }
+                else
+                {
+                    TextScores[anounceText].text = Phrases[2];
+                    TextScores[anounceText].color = statesColor[1];
+                }
             }
 
             StartCoroutine(Replace());
@@ -202,6 +209,8 @@ public class Manager : MonoBehaviour
             Ball.SetActive(true);
             Ball.transform.position = SpawnPoints[4].position;
             Ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            Ball.GetComponent<Ball>().bulletPower = Ball.GetComponent<Ball>().bullerPowerNormal;
+            Ball.GetComponent<Rigidbody2D>().drag = 1;
             Ball.GetComponent<Ball>().ChangeColor(0);
         }
     }
@@ -244,17 +253,20 @@ public class Manager : MonoBehaviour
             if (!hasPresentedScore)
             {
                 TextScores[0].color = Color.white;
+                var scoreToDraw = 0;
 
                 if (GameParameters.instance.Mode == GameParameters.WhichMode.Normal)
-                    TextScores[0].text = $"<color=yellow>{ScoreToDoNormal}</color>{Phrases[3]}";
+                    scoreToDraw = ScoreToDoNormal;
                 if (GameParameters.instance.Mode == GameParameters.WhichMode.Blitz)
-                    TextScores[0].text = $"<color=yellow>{ScoreToDoBlitz}</color>{Phrases[3]}";
+                    scoreToDraw = ScoreToDoBlitz;
                 if (GameParameters.instance.Mode == GameParameters.WhichMode.Domination)
-                    TextScores[0].text = $"<color=yellow>{ScoreToDoDomination}</color>{Phrases[3]}";
+                    scoreToDraw = ScoreToDoDomination;
                 if (GameParameters.instance.Mode == GameParameters.WhichMode.Possession)
-                    TextScores[0].text = $"<color=yellow>{ScoreToDoPossession}</color>{Phrases[3]}";
+                    scoreToDraw = ScoreToDoPossession;
                 if (GameParameters.instance.Mode == GameParameters.WhichMode.Soccer)
-                    TextScores[0].text = $"<color=yellow>{ScoreToDoSoccer}</color>{Phrases[3]}";
+                    scoreToDraw = ScoreToDoSoccer;
+
+                TextScores[0].text = $"<color=yellow><incr>{scoreToDraw}</incr></color>{Phrases[3]}";
 
                 yield return new WaitForSeconds(1f);
                 TextScores[0].transform.DOScale(Vector3.zero, .2f);
@@ -265,15 +277,18 @@ public class Manager : MonoBehaviour
 
             TextScores[0].gameObject.SetActive(false);
             TextScores[3].gameObject.SetActive(true);
+            TextScores[3].gameObject.transform.DOScale(Vector2.one, 0);
 
             ChangeBordersColor(statesColor[3], false);
 
             for (int i = nbDecompte; i > 0; i--)
             {
-                TextScores[3].text = i.ToString();
+                TextScores[3].text = $"<shake>{i}";
                 yield return new WaitForSeconds(timeForDecompteInSec);
             }
+            TextScores[3].transform.DOScale(Vector3.zero, 0);
             TextScores[3].gameObject.SetActive(false);
+
             ChangeBordersColor(statesColor[0], false);
 
             Players[0].GetComponent<PlayerMovement>().CanMove = true;
@@ -394,6 +409,7 @@ public class Manager : MonoBehaviour
             Players[1].gameObject.GetComponent<VibrateController>().playerIndex = XInputDotNetPure.PlayerIndex.Two;
         }
         Players[0].GetComponent<PlayerMovement>().LeavePause();
+        Players[1].GetComponent<PlayerMovement>().LeavePause();
     }
 
     public void PressLeaveAnim()
@@ -410,6 +426,7 @@ public class Manager : MonoBehaviour
 
     private void GoToMenu()
     {
+        DestroyGameParameters?.Invoke();
         SceneManager.LoadScene(0);
     }
 
@@ -455,7 +472,7 @@ public class Manager : MonoBehaviour
         TextScores[anounceText].gameObject.SetActive(true);
         Color test = statesColor[whowin];
         string colorHex = ColorUtility.ToHtmlStringRGB(test);
-        TextScores[0].text = $"<color=#{colorHex}>Team {whowin}</color>{Phrases[4]}";
+        TextScores[0].text = $"<color=#{colorHex}><bounce>Team {whowin}</bounce></color>{Phrases[4]}";
 
         //Time.timeScale = .001f;
         //Time.fixedDeltaTime = .02f * Time.timeScale;

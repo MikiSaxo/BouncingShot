@@ -132,7 +132,7 @@ public class Ball : MonoBehaviour
             collision.gameObject.GetComponent<VibrateController>().StartVibration(vib_p1col1[0], vib_p1col1[1], vib_p1col1[2]);
 
 
-        if (GameParameters.instance.Mode == GameParameters.WhichMode.Normal)
+        if (GameParameters.instance.Mode == GameParameters.WhichMode.Normal || GameParameters.instance.Mode == GameParameters.WhichMode.Blitz)
         {
             if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP1 || collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP2)
             {

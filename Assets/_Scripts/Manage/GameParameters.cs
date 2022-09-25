@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using System;
 
 
 public class GameParameters : MonoBehaviour
@@ -50,6 +51,8 @@ public class GameParameters : MonoBehaviour
                 MenuSelection.Instance.ChangeRedColor(i, redColorToChoose[i]);
             }
         }
+
+        Manager.DestroyGameParameters += OnDestroyEndGame;
     }
 
     public void ChooseMode(int mode)
@@ -77,5 +80,15 @@ public class GameParameters : MonoBehaviour
     public void ChooseMap(int index)
     {
         MapIndex = index-1;
+    }
+
+    private void OnDestroyEndGame()
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnDisable()
+    {
+        Manager.DestroyGameParameters -= OnDestroyEndGame;
     }
 }
