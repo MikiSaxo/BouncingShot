@@ -49,6 +49,7 @@ public class Manager : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject[] chooseButtonMain;
     [SerializeField] GameObject[] fx_WinConfettis;
+    [SerializeField] GameObject yaris;
 
     public bool CanLeaveAnim = false;
     public bool IsGameEnded = false;
@@ -75,6 +76,9 @@ public class Manager : MonoBehaviour
 
     private void Start()
     {
+        if (GameParameters.instance.IsEasterEgg)
+            yaris.SetActive(true);
+
         statesColor[1] = GameParameters.instance.blueColorToChoose[GameParameters.instance.BlueColors];
         statesColor[2] = GameParameters.instance.redColorToChoose[GameParameters.instance.RedColors];
 
@@ -485,12 +489,6 @@ public class Manager : MonoBehaviour
         ParticleSystem.MainModule ma2 = ps2.main;
         ma.startColor = winColor;
         ma2.startColor = winColor;
-
-        //fx_WinConfettis.GetComponent<ParticleSystem>().main.startColor = winColor;
-        //fx_WinConfettis.GetComponent<ParticleSystem>().startColor = winColor;
-
-        //Time.timeScale = .001f;
-        //Time.fixedDeltaTime = .02f * Time.timeScale;
     }
 
     void StopPlayers()

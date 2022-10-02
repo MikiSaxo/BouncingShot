@@ -260,6 +260,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EasterEgg"",
+                    ""type"": ""Button"",
+                    ""id"": ""8b1ae20d-e9fb-44ad-981a-71f6b362f046"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -271,6 +280,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Controller1"",
                     ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ecd0a413-6207-4097-a1d5-e3b89c1af1ca"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller1"",
+                    ""action"": ""EasterEgg"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -314,6 +334,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Back = m_Menu.FindAction("Back", throwIfNotFound: true);
+        m_Menu_EasterEgg = m_Menu.FindAction("EasterEgg", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -455,11 +476,13 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Menu;
     private IMenuActions m_MenuActionsCallbackInterface;
     private readonly InputAction m_Menu_Back;
+    private readonly InputAction m_Menu_EasterEgg;
     public struct MenuActions
     {
         private @PlayerControls m_Wrapper;
         public MenuActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Back => m_Wrapper.m_Menu_Back;
+        public InputAction @EasterEgg => m_Wrapper.m_Menu_EasterEgg;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -472,6 +495,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Back.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
                 @Back.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
                 @Back.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnBack;
+                @EasterEgg.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnEasterEgg;
+                @EasterEgg.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnEasterEgg;
+                @EasterEgg.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnEasterEgg;
             }
             m_Wrapper.m_MenuActionsCallbackInterface = instance;
             if (instance != null)
@@ -479,6 +505,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Back.started += instance.OnBack;
                 @Back.performed += instance.OnBack;
                 @Back.canceled += instance.OnBack;
+                @EasterEgg.started += instance.OnEasterEgg;
+                @EasterEgg.performed += instance.OnEasterEgg;
+                @EasterEgg.canceled += instance.OnEasterEgg;
             }
         }
     }
@@ -514,5 +543,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     public interface IMenuActions
     {
         void OnBack(InputAction.CallbackContext context);
+        void OnEasterEgg(InputAction.CallbackContext context);
     }
 }

@@ -30,6 +30,7 @@ public class MenuSelection : MonoBehaviour
     [SerializeField] TextMeshProUGUI indexOfMaps;
     [SerializeField] TextMeshProUGUI textOfMaps;
     [SerializeField] float transiTimeMap;
+    [SerializeField] GameObject yaris;
 
 
     private int currentPoint = 0;
@@ -40,6 +41,8 @@ public class MenuSelection : MonoBehaviour
     private bool hasChooseSoccer = false;
 
     private bool IsBack;
+    private bool IsYaris;
+    private float countYaris;
     private bool canBack;
     private float nextAttack;
     [SerializeField] float attackRate;
@@ -97,6 +100,16 @@ public class MenuSelection : MonoBehaviour
                 textOfMaps.enabled = false;
             }
         }
+        if (IsYaris)
+        {
+            countYaris += Time.deltaTime;
+            if (countYaris >= 10 && GameParameters.instance.IsEasterEgg == false)
+            {
+                GameParameters.instance.IsEasterEgg = true;
+                yaris.SetActive(true);
+                yaris.transform.DOScale(Vector2.zero, 2f);
+            }
+        }
     }
 
     public void OnStart()
@@ -122,13 +135,16 @@ public class MenuSelection : MonoBehaviour
         MoveToRightMenus();
         currentButtonsIndex--;
         NextMenus(currentButtonsIndex);
-
-        print("alllzgjz^ghiz");
     }
 
     public void OnBack(InputAction.CallbackContext context)
     {
         IsBack = context.action.triggered;
+    }
+
+    public void OnYaris(InputAction.CallbackContext context)
+    {
+        IsYaris = context.action.triggered;
     }
 
 

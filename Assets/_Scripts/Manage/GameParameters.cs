@@ -15,7 +15,7 @@ public class GameParameters : MonoBehaviour
     public Color[] blueColorToChoose;
     public Color[] redColorToChoose;
     public int MapIndex;
-
+    public bool IsEasterEgg = false;
 
     public enum WhichMode
     {
