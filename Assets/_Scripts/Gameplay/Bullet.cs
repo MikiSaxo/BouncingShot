@@ -54,6 +54,7 @@ public class Bullet : MonoBehaviour
             Quaternion toRotation = Quaternion.LookRotation(Vector3.forward, direction);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 5000f);
             transform.localEulerAngles += new Vector3(0, 0, 90);
+            AudioManager.Instance.PlaySound("Bumper");
         }
 
         if ((collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.P1 // Bullet qui touche un adversaire

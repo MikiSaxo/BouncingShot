@@ -91,7 +91,7 @@ public class MenuSelection : MonoBehaviour
             GoBackMenus();
             canBack = false;
 
-            if (currentButtonsIndex < 4)
+            if (currentButtonsIndex != 3)
             {
                 indexOfMaps.enabled = false;
                 textOfMaps.enabled = false;
@@ -112,6 +112,8 @@ public class MenuSelection : MonoBehaviour
 
         if (index == 3)
             ChangeIndexOfMap();
+        else
+            EnableMapsOrNot(false);
     }
 
     public void GoBackMenus()
@@ -213,9 +215,9 @@ public class MenuSelection : MonoBehaviour
             yield return new WaitForSeconds(transiTimeMap / 2);
 
             if (!hasChooseSoccer)
-               maps.transform.DOMoveY(tpPointsMap[0].position.y, 0f);
+                maps.transform.DOMoveY(tpPointsMap[0].position.y, 0f);
             else
-               mapsSoccer.transform.DOMoveY(tpPointsMapSoccer[0].position.y, 0f);
+                mapsSoccer.transform.DOMoveY(tpPointsMapSoccer[0].position.y, 0f);
             //print("tpTop");
         }
         else
@@ -231,10 +233,33 @@ public class MenuSelection : MonoBehaviour
 
     void ChangeIndexOfMap()
     {
-        indexOfMaps.enabled = true;
-        textOfMaps.enabled = true;
+        EnableMapsOrNot(true);
         indexOfMaps.text = $"{currentMapIndex}";
         GameParameters.instance.ChooseMap(currentMapIndex);
+    }
+
+    void EnableMapsOrNot(bool which)
+    {
+        indexOfMaps.enabled = which;
+        textOfMaps.enabled = which;
+        if (which)
+        {
+            if (hasChooseSoccer)
+            {
+                maps.SetActive(false);
+                mapsSoccer.SetActive(which);
+            }
+            else
+            {
+                maps.SetActive(which);
+                mapsSoccer.SetActive(false);
+            }
+        }
+        else
+        {
+            maps.SetActive(false);
+            mapsSoccer.SetActive(false);
+        }
     }
 
 

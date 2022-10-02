@@ -130,6 +130,8 @@ public class CursorMovement : MonoBehaviour
 
     void Shoot()
     {
+        AudioManager.Instance.PlaySound("PlayerShoot");
+
         gameObject.GetComponent<ReboundAnimation>().StartBounce();
         gameObject.GetComponent<VibrateController>().StartVibration(vib_Shoot[0], vib_Shoot[1], vib_Shoot[2]);
 

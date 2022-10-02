@@ -162,6 +162,7 @@ public class PlayerMovement : MonoBehaviour
         {
             gameObject.GetComponent<VibrateController>().StartVibration(vib_Dash[0], vib_Dash[1], vib_Dash[2]);
             dashPower = maxDashPower;
+            AudioManager.Instance.PlaySound("PlayerDash");
         }
     }
 

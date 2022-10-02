@@ -12,6 +12,7 @@ public class Bumper : MonoBehaviour
             collision.gameObject.GetComponent<PlayerMovement>().isShotByBumper = true;
             collision.gameObject.GetComponent<PlayerMovement>().LaunchBounceBullet();
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(-collision.contacts[0].normal * bumperPlayerPower, ForceMode2D.Impulse);
+            AudioManager.Instance.PlaySound("Bumper");
         }
     }
 }

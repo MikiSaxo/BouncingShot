@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1892342433572347429}
   - component: {fileID: 1892342433572347430}
+  - component: {fileID: 1187853728417117073}
+  - component: {fileID: 419447249574761241}
   m_Layer: 0
   m_Name: GameParameters
   m_TagString: Untagged
@@ -27,6 +29,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.6707672, y: 1.5142872, z: 5252.7764}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -66,3 +69,48 @@ MonoBehaviour:
   - {r: 1, g: 0.62734854, b: 0, a: 1}
   - {r: 1, g: 1, b: 0, a: 1}
   MapIndex: 0
+--- !u!114 &1187853728417117073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892342433572347431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7caef24351b27f4088fb93949f8e1b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: PlayerDeath
+    clip: {fileID: 8300000, guid: 2e4fd86812406864a8033b7cc18c58f7, type: 3}
+    volume: 0.079
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlayerShoot
+    clip: {fileID: 8300000, guid: 42e2e39588531d24ca7afda026f4b701, type: 3}
+    volume: 0.005
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlayerDash
+    clip: {fileID: 8300000, guid: 67d8e021c29fac249b6132d703da18c0, type: 3}
+    volume: 0.04
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Bumper
+    clip: {fileID: 8300000, guid: 6c2c7b2284089a244bb96563ebf7c5db, type: 3}
+    volume: 0.041
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+--- !u!81 &419447249574761241
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892342433572347431}
+  m_Enabled: 1

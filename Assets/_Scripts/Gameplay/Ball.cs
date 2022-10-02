@@ -67,6 +67,7 @@ public class Ball : MonoBehaviour
             var transferPosition = new Vector3(transform.position.x, transform.position.y, 0);
             Instantiate(fx_BallBumper, transferPosition, collision.gameObject.transform.rotation);
             camAnim.StartShakingCam(0);
+            AudioManager.Instance.PlaySound("Bumper");
         }
 
         if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.BulletP1) //BulletP1

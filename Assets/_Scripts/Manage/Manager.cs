@@ -48,6 +48,7 @@ public class Manager : MonoBehaviour
     [SerializeField] private GameObject[] mapsSoccer;
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject[] chooseButtonMain;
+    [SerializeField] GameObject fx_WinConfettis;
 
     public bool CanLeaveAnim = false;
     public bool IsGameEnded = false;
@@ -165,6 +166,9 @@ public class Manager : MonoBehaviour
                 Ball.GetComponent<Ball>().ChangeColor(0);
 
             TextScores[anounceText].gameObject.SetActive(true);
+
+            AudioManager.Instance.PlaySound("PlayerDeath");
+
             if (!IsGameEnded)
             {
                 if (whoTouch == 2)
@@ -473,6 +477,7 @@ public class Manager : MonoBehaviour
         Color test = statesColor[whowin];
         string colorHex = ColorUtility.ToHtmlStringRGB(test);
         TextScores[0].text = $"<color=#{colorHex}><bounce>Team {whowin}</bounce></color>{Phrases[4]}";
+        fx_WinConfettis.SetActive(true);
 
         //Time.timeScale = .001f;
         //Time.fixedDeltaTime = .02f * Time.timeScale;
