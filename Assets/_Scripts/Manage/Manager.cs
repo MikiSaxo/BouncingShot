@@ -48,7 +48,7 @@ public class Manager : MonoBehaviour
     [SerializeField] private GameObject[] mapsSoccer;
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject[] chooseButtonMain;
-    [SerializeField] GameObject fx_WinConfettis;
+    [SerializeField] GameObject[] fx_WinConfettis;
 
     public bool CanLeaveAnim = false;
     public bool IsGameEnded = false;
@@ -474,10 +474,20 @@ public class Manager : MonoBehaviour
         StopPlayers();
         winMenu.SetActive(true);
         TextScores[anounceText].gameObject.SetActive(true);
-        Color test = statesColor[whowin];
-        string colorHex = ColorUtility.ToHtmlStringRGB(test);
+        Color winColor = statesColor[whowin];
+        string colorHex = ColorUtility.ToHtmlStringRGB(winColor);
         TextScores[0].text = $"<color=#{colorHex}><bounce>Team {whowin}</bounce></color>{Phrases[4]}";
-        fx_WinConfettis.SetActive(true);
+        fx_WinConfettis[0].SetActive(true);
+
+        ParticleSystem ps = fx_WinConfettis[1].GetComponent<ParticleSystem>();
+        ParticleSystem ps2 = fx_WinConfettis[2].GetComponent<ParticleSystem>();
+        ParticleSystem.MainModule ma = ps.main;
+        ParticleSystem.MainModule ma2 = ps2.main;
+        ma.startColor = winColor;
+        ma2.startColor = winColor;
+
+        //fx_WinConfettis.GetComponent<ParticleSystem>().main.startColor = winColor;
+        //fx_WinConfettis.GetComponent<ParticleSystem>().startColor = winColor;
 
         //Time.timeScale = .001f;
         //Time.fixedDeltaTime = .02f * Time.timeScale;
