@@ -74,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (movementInput != Vector2.zero && CanMove)
+        if (movementInput != Vector2.zero && CanMove && !IsPaused)
             Movement();
 
         if (!CanMove && Manager.instance.IsReplacing)
@@ -137,7 +137,6 @@ public class PlayerMovement : MonoBehaviour
         Time.timeScale = timeScaleInZone;
         Time.fixedDeltaTime = timeScaleSlowMo * Time.timeScale;
         gameObject.GetComponent<VibrateController>().StopVibra();
-        CanMove = false;
         gameObject.GetComponent<CursorMovement>().CanShoot(false);
         IsPaused = true;
         Manager.instance.EnablePause(true);
@@ -149,7 +148,6 @@ public class PlayerMovement : MonoBehaviour
         Time.timeScale = 1f;
         Time.fixedDeltaTime = timeScaleSlowMo * Time.timeScale;
         Manager.instance.EnablePause(false);
-        CanMove = true;
         gameObject.GetComponent<CursorMovement>().CanShoot(true);
         IsPaused = false;
         canPauseLaunch = 0;
