@@ -31,7 +31,7 @@ public class GameParameters : MonoBehaviour
     {
         if (instance != null)
         {
-            Debug.LogWarning("Il y a plus d'une instance de GameManager dans la scène");
+            Debug.LogWarning("Il y a plus d'une instance de GameManager dans la scï¿½ne");
             return;
         }
         instance = this;
@@ -58,13 +58,11 @@ public class GameParameters : MonoBehaviour
     public void ChooseMode(int mode)
     {
         Mode = (WhichMode)mode;
-        print(Mode);
     }
 
     public void ChooseNbPlayers(int howMany)
     {
         NbOfPlayers = howMany;
-        print(NbOfPlayers);
     }
 
     public void ChooseBlueColor(int whichColor)
