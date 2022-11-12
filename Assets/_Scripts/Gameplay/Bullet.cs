@@ -38,6 +38,7 @@ public class Bullet : MonoBehaviour
         {
             var transferPosition = new Vector3(transform.position.x, transform.position.y, 0);
             Instantiate(fx_BulletBullet, transferPosition, transform.rotation);
+            AudioManager.Instance.PlaySound("BulletHitBullet");
             Destroy(gameObject);
         }
 
@@ -67,6 +68,7 @@ public class Bullet : MonoBehaviour
 
             var transferPosition = new Vector3(transform.position.x - collision.contacts[0].normal.x * .5f, transform.position.y - collision.contacts[0].normal.y * .5f, 0);
             Instantiate(fx_TouchPlayerBullet, transferPosition, collision.gameObject.transform.rotation);
+            AudioManager.Instance.PlaySound("BulletHitPlayer");
 
             Destroy(gameObject);
         }
@@ -85,6 +87,7 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.Ball) // Ball
         {
             Instantiate(fx_TouchBall, transferPosition, transform.rotation);
+            AudioManager.Instance.PlaySound("BallHitBullet");
             Destroy(gameObject);
         }
     }
