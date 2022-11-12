@@ -33,7 +33,6 @@ public class Manager : MonoBehaviour
     [SerializeField] int nbDecompte;
     public GameObject[] playerScoreVisu;
     [SerializeField] GameObject[] goals;
-    [SerializeField] Vector3 soccerSize;
     public Color[] statesColor;
     public Image[] borders;
     public Image[] bordersSoccer;
@@ -68,7 +67,7 @@ public class Manager : MonoBehaviour
     {
         if (instance != null)
         {
-            Debug.LogWarning("Il y a plus d'une instance de GameManager dans la scène");
+            Debug.LogWarning("Il y a plus d'une instance de GameManager dans la scï¿½ne");
             return;
         }
         instance = this;
@@ -292,6 +291,9 @@ public class Manager : MonoBehaviour
             for (int i = nbDecompte; i > 0; i--)
             {
                 TextScores[3].text = $"<shake>{i}";
+
+                AudioManager.Instance.PlaySound(i > 2 ? "Decompte12" : "Decompte3");
+
                 yield return new WaitForSeconds(timeForDecompteInSec);
             }
             TextScores[3].transform.DOScale(Vector3.zero, 0);
@@ -457,7 +459,6 @@ public class Manager : MonoBehaviour
             EndGame(whodwin);
 
         EventSystem.current.SetSelectedGameObject(chooseButtonMain[1]);
-
     }
 
     void EndGame(int whowin)

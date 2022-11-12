@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 using DG.Tweening;
 using UnityEngine.InputSystem;
+using UnityEngine.PlayerLoop;
 
 public class MenuSelection : MonoBehaviour
 {
@@ -48,6 +49,7 @@ public class MenuSelection : MonoBehaviour
     [SerializeField] float attackRate;
 
     public static MenuSelection Instance;
+
     private void Awake()
     {
         Instance = this;
@@ -63,6 +65,7 @@ public class MenuSelection : MonoBehaviour
     {
         blueColors[index].GetComponent<Image>().color = color;
     }
+
     public void ChangeRedColor(int index, Color color)
     {
         redColors[index].GetComponent<Image>().color = color;
@@ -89,6 +92,7 @@ public class MenuSelection : MonoBehaviour
                 nextAttack = attackRate;
             }
         }
+
         if (IsBack && canBack && currentButtonsIndex > 0)
         {
             GoBackMenus();
@@ -100,6 +104,7 @@ public class MenuSelection : MonoBehaviour
                 textOfMaps.enabled = false;
             }
         }
+
         if (IsYaris)
         {
             countYaris += Time.deltaTime;
@@ -157,22 +162,26 @@ public class MenuSelection : MonoBehaviour
     {
         currentPoint++;
         menus.transform.DOMoveX(tpPoints[currentPoint].position.x, 1f);
+        AudioManager.Instance.PlaySound("MoveMenu");
     }
 
     public void MoveToRightMenus()
     {
         currentPoint -= 1;
         menus.transform.DOMoveX(tpPoints[currentPoint].position.x, 1f);
+        AudioManager.Instance.PlaySound("MoveMenu");
     }
 
     public void ValidateBlueSide()
     {
         validateIconsColor[0].transform.position = followIconColor.transform.position;
+        AudioManager.Instance.PlaySound("MoveMenu");
     }
 
     public void ValidateRedSide()
     {
         validateIconsColor[1].transform.position = followIconColor.transform.position;
+        AudioManager.Instance.PlaySound("MoveMenu");
     }
 
     public void HasChooseSoccerMode(bool which)
@@ -188,6 +197,7 @@ public class MenuSelection : MonoBehaviour
             maps.SetActive(true);
             mapsSoccer.SetActive(false);
         }
+
         currentMapIndex = 1;
     }
 
@@ -213,6 +223,8 @@ public class MenuSelection : MonoBehaviour
 
             mapsSoccer.transform.DOMoveY(tpPointsMapSoccer[currentMapIndex].position.y, transiTimeMap);
         }
+
+        AudioManager.Instance.PlaySound("MoveMenu");
         LaunchCanTpTop();
     }
 
@@ -289,5 +301,4 @@ public class MenuSelection : MonoBehaviour
             }
         }
     }
-
 }
