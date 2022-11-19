@@ -55,6 +55,7 @@ public class Ball : MonoBehaviour
             var transferPosition = new Vector3(transform.position.x - collision.contacts[0].normal.x, transform.position.y - collision.contacts[0].normal.y, 0);
             Instantiate(fx_RedbondBall, transferPosition, collision.gameObject.transform.rotation);
             camAnim.StartShakingCam(0);
+            AudioManager.Instance.PlaySound("BallHitWallFast");
         }
 
         if (collision.gameObject.GetComponent<WhoAreYou>().ChoisiBieng == WhoAreYou.ChooseYourChampion.Bumper) //Bumper

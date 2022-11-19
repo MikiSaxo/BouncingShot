@@ -31,6 +31,8 @@ public class FadeSystem : MonoBehaviour
 
     public void LoadMainScene()
     {
+        AudioManager.Instance.PlaySound("MusicMain");
+        AudioManager.Instance.StopSound("MusicMenu");
         SceneManager.LoadScene(1);
     }
 }

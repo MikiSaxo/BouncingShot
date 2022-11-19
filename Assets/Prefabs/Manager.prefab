@@ -109,19 +109,19 @@ MonoBehaviour:
   - 0
   - 0
   ScoreToDoNormal: 10
-  ScoreToDoBlitz: 1
+  ScoreToDoBlitz: 2
   ScoreToDoDomination: 60
   ScoreToDoPossession: 60
   ScoreToDoSoccer: 5
   Phrases:
   - Waiting For Players
-  - Team 1 Scores!
-  - Team 2 Scores!
+  - <wiggle>Team 1</wiggle><color=white> Scores!
+  - <wiggle>Team 2</wiggle><color=white> Scores!
   - ' points to win!'
-  - ' has won!'
+  - ' <color=white>has won!'
   anounce:
-  - Team 1         Press a button
-  - Team 2         Press a button
+  - <bounce>Team 1</bounce>         <color=white>Press a button
+  - <bounce>Team 2</bounce>         <color=white>Press a button
   NbOfPlayer: 1
   timeForDecompteInSec: 0.5
   nbDecompte: 3
@@ -135,7 +135,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  soccerSize: {x: 1.2, y: 1.2, z: 1}
   statesColor:
   - {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 1}
   - {r: 0, g: 0.32743883, b: 1, a: 1}
@@ -598,6 +597,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   superMapSoccer: {fileID: 0}
   mapsSoccer:
   - {fileID: 0}
@@ -606,6 +609,11 @@ MonoBehaviour:
   chooseButtonMain:
   - {fileID: 0}
   - {fileID: 0}
+  fx_WinConfettis:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  yaris: {fileID: 0}
   CanLeaveAnim: 0
   IsGameEnded: 0
   winMenu: {fileID: 0}

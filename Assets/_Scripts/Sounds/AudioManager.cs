@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour
     {
         if (Instance != null)
         {
-            Debug.LogWarning("Il y a plus d'une instance de AudioManager dans la scène");
+            Debug.LogWarning("Il y a plus d'une instance de AudioManager dans la scï¿½ne");
             return;
         }
         Instance = this;
@@ -31,11 +31,12 @@ public class AudioManager : MonoBehaviour
         Scene currentScene = SceneManager.GetActiveScene();
         if (currentScene.name == "Menu")
         {
-            //PlaySound("PlayerShoot");
+            PlaySound("MusicMenu");
+            StopSound("MusicMain");
         }
         else
         {
-            //PlaySound("MusicGame");
+            
         }
     }
 

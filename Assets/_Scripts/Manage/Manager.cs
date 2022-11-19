@@ -166,7 +166,10 @@ public class Manager : MonoBehaviour
                 Ball.GetComponent<Rigidbody2D>().drag = 1;
             }
             else
+            {
+                AudioManager.Instance.PlaySound("Confettis");
                 Ball.GetComponent<Ball>().ChangeColor(0);
+            }
 
             TextScores[anounceText].gameObject.SetActive(true);
 
@@ -211,6 +214,7 @@ public class Manager : MonoBehaviour
     {
         if (!IsGameEnded)
         {
+            AudioManager.Instance.PlaySound(("PlayerDeath"));
             Ball.SetActive(false);
             yield return new WaitForSeconds(.5f);
             Ball.SetActive(true);
@@ -292,7 +296,7 @@ public class Manager : MonoBehaviour
             {
                 TextScores[3].text = $"<shake>{i}";
 
-                AudioManager.Instance.PlaySound(i > 2 ? "Decompte12" : "Decompte3");
+                AudioManager.Instance.PlaySound(i >= 2 ? "Decompte12" : "Decompte3");
 
                 yield return new WaitForSeconds(timeForDecompteInSec);
             }
@@ -424,6 +428,8 @@ public class Manager : MonoBehaviour
 
     public void PressLeaveAnim()
     {
+        AudioManager.Instance.StopSound("MusicMain");
+
         Players[0].GetComponent<PlayerMovement>().LeavePause();
         goals[5].SetActive(false);
         invisibleFade.transform.DOScale(Vector3.zero, 1.5f).OnComplete(GoToMenu);
@@ -431,6 +437,9 @@ public class Manager : MonoBehaviour
 
     public void RestartGame()
     {
+        AudioManager.Instance.StopSound("Confettis");
+        AudioManager.Instance.PlaySound("MusicMain");
+
         invisibleFade.transform.DOScale(Vector3.zero, 1.5f).OnComplete(GoToMain);
     }
 
@@ -464,6 +473,10 @@ public class Manager : MonoBehaviour
     void EndGame(int whowin)
     {
         print("whowin " + whowin);
+        AudioManager.Instance.PlaySound("Win");
+        AudioManager.Instance.PlaySound("Confettis");
+        AudioManager.Instance.StopSound("MusicMain");
+
 
         ChangeBordersColor(statesColor[whowin], false);
         for (int i = 0; i < leftSquare.Length; i++)

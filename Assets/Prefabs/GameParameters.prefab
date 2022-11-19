@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5da97667f4cd00d4586fa7e4e55d9fcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Mode: 1
+  Mode: 0
   NbOfPlayers: 2
   RedColors: 0
   BlueColors: 2
@@ -68,7 +68,7 @@ MonoBehaviour:
   - {r: 1, g: 0.23016784, b: 0, a: 1}
   - {r: 1, g: 0.62734854, b: 0, a: 1}
   - {r: 1, g: 1, b: 0, a: 1}
-  MapIndex: 5
+  MapIndex: 0
   IsEasterEgg: 0
 --- !u!114 &1187853728417117073
 MonoBehaviour:
@@ -85,63 +85,105 @@ MonoBehaviour:
   sounds:
   - name: PlayerDeath
     clip: {fileID: 8300000, guid: 2e4fd86812406864a8033b7cc18c58f7, type: 3}
-    volume: 0.079
+    volume: 0.156
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: PlayerShoot
     clip: {fileID: 8300000, guid: 42e2e39588531d24ca7afda026f4b701, type: 3}
-    volume: 0.005
+    volume: 0.025
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: PlayerDash
     clip: {fileID: 8300000, guid: 67d8e021c29fac249b6132d703da18c0, type: 3}
-    volume: 0.04
+    volume: 0.452
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Bumper
     clip: {fileID: 8300000, guid: 6c2c7b2284089a244bb96563ebf7c5db, type: 3}
-    volume: 0.041
+    volume: 0.282
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: BulletHitBullet
     clip: {fileID: 8300000, guid: e76a9462414610244b06d55610cd3e0f, type: 3}
-    volume: 0.041
+    volume: 0.2
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: BulletHitPlayer
     clip: {fileID: 8300000, guid: f66b1dc4fad1faf478250aaa3813fc5a, type: 3}
-    volume: 0.041
+    volume: 0.184
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: BulletHitWall
     clip: {fileID: 8300000, guid: a808d98a4023caa459d53357714d167e, type: 3}
-    volume: 0.041
+    volume: 0.189
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: BallHitWallFast
     clip: {fileID: 8300000, guid: 90fa2b5fde4f624458101ea8e976cb0e, type: 3}
-    volume: 0.041
+    volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: BallHitWallSlow
     clip: {fileID: 8300000, guid: df11730baef4c094881eca10ec8782cc, type: 3}
-    volume: 0.041
+    volume: 0.287
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: BallHitBullet
     clip: {fileID: 8300000, guid: 233c860720c901f47be6263ef3fd758d, type: 3}
+    volume: 0.326
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Decompte12
+    clip: {fileID: 8300000, guid: c42c80e8fb4776c4cabdd8477750d05b, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Decompte3
+    clip: {fileID: 8300000, guid: 8a3560c073ffcad4b9778eac19d11e43, type: 3}
+    volume: 0.195
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Win
+    clip: {fileID: 8300000, guid: ecbcf8ef9edc26b4fac8480cd6f0114a, type: 3}
     volume: 0.041
     pitch: 1
     loop: 0
+    source: {fileID: 0}
+  - name: Confettis
+    clip: {fileID: 8300000, guid: 46fa6d62edf34d940aadf6b3a6e0b47e, type: 3}
+    volume: 0.041
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: MoveMenu
+    clip: {fileID: 8300000, guid: 2362527a3ee8a4c438068ed1a53df2c3, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: MusicMenu
+    clip: {fileID: 8300000, guid: eb956833b98cfe549b04caf958c59a70, type: 3}
+    volume: 0.282
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: MusicMain
+    clip: {fileID: 8300000, guid: f278bc44db0516d4ead50ed7babec672, type: 3}
+    volume: 0.08
+    pitch: 1
+    loop: 1
     source: {fileID: 0}
 --- !u!81 &419447249574761241
 AudioListener:
